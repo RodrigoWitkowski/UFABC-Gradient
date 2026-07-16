@@ -1,0 +1,1828 @@
+{
+  "course": {
+    "code": "BCC",
+    "name": "Bacharelado em Ciencia da Computacao"
+  },
+  "version": "2023",
+  "admission_year_start": 2023,
+  "admission_year_end": null,
+  "valid_from": null,
+  "valid_until": null,
+  "unlisted_subject_category": "free",
+  "materialize_unlisted_subjects": false,
+  "metadata": {
+    "official": true,
+    "classification_only": true,
+    "source_documents": [
+      {
+        "key": "bcc-2023-ppc",
+        "url": "https://www.ufabc.edu.br/images/stories/comunicacao/Boletim/consepe_ato_decisorio_267_anexo.pdf",
+        "approval": "Ato Decisorio ConsEPE 267/2023",
+        "retrieved_on": "2026-07-15",
+        "sha256": "dbad29ad7a30da2474d75eff99724e4330d0aa9c31392e31ecf70f3fa25f8e1e"
+      },
+      {
+        "key": "bcc-2023-limited",
+        "url": "https://www.ufabc.edu.br/images/stories/comunicacao/Boletim/cg_ato-decisorio_044_anexo-01.pdf",
+        "approval": "Ato Decisorio CG 44/2023",
+        "retrieved_on": "2026-07-15",
+        "sha256": "25722f6fe8daa4014f980ea15c45f0d25ed15683e1c66d6a50417d4e855a5e24"
+      }
+    ],
+    "notes": [
+      "Inclui as obrigatorias do BCT que formam a base do BCC.",
+      "Trabalho de Conclusao de Curso nao foi incluido por nao possuir sigla na tabela."
+    ]
+  },
+  "subjects": [
+    {
+      "code": "BCJ0203-15",
+      "name": "Fenômenos Eletromagnéticos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCJ0204-15",
+      "name": "Fenômenos Mecânicos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCJ0205-15",
+      "name": "Fenômenos Térmicos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCK0103-15",
+      "name": "Física Quântica",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCL0306-15",
+      "name": "Biodiversidade: Interações entre organismos e ambiente",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCL0307-15",
+      "name": "Transformações Químicas",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCL0308-15",
+      "name": "Bioquímica: Estrutura, propriedade e funções de Biomoléculas",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCM0504-15",
+      "name": "Natureza da Informação",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCM0505-22",
+      "name": "Processamento da Informação",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCM0506-15",
+      "name": "Comunicação e Redes",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCN0402-15",
+      "name": "Funções de Uma Variável",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCN0404-15",
+      "name": "Geometria Analítica",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCN0405-15",
+      "name": "Introdução às Equações Diferenciais Ordinárias",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCN0407-15",
+      "name": "Funções de Várias Variáveis",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BCS0001-15",
+      "name": "Base Experimental das Ciências Naturais",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIK0102-15",
+      "name": "Estrutura da Matéria",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIL0304-15",
+      "name": "Evolução e Diversificação da Vida na Terra",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIN0406-15",
+      "name": "Introdução à Probabilidade e à Estatística",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIQ0602-15",
+      "name": "Estrutura e Dinâmica Social",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIR0004-15",
+      "name": "Bases Epistemológicas da Ciência Moderna",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIR0603-15",
+      "name": "Ciência, Tecnologia e Sociedade",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIS0002-15",
+      "name": "Projeto Dirigido",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIS0003-15",
+      "name": "Bases Matemáticas",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "BIS0005-15",
+      "name": "Bases Computacionais da Ciência",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bct_base"
+      }
+    },
+    {
+      "code": "ESTG013-17",
+      "name": "Pesquisa Operacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZA019-17",
+      "name": "Visão Computacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZB022-17",
+      "name": "Introdução à Bioinformática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZG013-17",
+      "name": "Empreendedorismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZG019-17",
+      "name": "Gestão Estratégica e Organizacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZI013-17",
+      "name": "Informática Industrial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZI014-17",
+      "name": "Sistemas Inteligentes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZI022-17",
+      "name": "Planejamento de Redes de Informação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZI029-17",
+      "name": "Redes WAN de Banda Larga",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZI030-17",
+      "name": "Gerenciamento e Interoperabilidade de Redes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZI033-17",
+      "name": "Programação de Dispositivos Móveis",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "ESZI034-17",
+      "name": "Jogos Digitais: Aspectos Técnicos e Aplicações",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCBM006-23",
+      "name": "Matemática Discreta",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC001-23",
+      "name": "Algoritmos e Estruturas de Dados I",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC002-23",
+      "name": "Algoritmos e Estruturas de Dados II",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC003-23",
+      "name": "Algoritmos em Grafos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC004-23",
+      "name": "Análise de Algoritmos I",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC005-23",
+      "name": "Análise de Algoritmos II",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC006-23",
+      "name": "Compiladores e Interpretadores",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC007-23",
+      "name": "Computação Gráfica",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC008-23",
+      "name": "Inteligência Artificial",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC009-23",
+      "name": "Linguagens Formais e Autômatos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC010-23",
+      "name": "Matemática Discreta II",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC011-23",
+      "name": "Metodologia e Escrita Científica para Ciência da Computação",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC012-23",
+      "name": "Modelagem de Banco de Dados",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCCC013-23",
+      "name": "Otimização Linear",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCCC015-23",
+      "name": "Programação Funcional",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA004-17",
+      "name": "Arquitetura de Computadores",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA006-17",
+      "name": "Circuitos Digitais",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA009-13",
+      "name": "Computadores, Ética e Sociedade",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA018-13",
+      "name": "Programação Orientada a Objetos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA022-17",
+      "name": "Redes de Computadores",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA023-17",
+      "name": "Segurança de Dados",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA024-13",
+      "name": "Sistemas Digitais",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA025-13",
+      "name": "Sistemas Distribuídos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA026-13",
+      "name": "Sistemas Operacionais",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA028-15",
+      "name": "Programação Estruturada",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTA033-15",
+      "name": "Engenharia de Software",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTB001-17",
+      "name": "Álgebra Linear",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCTB007-17",
+      "name": "Anéis e Corpos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCTB009-17",
+      "name": "Cálculo Numérico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCTB018-17",
+      "name": "Grupos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCTC021-20",
+      "name": "Neurociência Teórica e Computacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCTC022-15",
+      "name": "Processamento de Sinais Neurais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA001-13",
+      "name": "Análise de Projetos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA002-17",
+      "name": "Aprendizado de Máquina",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA003-17",
+      "name": "Arquitetura de Computadores de Alto Desempenho",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA004-13",
+      "name": "Avaliação de Desempenho de Redes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA005-17",
+      "name": "Banco de Dados de Apoio à Tomada de Decisão",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA006-17",
+      "name": "Computação Evolutiva e Conexionista",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA007-13",
+      "name": "Empreendedorismo e Desenvolvimento de Negócios",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA008-17",
+      "name": "Interação Humano-Computador",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-ppc",
+        "requirement_group": "bcc_specific"
+      }
+    },
+    {
+      "code": "MCZA010-13",
+      "name": "Laboratório de Engenharia de Software",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA011-17",
+      "name": "Laboratório de Redes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA012-13",
+      "name": "Laboratório de Sistemas Operacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA013-13",
+      "name": "Lógicas não Clássicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA014-17",
+      "name": "Métodos de Otimização",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA015-13",
+      "name": "Mineração de Dados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA016-17",
+      "name": "Gestão de projetos de software",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA017-13",
+      "name": "Processamento de Linguagem Natural",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA018-17",
+      "name": "Processamento Digital de Imagens",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA019-17",
+      "name": "Programação para Web",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA020-13",
+      "name": "Programação Paralela",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA021-17",
+      "name": "Projeto de Redes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA022-17",
+      "name": "Projeto Interdisciplinar",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA023-17",
+      "name": "Redes Convergentes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA024-17",
+      "name": "Redes sem Fio",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA025-13",
+      "name": "Segurança em Redes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA026-17",
+      "name": "Sistemas de Gerenciamento de Banco de Dados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA027-17",
+      "name": "Sistemas de Informação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA028-13",
+      "name": "Sistemas Multiagentes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA029-13",
+      "name": "Sistemas Multimídia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA030-17",
+      "name": "Vida Artificial na Computação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA031-13",
+      "name": "Web Semântica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA032-17",
+      "name": "Introdução à Programação de Jogos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA033-17",
+      "name": "Programação Avançada para Dispositivos Móveis",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA034-17",
+      "name": "Programação Segura",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA035-17",
+      "name": "Algoritmos Probabilísticos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA037-17",
+      "name": "Combinatória Extremal",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA038-17",
+      "name": "Prática Avançada de Programação A",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA039-17",
+      "name": "Prática Avançada de Programação B",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA040-17",
+      "name": "Prática Avançada de Programação C",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA041-17",
+      "name": "Processamento de Imagens Utilizando GPU",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA042-17",
+      "name": "Processo e Desenvolvimento de Softwares Educacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA044-17",
+      "name": "Robótica e Sistemas Inteligentes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA045-17",
+      "name": "Robótica Educacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA046-17",
+      "name": "Semântica de Linguagem de Programação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA047-17",
+      "name": "Sistemas Multi-Robôs Sociais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA048-17",
+      "name": "Teoria Espectral de Grafos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA049-17",
+      "name": "Tópicos Emergentes em Banco de Dados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA050-17",
+      "name": "Técnicas Avançadas de Programação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA052-22",
+      "name": "Vizualização de Dados e Informações",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA053-22",
+      "name": "Desenvolvimento Guiado por Tipos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZA054-22",
+      "name": "Projeto Avançado em Sistemas de Computação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZB012-13",
+      "name": "Inferência Estatística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZB015-13",
+      "name": "Introdução à Criptografia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZB018-13",
+      "name": "Introdução à Modelagem e Processos Estocásticos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZB032-13",
+      "name": "Teoria das Filas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "MCZB033-17",
+      "name": "Teoria da Recursão e Computabilidade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    },
+    {
+      "code": "NHZ5019-22",
+      "name": "Tecnologias da Informação e Comunicação na Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bcc-2023-limited"
+      }
+    }
+  ],
+  "requirements": [],
+  "replace_existing": true
+}

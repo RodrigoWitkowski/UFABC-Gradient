@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ufabc_ranking}
+      POSTGRES_USER: ${POSTGRES_USER:-ufabc}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ufabc}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ufabc} -d ${POSTGRES_DB:-ufabc_ranking}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-ufabc}:${POSTGRES_PASSWORD:-ufabc}@db:5432/${POSTGRES_DB:-ufabc_ranking}
+      IMPORT_STORAGE_PATH: /app/var/imports
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - import-data:/app/var/imports
+
+volumes:
+  postgres-data:
+  import-data:
+

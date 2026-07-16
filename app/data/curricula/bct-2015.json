@@ -1,0 +1,4476 @@
+{
+  "course": {
+    "code": "BCT",
+    "name": "Bacharelado em Ciencia e Tecnologia"
+  },
+  "version": "2015",
+  "admission_year_start": 2015,
+  "admission_year_end": 2022,
+  "valid_from": null,
+  "valid_until": null,
+  "unlisted_subject_category": "free",
+  "materialize_unlisted_subjects": false,
+  "metadata": {
+    "official": true,
+    "classification_only": true,
+    "source_documents": [
+      {
+        "key": "bct-2015-ppc",
+        "url": "https://www.ufabc.edu.br/images/consepe/resolucoes/3---Reviso-do-PP-do-Bacharelado-em-Cincia-e-Tecnologia-Esta-verso-contempla-as-retificaes.pdf",
+        "approval": "Resolucao ConsEPE 188/2015",
+        "retrieved_on": "2026-07-15",
+        "sha256": "59f3b8097c29cf7b12ab419fe0efa8de9166333b9a2025ac527805b0984262e9"
+      },
+      {
+        "key": "bct-2015-limited",
+        "url": "https://www.ufabc.edu.br/images/stories/comunicacao/Boletim/consepe_ato_decisorio_232_anexo.pdf",
+        "approval": "Ato Decisorio ConsEPE 232/2022",
+        "retrieved_on": "2026-07-15",
+        "sha256": "ba7e98d9b82816e43fbd1ee34ed8d3ace24737eadf97b945f47d7e8345e3b91a"
+      }
+    ],
+    "notes": []
+  },
+  "subjects": [
+    {
+      "code": "BCJ0203-15",
+      "name": "Fenômenos Eletromagnéticos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCJ0204-15",
+      "name": "Fenômenos Mecânicos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCJ0205-15",
+      "name": "Fenômenos Térmicos",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCK0103-15",
+      "name": "Física Quântica",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCK0104-15",
+      "name": "Interações Atômicas e Moleculares",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCL0306-15",
+      "name": "Biodiversidade: Interações entre organismos e ambiente",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCL0307-15",
+      "name": "Transformações Químicas",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCL0308-15",
+      "name": "Bioquímica: estrutura, propriedade e funções de Biomoléculas",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCM0504-15",
+      "name": "Natureza da Informação",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCM0505-15",
+      "name": "Processamento da Informação",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCM0506-15",
+      "name": "Comunicação e Redes",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCN0402-15",
+      "name": "Funções de Uma Variável",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCN0404-15",
+      "name": "Geometria Analítica",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCN0405-15",
+      "name": "Introdução às Equações Diferenciais Ordinárias",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCN0407-15",
+      "name": "Funções de Várias Variáveis",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCS0001-15",
+      "name": "Base Experimental das Ciências Naturais",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BCS0002-15",
+      "name": "Projeto Dirigido",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BHO0001-19",
+      "name": "Introdução às Humanidades e Ciências Sociais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHO0002-19",
+      "name": "Introdução ao Pensamento Econômico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHO0101-15",
+      "name": "Estado e Relações De Poder",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHO0102-15",
+      "name": "Desenvolvimento e Sustentabilidade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHO1102-19",
+      "name": "Introdução à Economia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHO1335-15",
+      "name": "Formação do Sistema Internacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHP0001-15",
+      "name": "Ética e Justiça",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHP0202-15",
+      "name": "Pensamento Crítico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHP0202-19",
+      "name": "Temas e Problemas em Filosofia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHQ0001-15",
+      "name": "Identidade e Cultura",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHQ0002-15",
+      "name": "Estudos Étnico-Raciais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHQ0003-15",
+      "name": "Interpretações do Brasil",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHQ0004-19",
+      "name": "Estudos de Gênero",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHQ0301-15",
+      "name": "Território e Sociedade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BHS0005-19",
+      "name": "Práticas em Ciências e Humanidades",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "BIJ0207-15",
+      "name": "Bases Conceituais da Energia",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIK0102-15",
+      "name": "Estrutura da Matéria",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIL0304-15",
+      "name": "Evolução e Diversificação da Vida na Terra",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIN0406-15",
+      "name": "Introdução à Probabilidade e à Estatística",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIQ0602-15",
+      "name": "Estrutura e Dinâmica Social",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIR0004-15",
+      "name": "Bases Epistemológicas da Ciência Moderna",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIR0603-15",
+      "name": "Ciência, Tecnologia e Sociedade",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIS0003-15",
+      "name": "Bases Matemáticas",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "BIS0005-15",
+      "name": "Bases Computacionais da Ciência",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-ppc"
+      }
+    },
+    {
+      "code": "ESHP004-13",
+      "name": "Cidadania, Direitos e Desigualdades",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESHR003-13",
+      "name": "Economia Política da Segurança Alimentar Global",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESHR004-13",
+      "name": "Economia Política Internacional da Energia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESHR005-13",
+      "name": "Estado e Desenvolvimento Econômico no Brasil Contemporâneo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESHT005-17",
+      "name": "Economia do Território",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESHT009-17",
+      "name": "História da Cidade e do Urbanismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTA001-17",
+      "name": "Dispositivos Eletrônicos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTA002-17",
+      "name": "Circuitos Elétricos I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTA004-17",
+      "name": "Circuitos Elétricos II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTA007-17",
+      "name": "Eletrônica Analógica Aplicada",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTA018-17",
+      "name": "Eletromagnetismo Aplicado",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTA019-17",
+      "name": "Projeto Assistido por Computador",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTA020-17",
+      "name": "Modelagem e Controle",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTB018-17",
+      "name": "Computação Científica aplicada a Problemas Biológicos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTB023-17",
+      "name": "Física Médica I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTE015-17",
+      "name": "Fundamentos de Conversão de Energia Elétrica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTE022-17",
+      "name": "Transferência de Calor I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTE029-17",
+      "name": "Engenharia de Combustíveis Fósseis",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTE036-17",
+      "name": "Economia da Energia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTG003-17",
+      "name": "Economia de Empresas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTG011-17",
+      "name": "Estatística Aplicada a Sistemas de Gestão",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTG013-17",
+      "name": "Empreendedorismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTG023-17",
+      "name": "Organização do Trabalho",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTG025-17",
+      "name": "Propriedade Intelectual",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI002-17",
+      "name": "Eletrônica Digital",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI003-17",
+      "name": "Transformadas em Sinais e Sistemas Lineares",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI004-17",
+      "name": "Princípios de Comunicação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI005-17",
+      "name": "Sinais Aleatórios",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI006-17",
+      "name": "Processamento Digital de Sinais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI007-17",
+      "name": "Comunicação Digital",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI008-17",
+      "name": "Teoria da Informação e Códigos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI010-17",
+      "name": "Comunicações Ópticas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI013-17",
+      "name": "Sistemas Microprocessados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI016-17",
+      "name": "Fundamentos de Fotônica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI017-17",
+      "name": "Fundamentos de Eletromagnetismo Aplicado",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI018-17",
+      "name": "Ondas Eletromagnéticas Aplicadas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTI020-17",
+      "name": "Teoria de Filas e Análise de Desempenho",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTM004-17",
+      "name": "Ciência dos Materiais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTM018-17",
+      "name": "Termodinâmica de Materiais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO001-17",
+      "name": "Circuitos Elétricos e Fotônica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO004-17",
+      "name": "Instrumentação e Controle",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO005-17",
+      "name": "Introdução às Engenharias",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO006-17",
+      "name": "Materiais e Suas Propriedades",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO008-17",
+      "name": "Mecânica dos Sólidos I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO011-17",
+      "name": "Fundamentos de Desenho Técnico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO012-17",
+      "name": "Princípios de Administração",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO013-17",
+      "name": "Engenharia Econômica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO014-17",
+      "name": "Termodinâmica Aplicada I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO015-17",
+      "name": "Mecânica dos Fluidos I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO016-17",
+      "name": "Fenômenos de Transporte",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO017-17",
+      "name": "Métodos Experimentais em Engenharia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO902-17",
+      "name": "Engenharia Unificada I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTO903-17",
+      "name": "Engenharia Unificada II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTS002-17",
+      "name": "Aeronáutica I-A",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTS019-17",
+      "name": "Dinâmica de Gases",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU004-17",
+      "name": "Cartografia e Geoprocessamento",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU005-17",
+      "name": "Climatologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU009-17",
+      "name": "Hidrologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU010-17",
+      "name": "Microbiologia Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU012-17",
+      "name": "Poluição Atmosférica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU015-17",
+      "name": "Saúde Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU019-17",
+      "name": "Teoria do Planejamento Urbano e Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU020-17",
+      "name": "Transferência de Massa",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU021-17",
+      "name": "Transportes e Mobilidade Urbana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU023-17",
+      "name": "Biomas Brasileiros",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU026-17",
+      "name": "Caracterização de Matrizes Ambientais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU027-17",
+      "name": "Fundamentos de Geologia para Engenharia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU028-17",
+      "name": "Hidráulica de Condutos Forçados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU029-17",
+      "name": "Hidráulica de Condutos Livres",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU032-17",
+      "name": "Representação Gráfica de Projetos Ambientais e Urbanos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESTU039-17",
+      "name": "Regulação Ambiental e Urbanística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZB022-17",
+      "name": "Introdução à Bioinformática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE047-13",
+      "name": "Engenharia Unificada (Engenharia Nuclear)",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE048-17",
+      "name": "Hidrogênio e Células a Combustível",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE064-17",
+      "name": "Petrofísica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE066-17",
+      "name": "Química do Petróleo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE097-17",
+      "name": "Armazenamento de Energia Elétrica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE104-17",
+      "name": "Energia Geotérmica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE105-17",
+      "name": "Energia dos Oceanos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZE110-17",
+      "name": "Eletrificação Rural com Recursos Energéticos Renováveis",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZI003-17",
+      "name": "Processamento de Informação em Línguas Naturais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZI014-17",
+      "name": "Sistemas Inteligentes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZI027-17",
+      "name": "Informação e Sociedade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZI031-17",
+      "name": "Segurança de Redes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZI033-17",
+      "name": "Programação de Dispositivos Móveis",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZI045-17",
+      "name": "Introdução à Linguística Computacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZP039-14",
+      "name": "Políticas de Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR001-13",
+      "name": "Conflitos no Ciberespaço: ativismo e guerra nas redes cibernéticas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR004-13",
+      "name": "Desafios do Pré-Sal e a Inserção Internacional do Brasil",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR005-13",
+      "name": "Dinâmica dos Investimentos Produtivos Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR007-13",
+      "name": "Energia nuclear e Relações Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR009-13",
+      "name": "Negociações internacionais, propriedade intelectual e transferência tecnológica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR013-13",
+      "name": "Trajetória da OPEP e da Agência Internacional de Energia (IEA)",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR014-13",
+      "name": "Trajetória de desenvolvimento de países exportadores de petróleo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZR015-13",
+      "name": "Trajetória dos investimentos produtivos no Brasil e do Brasil",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZS018-17",
+      "name": "Mecânica dos Sólidos II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZT005-17",
+      "name": "Informática Aplicada ao Planejamento Territorial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZT008-17",
+      "name": "Patrimônio Cultural e Paisagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZT009-17",
+      "name": "Planejamento e Gestão de Redes Técnicas e Sistemas Territoriais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZT016-17",
+      "name": "Urbanização Brasileira",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU006-17",
+      "name": "Economia, Sociedade e Meio Ambiente",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU017-17",
+      "name": "Sensoriamento Remoto",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU022-17",
+      "name": "Ciências Atmosféricas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU023-17",
+      "name": "Recursos Hídricos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU025-17",
+      "name": "Educação Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU030-17",
+      "name": "Riscos no Ambiente Urbano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU034-17",
+      "name": "Ecologia do Ambiente Urbano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "ESZU037-17",
+      "name": "Química Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "LIE0001-19",
+      "name": "Metodologias de Pesquisa em Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA001-17",
+      "name": "Algoritmos e Estruturas de Dados I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA002-17",
+      "name": "Algoritmos e Estruturas de Dados II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA003-17",
+      "name": "Análise de Algoritmos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA006-17",
+      "name": "Circuitos Digitais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA009-13",
+      "name": "Computadores, Ética e Sociedade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA014-15",
+      "name": "Inteligência Artificial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA015-13",
+      "name": "Linguagens Formais e Autômata",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA016-13",
+      "name": "Paradigmas de Programação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA017-17",
+      "name": "Programação Matemática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA018-13",
+      "name": "Programação Orientada a Objetos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA022-17",
+      "name": "Redes de Computadores",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA027-17",
+      "name": "Teoria dos Grafos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA028-15",
+      "name": "Programação Estruturada",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA033-15",
+      "name": "Engenharia de Software",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTA037-17",
+      "name": "Banco de Dados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB001-17",
+      "name": "Álgebra Linear",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB002-13",
+      "name": "Álgebra Linear Avançada I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB003-17",
+      "name": "Álgebra Linear Avançada II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB005-13",
+      "name": "Análise Real I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB006-13",
+      "name": "Análise Real II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB008-17",
+      "name": "Cálculo de Probabilidade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB009-17",
+      "name": "Cálculo Numérico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB010-13",
+      "name": "Cálculo Vetorial e Tensorial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB016-13",
+      "name": "Geometria Diferencial I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB018-17",
+      "name": "Grupos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB019-17",
+      "name": "Matemática Discreta",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB022-17",
+      "name": "Sequências e Séries",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB023-17",
+      "name": "Teoria Aritmética dos Números",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB026-17",
+      "name": "Topologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTB035-17",
+      "name": "Evolução dos Conceitos Matemáticos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC001-15",
+      "name": "Introdução à Filosofia da Mente",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC002-15",
+      "name": "Introdução à Neurociência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC007-20",
+      "name": "Comunicação Científica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC009-15",
+      "name": "Progressos e Métodos em Neurociência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC011-15",
+      "name": "Psicologia Cognitiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC014-13",
+      "name": "Introdução à Inferência Estatística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC018-20",
+      "name": "Neuropsicofarmacologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC021-20",
+      "name": "Neurociência Teórica e Computacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTC024-15",
+      "name": "Neuroetologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTD007-18",
+      "name": "Simetrias no Plano Euclidiano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTD009-18",
+      "name": "Geometria Plana Axiomática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTD010-18",
+      "name": "História da Matemática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTD021-18",
+      "name": "Fundamentos de Álgebra",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCTD023-18",
+      "name": "Fundamentos de Análise",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA001-13",
+      "name": "Análise de Projetos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA002-17",
+      "name": "Aprendizado de Máquina",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA007-13",
+      "name": "Empreendedorismo e Desenvolvimento de Negócios",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA008-17",
+      "name": "Interação Humano-Computador",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA013-13",
+      "name": "Lógicas Não Clássicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA015-13",
+      "name": "Mineração de Dados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA016-17",
+      "name": "Gestão de Projetos de Software",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA018-17",
+      "name": "Processamento Digital de Imagens",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA026-17",
+      "name": "Sistemas de Gerenciamento de Banco de Dados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA027-17",
+      "name": "Sistemas de Informação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA028-13",
+      "name": "Sistemas Multiagentes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA030-17",
+      "name": "Vida Artificial na Computação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA037-17",
+      "name": "Combinatória Extremal",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA042-17",
+      "name": "Processo e Desenvolvimento de Softwares Educacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZA044-17",
+      "name": "Robótica e Sistemas Inteligentes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZB007-13",
+      "name": "Elementos Finitos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZB009-13",
+      "name": "Geometria não Euclidiana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZB012-13",
+      "name": "Inferência Estatística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZB015-13",
+      "name": "Introdução à Criptografia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZB018-13",
+      "name": "Introdução à Modelagem e Processos Estocásticos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZB031-17",
+      "name": "Teoria dos Jogos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZB032-13",
+      "name": "Teoria das Filas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZC002-15",
+      "name": "Bases Neurais da Motricidade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZC003-15",
+      "name": "Introdução à Psicolinguística e Neurociência da Linguagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZC007-15",
+      "name": "Ergonomia Cognitiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZC008-13",
+      "name": "Neuroarte",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZC010-15",
+      "name": "Atenção e Estados de Consciência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZC011-15",
+      "name": "Tomada de Decisões e Neuroeconomia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "MCZC012-15",
+      "name": "Sensação e Percepção",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHH2017-16",
+      "name": "Filosofia da Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHI2049-13",
+      "name": "Lógica Básica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHI5001-15",
+      "name": "Desenvolvimento e Aprendizagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHI5002-15",
+      "name": "Didática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHI5011-13",
+      "name": "Políticas Educacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHI5015-15",
+      "name": "LIBRAS",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1002-15",
+      "name": "Bioética",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1013-15",
+      "name": "Bioquímica Funcional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1048-15",
+      "name": "Sistemática e Biogeografia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1053-15",
+      "name": "Biologia Celular",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1054-15",
+      "name": "Histologia e Embriologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1056-15",
+      "name": "Microbiologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1057-15",
+      "name": "Genética II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1061-15",
+      "name": "Genética I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1062-15",
+      "name": "Evolução",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1063-15",
+      "name": "Zoologia de Invertebrados I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1067-15",
+      "name": "Evolução e Diversidade de Plantas I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1068-15",
+      "name": "Evolução e Diversidade de Plantas II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1072-15",
+      "name": "Ecologia Comportamental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1083-22",
+      "name": "Práticas de Ensino de Biologia e Currículo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1084-22",
+      "name": "Práticas de Ensino de Biologia e Planejamento",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1085-22",
+      "name": "Práticas de Ensino de Biologia e Aprendizagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT1086-16",
+      "name": "Instrumentação para o Ensino de Ciências e Biologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT2081-09",
+      "name": "Teoria da Ciência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3012-15",
+      "name": "Física do Contínuo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3013-13",
+      "name": "Física Térmica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3027-15",
+      "name": "Laboratório de Física I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3028-15",
+      "name": "Laboratório de Física II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3036-15",
+      "name": "Mecânica Estatística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3037-13",
+      "name": "Mecânica Geral",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3044-15",
+      "name": "Óptica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3048-15",
+      "name": "Princípios de Mecânica Quântica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3049-15",
+      "name": "Princípios de Termodinâmica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3054-15",
+      "name": "Teoria da Relatividade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3055-13",
+      "name": "Teoria Eletromagnética",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3064-15",
+      "name": "Física Ondulatória",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3065-15",
+      "name": "Laboratório de Física III",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3066-15",
+      "name": "Variáveis Complexas e Aplicações",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3067-15",
+      "name": "Análise de Fourier e Aplicações",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3068-15",
+      "name": "Mecânica Clássica I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3070-15",
+      "name": "Eletromagnetismo I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT3072-15",
+      "name": "Mecânica Quântica I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4002-13",
+      "name": "Bioquímica Experimental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4017-15",
+      "name": "Funções e Reações Orgânicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4023-15",
+      "name": "Ligações Químicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4024-15",
+      "name": "Mecanismos de Reações Orgânicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4025-15",
+      "name": "Métodos de Análise em Química Orgânica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4041-15",
+      "name": "Química Orgânica Experimental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4049-15",
+      "name": "Estrutura da Matéria Avançada",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4050-15",
+      "name": "Química Analítica Clássica II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4051-15",
+      "name": "Química Analítica Clássica I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4052-15",
+      "name": "Química de Coordenação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4053-15",
+      "name": "Química dos Elementos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT4057-15",
+      "name": "Termodinâmica Química",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT5004-15",
+      "name": "Educação Científica, Sociedade e Cultura",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT5012-15",
+      "name": "Práticas de Ciências no Ensino Fundamental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHT5013-15",
+      "name": "Práticas de Ensino de Ciências e Matemática no Ensino Fundamental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ1003-15",
+      "name": "Biofísica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ1009-15",
+      "name": "Biologia Molecular e Biotecnologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ1027-15",
+      "name": "Farmacologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ1078-15",
+      "name": "Biotecnologia de Plantas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ2099-16",
+      "name": "Tópicos Contemporâneos em Educação e Filosofia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ2106-18",
+      "name": "Filosofia da Ciência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3001-15",
+      "name": "Conhecimento e Técnica: Perspectivas da Antiguidade e Período Medieval",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3003-15",
+      "name": "Efeitos Biológicos das Radiações",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3007-15",
+      "name": "Estrutura Atômica e Molecular",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3008-22",
+      "name": "Evolução da Física I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3010-15",
+      "name": "Física Computacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3021-15",
+      "name": "Interações da Radiação com a Matéria",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3024-15",
+      "name": "Introdução à Física de Partículas Elementares",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3026-15",
+      "name": "Introdução à Física Nuclear",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3031-15",
+      "name": "Laboratório de Propriedades Físicas de Materiais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3043-15",
+      "name": "Noções de Astronomia e Cosmologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3060-09",
+      "name": "Nascimento e Desenvolvimento da Ciência Moderna",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3078-15",
+      "name": "Equações Diferenciais Parciais Aplicadas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3080-15",
+      "name": "Laboratório de Física Médica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ3084-15",
+      "name": "Física do Meio Ambiente",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5009-09",
+      "name": "Introdução à Filosofia da Ciência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5014-15",
+      "name": "Questões Atuais no Ensino de Ciências",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5015-09",
+      "name": "Teoria do Conhecimento Científico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5016-15",
+      "name": "História da Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5017-15",
+      "name": "História e Filosofia das Ciências e o Ensino de Ciências",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5019-15",
+      "name": "Tecnologias da Informação e Comunicação na Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5020-15",
+      "name": "Educação Inclusiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5021-16",
+      "name": "Educação em Saúde e Sexualidade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ5023-18",
+      "name": "Práticas escolares em educação especial e inclusiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6001-18",
+      "name": "Fundamentos de Biotecnologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6003-18",
+      "name": "Nanobiotecnologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6004-18",
+      "name": "Enzimologia e Biocatálise",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6006-18",
+      "name": "Proteínas Recombinantes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6007-18",
+      "name": "Segurança e Regulamentação em Biotecnologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6009-18",
+      "name": "Biologia Sintética",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6010-18",
+      "name": "Genômica e Pós-Genômica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    },
+    {
+      "code": "NHZ6012-18",
+      "name": "Empreendedorismo e Planejamento de Projetos em Biotecnologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bct-2015-limited"
+      }
+    }
+  ],
+  "requirements": [],
+  "replace_existing": true
+}

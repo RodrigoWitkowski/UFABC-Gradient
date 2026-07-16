@@ -1,0 +1,1 @@
+"""UFABC Class Ranking backend."""

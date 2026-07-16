@@ -1,0 +1,4128 @@
+{
+  "course": {
+    "code": "BCH",
+    "name": "Bacharelado em Ciencias e Humanidades"
+  },
+  "version": "2022",
+  "admission_year_start": 2022,
+  "admission_year_end": null,
+  "valid_from": null,
+  "valid_until": null,
+  "unlisted_subject_category": "free",
+  "materialize_unlisted_subjects": false,
+  "metadata": {
+    "official": true,
+    "classification_only": true,
+    "source_documents": [
+      {
+        "key": "bch-2022-ppc",
+        "url": "https://www.ufabc.edu.br/images/stories/comunicacao/Boletim/consepe_ato_decisorio_236_anexo.pdf",
+        "approval": "Ato Decisorio ConsEPE 236/2022",
+        "retrieved_on": "2026-07-15",
+        "sha256": "046eb4b9b7cc77636cb9ddbfe9c62d7c3be3e8fb2763a9ad68d8875a2687b5a5"
+      },
+      {
+        "key": "bch-2022-limited",
+        "url": "https://prograd.ufabc.edu.br/cg/2023/BCH_Doc_Comp_I_v2.pdf",
+        "approval": "Ato Decisorio CG 22/2022",
+        "retrieved_on": "2026-07-15",
+        "sha256": "fa598590241252d06bb58e2237e6ff2cc6999047dc81a5c583805bc3e7359539"
+      }
+    ],
+    "notes": [
+      "Obrigatorias transcritas do quadro grafico do PPC 2022."
+    ]
+  },
+  "subjects": [
+    {
+      "code": "BCJ0203-15",
+      "name": "Fenômenos Eletromagnéticos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCJ0204-15",
+      "name": "Fenômenos Mecânicos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCJ0205-15",
+      "name": "Fenômenos Térmicos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCK0103-15",
+      "name": "Física Quântica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCK0104-15",
+      "name": "Interações Atômicas e Moleculares",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCL0306-15",
+      "name": "Biodiversidade: Interacoes entre Organismos e Ambiente",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BCL0307-15",
+      "name": "Transformações Químicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCL0308-15",
+      "name": "Bioquímica: estrutura, propriedade e funções de biomoléculas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCM0504-15",
+      "name": "Natureza da Informação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCM0505-22",
+      "name": "Processamento da Informação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCM0506-15",
+      "name": "Comunicação e Redes",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCN0402-15",
+      "name": "Funções de Uma Variável",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCN0404-15",
+      "name": "Geometria Analítica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCN0405-15",
+      "name": "Introdução às Equações Diferenciais Ordinárias",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCN0407-15",
+      "name": "Funções de Várias Variáveis",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCS0001-15",
+      "name": "Base Experimental das Ciências Naturais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BCS0002-15",
+      "name": "Projeto Dirigido",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHO0001-19",
+      "name": "Introducao as Humanidades e as Ciencias Sociais",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHO0002-19",
+      "name": "Introducao ao Pensamento Economico",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHO0101-15",
+      "name": "Estado e Relacoes de Poder",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHO0102-15",
+      "name": "Desenvolvimento e Sustentabilidade",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHO1102-19",
+      "name": "Introducao a Economia",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHO1335-15",
+      "name": "Formacao do Sistema Internacional",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHP0001-15",
+      "name": "Etica e Justica",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHP0202-15",
+      "name": "Pensamento Critico",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHP0202-19",
+      "name": "Temas e Problemas em Filosofia",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHQ0001-15",
+      "name": "Identidade e Cultura",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHQ0002-15",
+      "name": "Estudos Etnico-Raciais",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHQ0003-15",
+      "name": "Interpretacoes do Brasil",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHQ0004-19",
+      "name": "Estudos de Genero",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHQ0301-15",
+      "name": "Territorio e Sociedade",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHS0001-23",
+      "name": "Análise de Conjuntura Internacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0002-17",
+      "name": "Diálogos Interdisciplinares",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0002-22",
+      "name": "Diversidade de gênero e formação de professor",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0002-23",
+      "name": "Arenas e Problemas Públicos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0003-17",
+      "name": "Tópicos Avançados de Ciências e Humanidades",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0003-23",
+      "name": "Diálogos Extensionistas em Economia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0004-17",
+      "name": "Atividades da Teoria",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0004-23",
+      "name": "Encontros sobre gênero e sexualidades",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0005-19",
+      "name": "Praticas em Ciencias e Humanidades",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BHS0005-23",
+      "name": "Filosofia e sociedade civil em movimento(s)",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0006-23",
+      "name": "Introdução ao acolhimento intercultural aos migrantes e refugiados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0007-23",
+      "name": "Panorama Internacional do ABC",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0008-23",
+      "name": "Práticas comunitárias em campo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0009-23",
+      "name": "Práticas Extensionistas em Economia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0010-23",
+      "name": "Práticas territoriais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0011-23",
+      "name": "Reflexões sobre arte e sociedade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BHS0012-23",
+      "name": "Temas filosóficos em debate",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 8,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BIJ0207-15",
+      "name": "Bases Conceituais da Energia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BIK0102-15",
+      "name": "Estrutura da Matéria",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BIL0304-15",
+      "name": "Evolução e Diversificação da Vida na Terra",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "BIN0406-15",
+      "name": "Introducao a Probabilidade e a Estatistica",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BIQ0602-15",
+      "name": "Estrutura e Dinamica Social",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BIR0004-15",
+      "name": "Bases Epistemologicas da Ciencia Moderna",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BIR0603-15",
+      "name": "Ciencia, Tecnologia e Sociedade",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BIS0003-15",
+      "name": "Bases Matematicas",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "BIS0005-15",
+      "name": "Bases Computacionais da Ciencia",
+      "category": "mandatory",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-ppc"
+      }
+    },
+    {
+      "code": "ESHC002-17",
+      "name": "Contabilidade Básica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC003-17",
+      "name": "Desenvolvimento Socioeconômico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC007-21",
+      "name": "Economia Brasileira I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC008-21",
+      "name": "Economia Brasileira II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC012-21",
+      "name": "Economia Institucional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC013-21",
+      "name": "Relações Comerciais e de Investimento Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC016-17",
+      "name": "Finanças Corporativas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC017-17",
+      "name": "Finanças Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC018-17",
+      "name": "Formação Econômica do Brasil",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC019-17",
+      "name": "História do Pensamento Econômico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC020-17",
+      "name": "História Econômica Geral",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC022-17",
+      "name": "Macroeconomia I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC024-19",
+      "name": "Macroeconomia III",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC025-17",
+      "name": "Microeconomia I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC026-21",
+      "name": "Microeconomia II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC027-21",
+      "name": "Economia Matemática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC028-17",
+      "name": "Economia Política",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC029-21",
+      "name": "Microeconomia III",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC030-17",
+      "name": "Desigualdades de Raça, Gênero e Renda",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC031-17",
+      "name": "Macroeconomia Pós-Keynesiana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC032-17",
+      "name": "Macroeconomia II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC033-21",
+      "name": "Economia Brasileira Contemporânea",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC034-21",
+      "name": "Economia do Meio Ambiente",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC035-21",
+      "name": "Econometria I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC036-21",
+      "name": "Econometria II",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC037-21",
+      "name": "Econometria III",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC039-17",
+      "name": "Questões Metodológicas em Economia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHC040-21",
+      "name": "Relações Monetárias e Financeiras Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP004-13",
+      "name": "Cidadania, Direitos e Desigualdades",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP005-13",
+      "name": "Conflitos Sociais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP007-13",
+      "name": "Federalismo e Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP009-13",
+      "name": "Governo, Burocracia e Administração Pública",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP009-22",
+      "name": "Burocracia e Implementação de Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP012-13",
+      "name": "Introdução ao Direito Administrativo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP012-22",
+      "name": "Direito Administrativo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP013-13",
+      "name": "Introdução ao Direito Constitucional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP013-22",
+      "name": "Direito Constitucional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP014-13",
+      "name": "Introdução às Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP016-22",
+      "name": "Métodos Quantitativos em Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP018-14",
+      "name": "Políticas Sociais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP019-22",
+      "name": "Regimes e Formas de Governo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP021-13",
+      "name": "Trajetórias das Políticas de CT&I no Brasil",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP022-14",
+      "name": "Cultura Política",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP023-14",
+      "name": "Formação Histórica do Brasil Contemporâneo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP023-22",
+      "name": "História das Instituições Políticas Brasileiras",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP025-22",
+      "name": "Observatório de Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP026-14",
+      "name": "Participação, Movimentos Sociais e Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP027-14",
+      "name": "Poder Local",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP028-14",
+      "name": "Políticas Públicas para Sociedade da Informação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP028-22",
+      "name": "Políticas Digitais, Dados e Gestão Algorítmica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP029-14",
+      "name": "Teoria e Gestão de Organizações Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP030-14",
+      "name": "Planejamento Orçamentário",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP030-22",
+      "name": "Orçamento Público",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP031-22",
+      "name": "Avaliação e Monitoramento de Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHP032-22",
+      "name": "Poder Legislativo e Processo Decisório",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR002-21",
+      "name": "Temas de Direito Internacional Público",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR003-21",
+      "name": "Economia Política Internacional da Segurança Alimentar",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR004-13",
+      "name": "Economia Política Internacional da Energia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR005-13",
+      "name": "Estado e Desenvolvimento Econômico no Brasil Contemporâneo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR006-13",
+      "name": "Formação Histórica da América Latina",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR007-14",
+      "name": "Geografia Política",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR007-21",
+      "name": "Geopolítica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR008-13",
+      "name": "Globalização e os Processos de Integração Regional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR008-21",
+      "name": "Integração Regional - Teorias e Experiências",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR011-13",
+      "name": "Introdução ao Estudo do Direito",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR011-21",
+      "name": "Introdução ao Direito e Fundamentos do Direito Internacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR012-21",
+      "name": "Política Internacional dos EUA",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR014-21",
+      "name": "Relações Internacionais Contemporâneas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR015-21",
+      "name": "Segurança Internacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR016-21",
+      "name": "Sistema Financeiro Internacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR017-13",
+      "name": "Sistema ONU e os Desafios do Multilateralismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR017-21",
+      "name": "Organizações Internacionais e Multilateralismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR018-13",
+      "name": "Sociedade Civil Organizada Global",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR018-21",
+      "name": "Atores Não Estatais e as Relações Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR019-13",
+      "name": "Surgimento da China como Potência Mundial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR019-21",
+      "name": "China nas Relações Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR022-21",
+      "name": "Teorias Clássicas das Relações Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR023-14",
+      "name": "Pensamento Crítico das Relações Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR023-21",
+      "name": "Teorias Contemporâneas das Relações Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR024-14",
+      "name": "História da Política Externa Brasileira",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR025-14",
+      "name": "Política Externa Brasileira Contemporânea",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR026-14",
+      "name": "História do Terceiro Mundo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR027-14",
+      "name": "Trajetórias Internacionais do Continente Africano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR027-21",
+      "name": "África nas Relações Internacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR028-21",
+      "name": "Regime Internacional dos Direitos Humanos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR029-21",
+      "name": "Análise de Política Externa",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR030-21",
+      "name": "Estudos Estratégicos e Defesa",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHR031-21",
+      "name": "Economia Política Internacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT001-17",
+      "name": "Arranjos Institucionais e Marco Regulatório do Território",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT002-17",
+      "name": "Cartografia e Geoprocessamento para o Planejamento Territorial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 5,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT003-17",
+      "name": "Demografia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT005-17",
+      "name": "Economia do Território",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT006-17",
+      "name": "Economia Urbana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT007-17",
+      "name": "Estudos do Meio Físico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT008-17",
+      "name": "Governança Pública, Democracia e Políticas no Território",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT009-17",
+      "name": "História da Cidade e do Urbanismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT010-17",
+      "name": "Métodos de Planejamento",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT011-17",
+      "name": "Métodos e Técnicas de Análise de Informação para o Planejamento",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT011-21",
+      "name": "Análise de Dados para o Planejamento Territorial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT012-17",
+      "name": "Mobilização Produtiva dos Territórios e Desenvolvimento Local",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT013-22",
+      "name": "Oficina de Planejamento Macro e Meso Regional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT014-22",
+      "name": "Oficina de Planejamento de Áreas Periurbanas, Interioranas e Rurais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT015-22",
+      "name": "Oficina de Planejamento Urbano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT016-22",
+      "name": "Oficina de Planejamento e Governança Metropolitana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT017-17",
+      "name": "Planejamento e Política Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT018-17",
+      "name": "Planejamento e Política Regional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT019-17",
+      "name": "Planejamento e Política Rural",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT020-17",
+      "name": "Política Metropolitana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT021-17",
+      "name": "Política Urbana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT023-17",
+      "name": "Sociologia dos Territórios",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT024-17",
+      "name": "Uso do Solo Urbano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT025-17",
+      "name": "Desenvolvimento Econômico e Social no Brasil",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESHT026-21",
+      "name": "Biodiversidade, Geodiversidade e Paisagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTB010-17",
+      "name": "Legislação Relacionada à Saúde",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTB015-17",
+      "name": "Princípios de Ética em Serviços de Saúde",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTE004-17",
+      "name": "Energia, Meio Ambiente e Sociedade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTE036-17",
+      "name": "Economia da Energia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTG001-17",
+      "name": "Custos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTG003-17",
+      "name": "Economia de Empresas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTG010-17",
+      "name": "Inovação Tecnológica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTG011-17",
+      "name": "Estatística Aplicada a Sistemas de gestão",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTG013-17",
+      "name": "Pesquisa Operacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTG023-17",
+      "name": "Organização do Trabalho",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTG025-17",
+      "name": "Propriedade Intelectual",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTO012-17",
+      "name": "Princípios de Administração",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTO013-17",
+      "name": "Engenharia Econômica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU004-17",
+      "name": "Cartografia e Geoprocessamento",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU005-17",
+      "name": "Climatologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU012-17",
+      "name": "Poluição Atmosférica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU015-17",
+      "name": "Saúde Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU019-17",
+      "name": "Teoria do Planejamento Urbano e Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU021-17",
+      "name": "Transportes e Mobilidade Urbana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU023-17",
+      "name": "Biomas Brasileiros",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU032-17",
+      "name": "Representação Gráfica de Projetos Ambientais e Urbanos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESTU039-17",
+      "name": "Regulação Ambiental e Urbanística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZE110-17",
+      "name": "Eletrificação Rural com Recursos Energéticos Renováveis",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZI027-17",
+      "name": "Informação e Sociedade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZI043-17",
+      "name": "Programação Baseada em Componentes para Jogos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZI045-17",
+      "name": "Introdução à Linguística Computacional",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZP002-13",
+      "name": "Instituições Judiciais e Políticas Públicas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU006-17",
+      "name": "Economia, Sociedade e Meio Ambiente",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU013-17",
+      "name": "Logística e Meio Ambiente",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU017-17",
+      "name": "Sensoriamento Remoto",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU022-17",
+      "name": "Ciências Atmosféricas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU023-17",
+      "name": "Recursos Hídricos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU025-17",
+      "name": "Educação Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU030-17",
+      "name": "Riscos no Ambiente Urbano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU034-17",
+      "name": "Ecologia do Ambiente Urbano",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "ESZU037-17",
+      "name": "Química Ambiental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "LHE0001-19",
+      "name": "História, Eurocentrismo e Pós-Colonialismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "LHE0004-19",
+      "name": "Teoria da História I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "LIE0001-19",
+      "name": "Metodologias de Pesquisa em Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTA001-17",
+      "name": "Algoritmos e Estruturas de Dados I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTA009-13",
+      "name": "Computadores, Ética e Sociedade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTA014-15",
+      "name": "Inteligência Artificial",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTA022-17",
+      "name": "Redes de Computadores",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTA028-15",
+      "name": "Programação Estruturada",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTA037-17",
+      "name": "Banco de Dados",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTB001-17",
+      "name": "Álgebra Linear",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 6,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTB008-17",
+      "name": "Cálculo de Probabilidade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTB019-17",
+      "name": "Matemática Discreta",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTC001-15",
+      "name": "Introdução à Filosofia da Mente",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTC002-15",
+      "name": "Introdução à Neurociência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTC009-15",
+      "name": "Progressos e Métodos em Neurociência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTC011-15",
+      "name": "Psicologia Cognitiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTC014-13",
+      "name": "Introdução à Inferência Estatística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTC024-15",
+      "name": "Neuroetologia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCTD010-18",
+      "name": "História da Matemática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB002-13",
+      "name": "Análise de Regressão",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB003-17",
+      "name": "Análise Multivariada",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB009-13",
+      "name": "Geometria Não Euclidiana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB012-13",
+      "name": "Inferência Estatística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB016-13",
+      "name": "Introdução à Estatística Bayesiana",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB018-13",
+      "name": "Introdução à Modelagem e Processos Estocásticos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB022-17",
+      "name": "Metateoremas da Lógica Clássica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB031-17",
+      "name": "Teoria dos Jogos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB032-13",
+      "name": "Teoria das Filas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZB036-17",
+      "name": "Filosofia da Matemática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZC003-15",
+      "name": "Introdução à Psicolinguística e Neurociência da Linguagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZC007-15",
+      "name": "Ergonomia Cognitiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZC008-13",
+      "name": "Neuroarte",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZC011-15",
+      "name": "Tomada de Decisões e Neuroeconomia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "MCZC012-15",
+      "name": "Sensação e Percepção",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2007-13",
+      "name": "Estética",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2008-13",
+      "name": "Estética: Perspectivas Contemporâneas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2009-13",
+      "name": "Ética",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2010-18",
+      "name": "Ética contemporânea",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2012-13",
+      "name": "Fenomenologia e Filosofia Hermenêutica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2017-16",
+      "name": "Filosofia da Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2019-13",
+      "name": "Filosofia da Linguagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2023-16",
+      "name": "Filosofia do Ensino de Filosofia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2026-13",
+      "name": "Filosofia no Brasil e na América Latina",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2028-13",
+      "name": "Filosofia Política",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2029-18",
+      "name": "Filosofia Política Contemporânea",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2032-18",
+      "name": "História da Filosofia Antiga Helenística",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2033-13",
+      "name": "História da Filosofia Antiga: Platão e o Platonismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2033-18",
+      "name": "História da Filosofia Antiga Clássica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2034-13",
+      "name": "História da Filosofia Contemporânea: o século XIX",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2035-13",
+      "name": "História da Filosofia Contemporânea: o século XX",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2040-13",
+      "name": "História da Filosofia Moderna: o Iluminismo e seus desdobramentos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2041-13",
+      "name": "História da Filosofia Moderna: perspectivas racionalistas",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2073-18",
+      "name": "Teoria do Conhecimento: Empirismo e Racionalismo",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2085-16",
+      "name": "Filosofia da Arte",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2086-16",
+      "name": "História da Filosofia Medieval: do século IV ao X",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2087-16",
+      "name": "História da Filosofia Medieval: do século XI ao XIV",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2088-16",
+      "name": "Prática de Ensino de Filosofia: Currículos",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2089-16",
+      "name": "Prática de Ensino de Filosofia: Metodologias",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHH2090-16",
+      "name": "Prática de Ensino de Filosofia: Programas de Ensino",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHI2049-13",
+      "name": "Lógica Básica",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHI5001-15",
+      "name": "Desenvolvimento e Aprendizagem",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHI5002-15",
+      "name": "Didática",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHI5011-13",
+      "name": "Políticas Educacionais",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHI5015-22",
+      "name": "Libras",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHT1002-15",
+      "name": "Bioética",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHT3067-15",
+      "name": "Análise de Fourier e aplicações",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHT5004-15",
+      "name": "Educação Científica, Sociedade e Cultura",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHT5012-15",
+      "name": "Práticas de Ciências no Ensino Fundamental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHT5013-15",
+      "name": "Práticas de Ensino de Ciências e Matemática no Ensino Fundamental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHT5013-22",
+      "name": "Práticas de Ensino de Ciências e Matemática no Ensino Fundamental",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ2092-16",
+      "name": "Arte e Ensino",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ2099-16",
+      "name": "Tópicos Contemporâneos em Educação e Filosofia",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ2106-18",
+      "name": "Filosofia da Ciência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ2111-18",
+      "name": "Teorias da verdade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ2116-18",
+      "name": "Discussões atuais em filosofia da ciência",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ3001-15",
+      "name": "Conhecimento e Técnica: Perspectivas da Antiguidade e Período Medieval",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ3008-22",
+      "name": "Evolução da Física I",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ3060-09",
+      "name": "Nascimento e Desenvolvimento da Ciência Moderna",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5014-15",
+      "name": "Questões Atuais no Ensino de Ciências",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5015-09",
+      "name": "Teoria do Conhecimento Científico",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5016-15",
+      "name": "História da Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5017-15",
+      "name": "História e Filosofia das Ciências e o Ensino de Ciências",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5019-22",
+      "name": "Tecnologias da Informação e Comunicação na Educação",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5020-15",
+      "name": "Educação Inclusiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 2,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5021-16",
+      "name": "Educação em Saúde e Sexualidade",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 3,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    },
+    {
+      "code": "NHZ5023-18",
+      "name": "Práticas Escolares em Educação Especial e Inclusiva",
+      "category": "limited",
+      "category_source": "explicit",
+      "ideal_term": null,
+      "recommended_term": null,
+      "credits": 4,
+      "valid_from": null,
+      "valid_until": null,
+      "metadata": {
+        "source_key": "bch-2022-limited"
+      }
+    }
+  ],
+  "requirements": [],
+  "replace_existing": true
+}
