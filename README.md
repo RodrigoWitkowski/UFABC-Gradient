@@ -1,4 +1,4 @@
-# UFABC Class Ranking
+# Gradient
 
 As definicoes e decisoes de dominio sobre disciplinas obrigatorias, de opcao limitada e
 livres estao registradas em [REGRAS_UFABC.md](REGRAS_UFABC.md).
@@ -129,27 +129,24 @@ curl http://localhost:8000/courses/UUID_DO_CURSO/curriculums
 
 ## Sincronizar o UFABC Next
 
-Por padrão, o endpoint consulta apenas os componentes do quadrimestre e associa os códigos
-de turma que também existem na planilha oficial:
+A sincronização só pode ser iniciada pelo CLI administrativo dentro do container. Não existe
+um endpoint HTTP público capaz de disparar chamadas ao Next. Para importar componentes e um
+lote de até 25 docentes:
 
-```bash
-curl -X POST http://localhost:8000/sync/ufabc-next \
-  -H "Content-Type: application/json" \
-  -d '{"season":"2026:3"}'
+```powershell
+docker compose exec api python -m app.cli.sync_ufabc_next --season 2026:3 --include-teacher-reviews --review-limit 25 --confirm-external-requests
 ```
 
-Reviews são opcionais e possuem limite explícito para evitar centenas de requisições em um
-teste. Este exemplo sincroniza no máximo dez professores e dez disciplinas:
+Cada nova execução seleciona primeiro docentes que ainda não possuem snapshot. Assim, repetir
+o comando avança para o lote seguinte em vez de consultar os mesmos IDs. O JSON exibido no
+terminal inclui `review_progress`, com totais concluídos e pendentes. A resposta de docente já
+contém estatísticas gerais e por disciplina; por isso, o preenchimento inicial não precisa usar
+`--include-subject-reviews`.
 
-```bash
-curl -X POST http://localhost:8000/sync/ufabc-next \
-  -H "Content-Type: application/json" \
-  -d '{
-    "season":"2026:3",
-    "include_teacher_reviews":true,
-    "include_subject_reviews":true,
-    "review_limit":10
-  }'
+Para consultar o progresso sem acessar o Next:
+
+```powershell
+docker compose exec api python -m app.cli.sync_ufabc_next --season 2026:3 --progress-only
 ```
 
 Consultar a execução mais recente ou uma execução específica:
@@ -160,25 +157,24 @@ curl "http://localhost:8000/sync/ufabc-next/status?run_id=UUID_DA_EXECUCAO"
 ```
 
 Cada status informa chamadas remotas, cache hits, HTTP retornado, itens recebidos,
-correspondências e avisos. O cache impede novas chamadas dentro do TTL. Use
-`"force_refresh":true` somente quando for necessário ignorar o cache.
+correspondências e avisos. Por segurança, a sincronização é sequencial, espera no mínimo cinco
+segundos entre chamadas, usa lotes de 25, não repete automaticamente uma chamada com erro e
+interrompe a execução ao atingir 30 chamadas remotas ou receber HTTP `429`. Apenas uma execução
+pode permanecer ativa. Cada snapshot de docente é confirmado no banco antes da próxima chamada,
+portanto um erro no fim do lote não perde o progresso anterior.
 
-Por segurança, a sincronização é sequencial, espera no mínimo 1 segundo entre chamadas,
-usa no máximo 10 reviews por padrão e interrompe a execução ao atingir 50 chamadas remotas.
-Esses valores podem ser alterados por configuração, mas devem ser aumentados conscientemente.
-Ranking, reranking e testes estatísticos nunca consultam o Next: usam somente snapshots locais.
+O cache de componentes dura 24 horas e o de reviews, 90 dias. Componentes vindos do cache são
+usados para descobrir os IDs sem duplicar todos os snapshots de turmas. Ranking, reranking e
+testes estatísticos nunca consultam o Next: usam somente dados locais.
 
 A integração pode ser desligada com `UFABC_NEXT_ENABLED=false`. Timeout, retries, backoff,
 intervalo mínimo e TTLs são configurados pelas variáveis `UFABC_NEXT_*` do `.env.example`.
 O sistema não persiste a lista de alunos matriculados, RA, login, e-mail, SIAPE ou chaves
 internas recebidas nos payloads.
 
-Para uma sincronização periódica, agende este comando no cron ou no Agendador de Tarefas do
-Windows. O projeto não ativa chamadas automáticas sem configuração explícita:
-
-```bash
-docker compose exec api python -m app.cli.sync_ufabc_next --season 2026:3
-```
+O projeto não agenda chamadas automaticamente. Para a carga inicial, execute no máximo um lote
+por hora. Com os 545 docentes identificados em `2026:3`, são necessárias aproximadamente 546
+chamadas no total: uma de componentes e uma para cada docente, divididas em 22 lotes.
 
 ## Estatísticas de docentes
 
@@ -255,15 +251,31 @@ Cada resultado representa uma turma específica e retorna seis notas separadas:
 - carga da disciplina;
 - compatibilidade de campus.
 
-A configuração padrão calcula:
+A nota de compatibilidade `N` e todos os seus componentes ficam entre 0 e 100. A configuração
+padrão usa a seguinte soma ponderada:
 
 ```text
-total = 0,35 * relevancia curricular
-      + 0,25 * docente
-      + 0,25 * vagas/demanda
-      + 0,10 * turno
-      + 0,05 * carga
+N = 0,35 R + 0,25 D + 0,25 V + 0,10 H + 0,05 C + 0,00 K
 ```
+
+Os símbolos representam:
+
+- `R`, relevância curricular: obrigatória no quadrimestre ideal = 100; obrigatória = 90;
+  opção limitada = 60; livre = 30; não aplicável ou sem classificação = 0. Se o aluno possui
+  vários cursos, essas notas são combinadas pela estratégia escolhida no perfil.
+- `D`, docentes: média das notas dos professores da turma. Por padrão é usada a taxa ajustada
+  de conceitos A ou B. Para cada conceito `g`, `p̃_g = (n_g + 20q_g) / (n + 20)`, em que `n_g`
+  é a contagem observada, `n` é a amostra e `q_g` é a taxa de referência. O histórico específico
+  da disciplina recebe peso `r = n_s / (n_s + 20)` e é combinado ao histórico geral por
+  `p_AB = r p_AB,s + (1-r) p_AB,g`. Finalmente, `D = 100 p_AB`.
+- `V`, disponibilidade: `V = 100 min(vagas / solicitações, 1)`. Se a demanda ainda não existe,
+  é usada a nota neutra 50. Esse valor não é uma promessa pessoal de matrícula.
+- `H`, horário: 100 quando o turno coincide com o do aluno, 25 quando difere e 50 quando falta
+  informação. Preferências opcionais de dias e horários entram como média ponderada adicional.
+- `C`, carga: `C = max(100 - 15 max(créditos - 6, 0), 0)`. Até seis créditos recebe 100.
+- `K`, campus: 100 para campus preferido, 25 para outro e 50 sem informação. Quando o aluno
+  fornece uma lista explícita de campi preferidos, um campus fora dela recebe 0. O peso padrão
+  de `K` é zero, então campus não altera `N` enquanto o aluno não configurar pesos diferentes.
 
 Disciplinas concluídas ou em andamento são excluídas por padrão. Uma disciplina ausente das
 listas de obrigatórias e limitadas usa a regra `free` da matriz. Quando a demanda é zero, ela

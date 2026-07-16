@@ -1,5 +1,6 @@
 import json
 from collections.abc import Generator
+from datetime import UTC, datetime
 
 import httpx
 import pytest
@@ -7,7 +8,6 @@ from fastapi.testclient import TestClient
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from app.api.routes import ufabc_next as ufabc_next_routes
 from app.core.config import Settings
 from app.db.session import get_db
 from app.main import app
@@ -25,7 +25,11 @@ from app.models.ufabc_next import (
 from app.schemas.ufabc_next import UfabcNextSyncRequest
 from app.services.normalization.text import normalize_text
 from app.services.ufabc_next.cache import UfabcNextDatabaseCache
-from app.services.ufabc_next.client import UfabcNextClient, UfabcNextRequestLimitError
+from app.services.ufabc_next.client import (
+    UfabcNextClient,
+    UfabcNextRateLimitError,
+    UfabcNextRequestLimitError,
+)
 from app.services.ufabc_next.sync import UfabcNextSyncError, UfabcNextSyncService
 
 
@@ -217,6 +221,43 @@ def test_client_stops_at_local_remote_request_limit(session: Session) -> None:
     assert client.remote_requests == 1
 
 
+def test_client_stops_immediately_on_remote_rate_limit(session: Session) -> None:
+    calls = 0
+
+    def handler(_: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        return httpx.Response(
+            429,
+            headers={
+                "retry-after": "45",
+                "x-ratelimit-limit": "1000",
+                "x-ratelimit-remaining": "0",
+            },
+            json={"message": "slow down"},
+        )
+
+    client = build_mock_client(
+        session,
+        httpx.MockTransport(handler),
+        ufabc_next_max_retries=2,
+    )
+
+    with pytest.raises(UfabcNextRateLimitError, match="429"):
+        client.get_components("2026:3")
+
+    assert calls == 1
+    assert client.request_log == [
+        {
+            "path": "/entities/components",
+            "status_code": 429,
+            "x_ratelimit_limit": "1000",
+            "x_ratelimit_remaining": "0",
+            "retry_after": "45",
+        }
+    ]
+
+
 def test_sync_persists_components_reviews_and_external_links(session: Session) -> None:
     _, section, teacher = create_offering(session)
     alternate_subject = Subject(
@@ -285,10 +326,9 @@ def test_sync_persists_components_reviews_and_external_links(session: Session) -
     assert "externalKey" not in persisted_reviews
 
 
-def test_sync_api_returns_run_and_status(
+def test_sync_start_is_not_exposed_and_status_is_read_only(
     api_client: TestClient,
     session: Session,
-    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     create_offering(session)
 
@@ -297,32 +337,80 @@ def test_sync_api_returns_run_and_status(
         return httpx.Response(200, json=components_payload()[:1])
 
     mock_client = build_mock_client(session, httpx.MockTransport(handler))
-    monkeypatch.setattr(
-        ufabc_next_routes,
-        "UfabcNextClient",
-        lambda settings, cache: mock_client,
+    run = UfabcNextSyncService(session, mock_client).sync(
+        UfabcNextSyncRequest(season="2026:3")
     )
 
     response = api_client.post("/sync/ufabc-next", json={"season": "2026:3"})
-
-    assert response.status_code == 201
-    payload = response.json()
-    assert payload["status"] == "completed"
-    assert payload["components_received"] == 1
-    assert payload["request_log"] == [
-        {
-            "path": "/entities/components",
-            "status_code": 200,
-            "items_returned": 1,
-        }
-    ]
+    assert response.status_code == 404
     status_response = api_client.get(
         "/sync/ufabc-next/status",
-        params={"run_id": payload["id"]},
+        params={"run_id": str(run.id)},
     )
     assert status_response.status_code == 200
-    assert status_response.json()["id"] == payload["id"]
+    assert status_response.json()["id"] == str(run.id)
     assert session.scalar(select(func.count()).select_from(UfabcNextSyncRun)) == 1
+
+
+def test_sync_batches_advance_to_teachers_without_snapshots(session: Session) -> None:
+    create_offering(session)
+    component_response = components_payload()
+    component_response[1]["teoria"] = "Docente Teste"
+    component_response[1]["teoriaId"] = "teacher-next-2"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/entities/components":
+            return httpx.Response(200, json=component_response)
+        if request.url.path.startswith("/entities/teachers/reviews/"):
+            return httpx.Response(200, json=review_payload())
+        return httpx.Response(404)
+
+    first_client = build_mock_client(session, httpx.MockTransport(handler))
+    first_service = UfabcNextSyncService(session, first_client)
+    first_service.sync(
+        UfabcNextSyncRequest(
+            season="2026:3",
+            include_teacher_reviews=True,
+            review_limit=1,
+        )
+    )
+
+    second_client = build_mock_client(session, httpx.MockTransport(handler))
+    second_service = UfabcNextSyncService(session, second_client)
+    second_service.sync(
+        UfabcNextSyncRequest(
+            season="2026:3",
+            include_teacher_reviews=True,
+            review_limit=1,
+        )
+    )
+
+    reviewed = set(session.scalars(select(TeacherReviewSnapshot.external_teacher_id)).all())
+    assert reviewed == {"teacher-next-1", "teacher-next-2"}
+    assert session.scalar(select(func.count()).select_from(UfabcNextComponentSnapshot)) == 2
+    assert second_service.review_progress()["teacher_pending"] == 0
+
+
+def test_sync_rejects_another_active_run(session: Session) -> None:
+    create_offering(session)
+    active = UfabcNextSyncRun(
+        season="2026:3",
+        status=ExternalSyncStatus.RUNNING,
+        started_at=datetime.now(UTC).replace(tzinfo=None),
+        warnings=[],
+        request_log=[],
+    )
+    session.add(active)
+    session.commit()
+    client = build_mock_client(
+        session,
+        httpx.MockTransport(lambda _: httpx.Response(500)),
+    )
+
+    with pytest.raises(ValueError, match="sincronizacao em andamento"):
+        UfabcNextSyncService(session, client).sync(UfabcNextSyncRequest(season="2026:3"))
+
+    assert client.remote_requests == 0
 
 
 def test_failed_sync_is_persisted(session: Session) -> None:

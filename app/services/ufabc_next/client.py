@@ -36,6 +36,15 @@ class UfabcNextRequestLimitError(UfabcNextError):
     pass
 
 
+class UfabcNextRateLimitError(UfabcNextError):
+    def __init__(self, retry_after: str | None) -> None:
+        message = "UFABC Next retornou HTTP 429; sincronizacao interrompida"
+        if retry_after:
+            message += f"; tente novamente apos {retry_after} segundo(s)"
+        super().__init__(message)
+        self.retry_after = retry_after
+
+
 class UfabcNextResponseError(UfabcNextError):
     def __init__(self, message: str, *, status_code: int | None = None) -> None:
         super().__init__(message)
@@ -43,7 +52,7 @@ class UfabcNextResponseError(UfabcNextError):
 
 
 class UfabcNextClient:
-    RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
+    RETRYABLE_STATUS_CODES = {500, 502, 503, 504}
 
     def __init__(
         self,
@@ -66,7 +75,7 @@ class UfabcNextClient:
         self.http = http_client or httpx.Client(
             base_url=settings.ufabc_next_base_url.rstrip("/"),
             timeout=settings.ufabc_next_timeout_seconds,
-            headers={"User-Agent": "ufabc-class-ranking/0.6-experiment"},
+            headers={"User-Agent": "gradient-ufabc/0.11-experiment"},
             follow_redirects=True,
         )
 
@@ -176,7 +185,10 @@ class UfabcNextClient:
                 "path": path,
                 "status_code": response.status_code,
             }
+            request_record.update(self._rate_limit_headers(response))
             self.request_log.append(request_record)
+            if response.status_code == 429:
+                raise UfabcNextRateLimitError(response.headers.get("retry-after"))
             if response.status_code in self.RETRYABLE_STATUS_CODES:
                 last_error = UfabcNextResponseError(
                     f"UFABC Next retornou HTTP {response.status_code}",
@@ -250,6 +262,20 @@ class UfabcNextClient:
             if isinstance(general, dict) and isinstance(general.get("count"), int):
                 return {"sample_size": general["count"]}
         return {}
+
+    @staticmethod
+    def _rate_limit_headers(response: httpx.Response) -> dict[str, str]:
+        result: dict[str, str] = {}
+        for header in (
+            "x-ratelimit-limit",
+            "x-ratelimit-remaining",
+            "x-ratelimit-reset",
+            "retry-after",
+        ):
+            value = response.headers.get(header)
+            if value is not None:
+                result[header.replace("-", "_")] = value
+        return result
 
     @classmethod
     def _sanitize_components(cls, payload: Any) -> Any:

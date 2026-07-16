@@ -12,7 +12,7 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    app_name: str = "UFABC Class Ranking"
+    app_name: str = "Gradient"
     app_env: str = "development"
     database_url: str = "postgresql+psycopg://ufabc:ufabc@localhost:5432/ufabc_ranking"
     import_storage_path: Path = Path("var/imports")
@@ -21,12 +21,13 @@ class Settings(BaseSettings):
     ufabc_next_enabled: bool = True
     ufabc_next_base_url: str = "https://api.v2.ufabcnext.com"
     ufabc_next_timeout_seconds: float = Field(default=15.0, gt=0, le=120)
-    ufabc_next_max_retries: int = Field(default=2, ge=0, le=5)
-    ufabc_next_backoff_seconds: float = Field(default=0.5, ge=0, le=30)
-    ufabc_next_min_interval_seconds: float = Field(default=1.0, ge=0, le=60)
-    ufabc_next_max_requests_per_sync: int = Field(default=50, ge=1, le=10_000)
-    ufabc_next_component_cache_seconds: int = Field(default=900, ge=0)
-    ufabc_next_review_cache_seconds: int = Field(default=86400, ge=0)
+    ufabc_next_max_retries: int = Field(default=0, ge=0, le=2)
+    ufabc_next_backoff_seconds: float = Field(default=5.0, ge=0, le=60)
+    ufabc_next_min_interval_seconds: float = Field(default=5.0, ge=0, le=60)
+    ufabc_next_max_requests_per_sync: int = Field(default=30, ge=1, le=100)
+    ufabc_next_component_cache_seconds: int = Field(default=86400, ge=0)
+    ufabc_next_review_cache_seconds: int = Field(default=7776000, ge=0)
+    ufabc_next_sync_stale_seconds: int = Field(default=3600, ge=300, le=86400)
 
 
 @lru_cache

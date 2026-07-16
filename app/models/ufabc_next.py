@@ -13,6 +13,7 @@ from sqlalchemy import (
     String,
     Text,
     UniqueConstraint,
+    text,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -40,7 +41,16 @@ class ExternalSubjectIdentifier(UUIDPrimaryKeyMixin, TimestampMixin, Base):
 
 class UfabcNextSyncRun(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __tablename__ = "ufabc_next_sync_runs"
-    __table_args__ = (Index("ix_next_sync_runs_season_created", "season", "created_at"),)
+    __table_args__ = (
+        Index("ix_next_sync_runs_season_created", "season", "created_at"),
+        Index(
+            "uq_next_sync_runs_single_running",
+            "status",
+            unique=True,
+            postgresql_where=text("status = 'RUNNING'"),
+            sqlite_where=text("status = 'RUNNING'"),
+        ),
+    )
 
     season: Mapped[str] = mapped_column(String(16), index=True)
     status: Mapped[ExternalSyncStatus] = mapped_column(

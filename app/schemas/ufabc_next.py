@@ -11,7 +11,7 @@ class UfabcNextSyncRequest(BaseModel):
     season: str = Field(pattern=r"^[0-9]{4}:[1-3]$")
     include_teacher_reviews: bool = False
     include_subject_reviews: bool = False
-    review_limit: int = Field(default=10, ge=1, le=1000)
+    review_limit: int = Field(default=25, ge=1, le=25)
     force_refresh: bool = False
 
 

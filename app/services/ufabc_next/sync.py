@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import uuid
 from collections import defaultdict
+from datetime import datetime, timedelta
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, selectinload
 
 from app.models.enums import ExternalSyncStatus, TeacherAliasStatus
@@ -27,7 +29,12 @@ from app.models.ufabc_next import (
 from app.schemas.ufabc_next import UfabcNextSyncRequest
 from app.services.normalization.text import normalize_code, normalize_text
 from app.services.ufabc_next.cache import utc_now_naive
-from app.services.ufabc_next.client import UfabcNextClient, UfabcNextError
+from app.services.ufabc_next.client import (
+    UfabcNextClient,
+    UfabcNextError,
+    UfabcNextRateLimitError,
+    UfabcNextRequestLimitError,
+)
 
 PROVIDER = "ufabc_next"
 REVIEW_PRIVATE_KEYS = {
@@ -77,6 +84,16 @@ class UfabcNextSyncService:
             raise ValueError(
                 "quadrimestre nao encontrado; importe a planilha de ofertas antes do Next"
             )
+        self._expire_stale_runs()
+        active_run = self.session.scalar(
+            select(UfabcNextSyncRun).where(
+                UfabcNextSyncRun.status == ExternalSyncStatus.RUNNING
+            )
+        )
+        if active_run is not None:
+            raise ValueError(
+                f"ja existe uma sincronizacao em andamento: {active_run.id}"
+            )
         run = UfabcNextSyncRun(
             season=options.season,
             status=ExternalSyncStatus.RUNNING,
@@ -88,14 +105,25 @@ class UfabcNextSyncService:
             request_log=[],
         )
         self.session.add(run)
-        self.session.commit()
+        try:
+            self.session.commit()
+        except IntegrityError as exc:
+            self.session.rollback()
+            raise ValueError("ja existe uma sincronizacao em andamento") from exc
 
         try:
+            cache_hits_before = self.client.cache_hits
             components = self.client.get_components(
                 options.season,
                 force_refresh=options.force_refresh,
             )
-            teacher_ids, subject_ids = self._persist_components(run, term, components)
+            components_from_cache = self.client.cache_hits > cache_hits_before
+            teacher_ids, subject_ids = self._persist_components(
+                run,
+                term,
+                components,
+                persist_snapshots=not components_from_cache,
+            )
             if options.include_teacher_reviews:
                 run.teacher_reviews_synced = self._sync_teacher_reviews(
                     run,
@@ -113,6 +141,7 @@ class UfabcNextSyncService:
             run.remote_requests = self.client.remote_requests
             run.cache_hits = self.client.cache_hits
             run.request_log = self.client.request_log
+            run.warnings = list(run.warnings)
             run.status = (
                 ExternalSyncStatus.COMPLETED_WITH_WARNINGS
                 if run.warnings
@@ -130,6 +159,7 @@ class UfabcNextSyncService:
                 failed_run.remote_requests = self.client.remote_requests
                 failed_run.cache_hits = self.client.cache_hits
                 failed_run.request_log = self.client.request_log
+                failed_run.warnings = list(run.warnings)
                 failed_run.error_message = str(exc)[:2000]
                 self.session.commit()
             raise UfabcNextSyncError(str(exc), run_id=run.id) from exc
@@ -139,6 +169,8 @@ class UfabcNextSyncService:
         run: UfabcNextSyncRun,
         term: Term,
         components: list[dict[str, Any]],
+        *,
+        persist_snapshots: bool,
     ) -> tuple[set[str], set[str]]:
         sections = (
             self.session.scalars(
@@ -213,22 +245,23 @@ class UfabcNextSyncService:
             enrolled_count = self._optional_int(item.get("enrolled_count")) or 0
             sanitized = {key: value for key, value in item.items() if key in COMPONENT_FIELDS}
             sanitized["enrolled_count"] = enrolled_count
-            self.session.add(
-                UfabcNextComponentSnapshot(
-                    sync_run_id=run.id,
-                    term_id=term.id,
-                    section_id=section.id if section else None,
-                    subject_id=subject.id if subject else None,
-                    external_component_id=self._optional_string(item.get("disciplina_id")),
-                    external_section_code=section_code,
-                    external_subject_id=external_subject_id,
-                    seats=self._optional_int(item.get("vagas")),
-                    requests=self._optional_int(item.get("requisicoes")),
-                    enrolled_count=enrolled_count,
-                    ideal_term=self._optional_bool(item.get("ideal_quad")),
-                    payload=sanitized,
+            if persist_snapshots:
+                self.session.add(
+                    UfabcNextComponentSnapshot(
+                        sync_run_id=run.id,
+                        term_id=term.id,
+                        section_id=section.id if section else None,
+                        subject_id=subject.id if subject else None,
+                        external_component_id=self._optional_string(item.get("disciplina_id")),
+                        external_section_code=section_code,
+                        external_subject_id=external_subject_id,
+                        seats=self._optional_int(item.get("vagas")),
+                        requests=self._optional_int(item.get("requisicoes")),
+                        enrolled_count=enrolled_count,
+                        ideal_term=self._optional_bool(item.get("ideal_quad")),
+                        payload=sanitized,
+                    )
                 )
-            )
 
         run.components_received = len(components)
         run.components_matched = matched
@@ -258,10 +291,24 @@ class UfabcNextSyncService:
                 )
             ).all()
         }
-        selected = sorted(external_ids)[:limit]
-        if len(external_ids) > limit:
+        reviewed_ids = set(
+            self.session.scalars(
+                select(TeacherReviewSnapshot.external_teacher_id).where(
+                    TeacherReviewSnapshot.external_teacher_id.in_(external_ids)
+                )
+            ).all()
+        )
+        pending_ids = external_ids - reviewed_ids
+        selected = (
+            self._oldest_teacher_ids(external_ids)[:limit]
+            if force_refresh
+            else sorted(pending_ids)[:limit]
+        )
+        if not selected and not force_refresh:
+            run.warnings.append("todos os docentes identificados ja possuem snapshot")
+        elif not force_refresh and len(pending_ids) > limit:
             run.warnings.append(
-                f"reviews de professores limitados a {limit} de {len(external_ids)} identificadores"
+                f"lote de {limit} docentes; {len(pending_ids) - limit} permanecem pendentes"
             )
         synced = 0
         for external_id in selected:
@@ -270,6 +317,8 @@ class UfabcNextSyncService:
                     external_id,
                     force_refresh=force_refresh,
                 )
+            except (UfabcNextRateLimitError, UfabcNextRequestLimitError):
+                raise
             except UfabcNextError as exc:
                 run.warnings.append(f"review do professor {external_id} falhou: {exc}")
                 continue
@@ -287,8 +336,8 @@ class UfabcNextSyncService:
                     fetched_at=utc_now_naive(),
                 )
             )
+            self.session.commit()
             synced += 1
-        self.session.flush()
         return synced
 
     def _sync_subject_reviews(
@@ -311,10 +360,24 @@ class UfabcNextSyncService:
             external_id: next(iter(subject_ids)) if len(subject_ids) == 1 else None
             for external_id, subject_ids in identifier_subjects.items()
         }
-        selected = sorted(external_ids)[:limit]
-        if len(external_ids) > limit:
+        reviewed_ids = set(
+            self.session.scalars(
+                select(SubjectReviewSnapshot.external_subject_id).where(
+                    SubjectReviewSnapshot.external_subject_id.in_(external_ids)
+                )
+            ).all()
+        )
+        pending_ids = external_ids - reviewed_ids
+        selected = (
+            self._oldest_subject_ids(external_ids)[:limit]
+            if force_refresh
+            else sorted(pending_ids)[:limit]
+        )
+        if not selected and not force_refresh:
+            run.warnings.append("todas as disciplinas identificadas ja possuem snapshot")
+        elif not force_refresh and len(pending_ids) > limit:
             run.warnings.append(
-                f"reviews de disciplinas limitados a {limit} de {len(external_ids)} identificadores"
+                f"lote de {limit} disciplinas; {len(pending_ids) - limit} permanecem pendentes"
             )
         synced = 0
         for external_id in selected:
@@ -323,6 +386,8 @@ class UfabcNextSyncService:
                     external_id,
                     force_refresh=force_refresh,
                 )
+            except (UfabcNextRateLimitError, UfabcNextRequestLimitError):
+                raise
             except UfabcNextError as exc:
                 run.warnings.append(f"review da disciplina {external_id} falhou: {exc}")
                 continue
@@ -340,9 +405,82 @@ class UfabcNextSyncService:
                     fetched_at=utc_now_naive(),
                 )
             )
+            self.session.commit()
             synced += 1
-        self.session.flush()
         return synced
+
+    def review_progress(self) -> dict[str, int]:
+        teacher_total = self.session.scalar(
+            select(func.count(func.distinct(ExternalTeacherIdentifier.external_id))).where(
+                ExternalTeacherIdentifier.provider == PROVIDER
+            )
+        ) or 0
+        teacher_completed = self.session.scalar(
+            select(func.count(func.distinct(TeacherReviewSnapshot.external_teacher_id)))
+        ) or 0
+        subject_total = self.session.scalar(
+            select(func.count(func.distinct(ExternalSubjectIdentifier.external_id))).where(
+                ExternalSubjectIdentifier.provider == PROVIDER
+            )
+        ) or 0
+        subject_completed = self.session.scalar(
+            select(func.count(func.distinct(SubjectReviewSnapshot.external_subject_id)))
+        ) or 0
+        return {
+            "teacher_total": teacher_total,
+            "teacher_completed": teacher_completed,
+            "teacher_pending": max(teacher_total - teacher_completed, 0),
+            "subject_total": subject_total,
+            "subject_completed": subject_completed,
+            "subject_pending": max(subject_total - subject_completed, 0),
+        }
+
+    def _expire_stale_runs(self) -> None:
+        cutoff = utc_now_naive() - timedelta(
+            seconds=self.client.settings.ufabc_next_sync_stale_seconds
+        )
+        stale_runs = self.session.scalars(
+            select(UfabcNextSyncRun).where(
+                UfabcNextSyncRun.status == ExternalSyncStatus.RUNNING,
+                UfabcNextSyncRun.started_at < cutoff,
+            )
+        ).all()
+        if not stale_runs:
+            return
+        now = utc_now_naive()
+        for stale_run in stale_runs:
+            stale_run.status = ExternalSyncStatus.FAILED
+            stale_run.finished_at = now
+            stale_run.error_message = "sincronizacao marcada como expirada antes de novo lote"
+        self.session.commit()
+
+    def _oldest_teacher_ids(self, external_ids: set[str]) -> list[str]:
+        latest = {
+            external_id: fetched_at
+            for external_id, fetched_at in self.session.execute(
+                select(
+                    TeacherReviewSnapshot.external_teacher_id,
+                    func.max(TeacherReviewSnapshot.fetched_at),
+                )
+                .where(TeacherReviewSnapshot.external_teacher_id.in_(external_ids))
+                .group_by(TeacherReviewSnapshot.external_teacher_id)
+            ).all()
+        }
+        return sorted(external_ids, key=lambda item: (latest.get(item, datetime.min), item))
+
+    def _oldest_subject_ids(self, external_ids: set[str]) -> list[str]:
+        latest = {
+            external_id: fetched_at
+            for external_id, fetched_at in self.session.execute(
+                select(
+                    SubjectReviewSnapshot.external_subject_id,
+                    func.max(SubjectReviewSnapshot.fetched_at),
+                )
+                .where(SubjectReviewSnapshot.external_subject_id.in_(external_ids))
+                .group_by(SubjectReviewSnapshot.external_subject_id)
+            ).all()
+        }
+        return sorted(external_ids, key=lambda item: (latest.get(item, datetime.min), item))
 
     def _teachers_by_normalized_name(self) -> dict[str, list[Teacher]]:
         teachers = (

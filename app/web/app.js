@@ -1,10 +1,19 @@
+const studentIdStorageKey = "gradient_student_id";
+const legacyStudentIdStorageKey = "trajeto_student_id";
+const storedStudentId = window.localStorage.getItem(studentIdStorageKey)
+  || window.localStorage.getItem(legacyStudentIdStorageKey);
+if (storedStudentId && !window.localStorage.getItem(studentIdStorageKey)) {
+  window.localStorage.setItem(studentIdStorageKey, storedStudentId);
+  window.localStorage.removeItem(legacyStudentIdStorageKey);
+}
+
 const state = {
   courses: [],
   terms: [],
   profile: null,
   ranking: null,
   selectedSections: new Map(),
-  studentId: window.localStorage.getItem("trajeto_student_id"),
+  studentId: storedStudentId,
 };
 
 const elements = {
@@ -106,7 +115,7 @@ async function handleHistoryUpload(event) {
     });
     state.studentId = result.student.id;
     state.profile = result.student;
-    window.localStorage.setItem("trajeto_student_id", state.studentId);
+    window.localStorage.setItem(studentIdStorageKey, state.studentId);
     fillProfile(state.profile);
     const replacement = result.replaced_existing ? " O histórico anterior foi substituído." : "";
     const repeatedApprovals = result.completed_attempt_count - result.completed_count;
@@ -140,7 +149,7 @@ async function loadStoredProfile() {
     fillProfile(state.profile);
     showToast("Perfil local recuperado.");
   } catch (error) {
-    window.localStorage.removeItem("trajeto_student_id");
+    window.localStorage.removeItem(studentIdStorageKey);
     state.studentId = null;
     state.profile = null;
     selectDefaultCourse();
@@ -338,7 +347,7 @@ async function saveProfile() {
       body: JSON.stringify(basicProfile),
     });
     state.studentId = created.id;
-    window.localStorage.setItem("trajeto_student_id", created.id);
+    window.localStorage.setItem(studentIdStorageKey, created.id);
   }
 
   state.profile = await fetchJson(`/students/${state.studentId}/academic-profile`, {

@@ -3,8 +3,8 @@ requires = ["setuptools>=75"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ufabc-class-ranking"
-version = "0.10.0"
+name = "gradient-ufabc"
+version = "0.11.0"
 description = "Backend para importacao, classificacao curricular e ranking de turmas da UFABC"
 readme = "README.md"
 requires-python = ">=3.12"

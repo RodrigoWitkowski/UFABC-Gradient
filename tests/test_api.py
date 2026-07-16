@@ -34,7 +34,7 @@ def test_web_interface_and_assets_are_served(client: TestClient) -> None:
     script = client.get("/assets/app.js")
 
     assert page.status_code == 200
-    assert "Trajeto UFABC" in page.text
+    assert "Gradient" in page.text
     assert 'id="ranking-form"' in page.text
     assert 'id="current-term"' in page.text
     assert 'id="period-window"' in page.text
