@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from app.models.curriculum import CurriculumVersion
 from app.models.imports import ImportBatch
 from app.models.offerings import Section
@@ -100,7 +102,11 @@ def serialize_curriculum(curriculum: CurriculumVersion) -> CurriculumRead:
                     "category_source": entry.category_source,
                     "ideal_term": entry.ideal_term,
                     "recommended_term": entry.recommended_term,
-                    "credits": entry.credits,
+                    "credits": (
+                        entry.credits.quantize(Decimal("0.01"))
+                        if entry.credits is not None
+                        else None
+                    ),
                     "metadata": entry.metadata_,
                 }
                 for entry in curriculum.subjects
@@ -108,7 +114,11 @@ def serialize_curriculum(curriculum: CurriculumVersion) -> CurriculumRead:
             "requirements": [
                 {
                     "category": item.category,
-                    "minimum_credits": item.minimum_credits,
+                    "minimum_credits": (
+                        item.minimum_credits.quantize(Decimal("0.01"))
+                        if item.minimum_credits is not None
+                        else None
+                    ),
                     "minimum_subjects": item.minimum_subjects,
                     "metadata": item.metadata_,
                 }
@@ -123,12 +133,14 @@ def serialize_student(profile: StudentProfile) -> StudentRead:
     return StudentRead.model_validate(
         {
             "id": profile.id,
+            "ra": profile.ra,
             "display_name": profile.display_name,
             "admission_year": profile.admission_year,
             "admission_shift": profile.admission_shift,
             "campus": profile.campus,
             "cr": profile.cr,
             "ca": profile.ca,
+            "max_quarter_credits": profile.max_quarter_credits,
             "accumulated_credits": profile.accumulated_credits,
             "course_strategy": profile.course_strategy,
             "courses": [

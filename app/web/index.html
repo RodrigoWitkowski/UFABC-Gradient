@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ranking explicável de turmas da UFABC.">
+    <title>Trajeto UFABC</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Trajeto UFABC, início">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>
+          <strong>Trajeto</strong>
+          <small>UFABC</small>
+        </span>
+      </a>
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="api-status">Conectando ao sistema</span>
+      </div>
+      <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API /docs</a>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Planejamento acadêmico, sem caixa-preta</p>
+          <h1 id="hero-title">Escolha turmas com mais <em>contexto</em>.</h1>
+          <p>
+            Compare encaixe curricular, docentes, horários e demanda. Cada nota mostra
+            de onde veio, e a prioridade de matrícula segue as regras da UFABC.
+          </p>
+        </div>
+        <aside class="hero-note" aria-label="Como interpretar a estimativa">
+          <span class="note-index">01</span>
+          <div>
+            <strong>Estimativa, não promessa.</strong>
+            <p>Vagas ÷ solicitações mede a disputa da turma. Sua prioridade aparece separada.</p>
+          </div>
+        </aside>
+      </section>
+
+      <nav class="step-nav" aria-label="Etapas">
+        <button class="step is-active" type="button" data-step-target="profile-panel">
+          <span>1</span> Perfil
+        </button>
+        <button class="step" type="button" data-step-target="filters-panel">
+          <span>2</span> Preferências
+        </button>
+        <button class="step" type="button" data-step-target="results-panel">
+          <span>3</span> Ranking
+        </button>
+      </nav>
+
+      <div class="app-shell">
+        <aside class="control-column">
+          <form id="ranking-form">
+            <section class="control-panel" id="profile-panel">
+              <div class="panel-heading">
+                <span class="panel-number">01</span>
+                <div>
+                  <p class="kicker">Quem está planejando?</p>
+                  <h2>Perfil acadêmico</h2>
+                </div>
+              </div>
+
+              <div class="field-grid two-columns">
+                <label class="field field-wide">
+                  <span>Como podemos te chamar?</span>
+                  <input id="display-name" name="display_name" type="text" maxlength="255"
+                    placeholder="Seu nome ou apelido" autocomplete="name">
+                </label>
+                <label class="field">
+                  <span>RA</span>
+                  <input id="ra" name="ra" type="text" minlength="8" maxlength="16"
+                    pattern="[0-9]{8,16}" placeholder="Somente números" inputmode="numeric">
+                </label>
+                <label class="field">
+                  <span>Ano de ingresso</span>
+                  <input id="admission-year" name="admission_year" type="number"
+                    min="2006" max="2100" value="2023" required>
+                </label>
+                <label class="field">
+                  <span>Turno de ingresso</span>
+                  <select id="admission-shift" name="admission_shift" required>
+                    <option value="Noturno">Noturno</option>
+                    <option value="Matutino">Matutino</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Campus de preferência</span>
+                  <select id="student-campus" name="campus">
+                    <option value="SA">Santo André</option>
+                    <option value="SB">São Bernardo</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>CA <small>0 a 4</small></span>
+                  <input id="ca" name="ca" type="number" min="0" max="4" step="0.0001"
+                    placeholder="Ex.: 3,20" inputmode="decimal">
+                </label>
+                <label class="field">
+                  <span>Limite total de créditos</span>
+                  <input id="max-quarter-credits" name="max_quarter_credits" type="number"
+                    min="0" max="60" step="1" placeholder="Calculado pelo CA" inputmode="numeric">
+                  <small class="field-help">Sugestão: arredondar 20 + 2 × CA para cima.</small>
+                </label>
+              </div>
+
+              <fieldset class="course-fieldset">
+                <legend>Seus cursos</legend>
+                <p class="field-help">Selecione os vínculos atuais e marque um curso principal.</p>
+                <div id="course-options" class="course-options" aria-live="polite">
+                  <div class="skeleton course-skeleton"></div>
+                  <div class="skeleton course-skeleton"></div>
+                  <div class="skeleton course-skeleton"></div>
+                </div>
+              </fieldset>
+
+              <details class="advanced-profile">
+                <summary>Campos acadêmicos opcionais</summary>
+                <div class="field-grid two-columns details-body">
+                  <label class="field">
+                    <span>CR <small>não define prioridade</small></span>
+                    <input id="cr" name="cr" type="number" min="0" max="4" step="0.0001"
+                      placeholder="Ex.: 3,10" inputmode="decimal">
+                  </label>
+                  <label class="field">
+                    <span>Créditos acumulados</span>
+                    <input id="accumulated-credits" name="accumulated_credits" type="number"
+                      min="0" step="0.5" placeholder="Opcional" inputmode="decimal">
+                  </label>
+                </div>
+              </details>
+            </section>
+
+            <section class="control-panel" id="filters-panel">
+              <div class="panel-heading">
+                <span class="panel-number">02</span>
+                <div>
+                  <p class="kicker">O que cabe na rotina?</p>
+                  <h2>Preferências</h2>
+                </div>
+              </div>
+
+              <div class="current-offer" aria-live="polite">
+                <span>Oferta usada no ranking</span>
+                <strong id="current-term">Carregando...</strong>
+              </div>
+              <input id="term" name="term" type="hidden">
+
+              <fieldset class="filter-group">
+                <legend>Campi aceitos</legend>
+                <div class="segmented">
+                  <label><input type="checkbox" name="allowed_campus" value="SA" checked><span>SA</span></label>
+                  <label><input type="checkbox" name="allowed_campus" value="SB" checked><span>SB</span></label>
+                </div>
+              </fieldset>
+
+              <label class="field schedule-window-field">
+                <span>Quando você pode ter aula?</span>
+                <select id="period-window" name="period_window">
+                  <option value="any">Qualquer horário</option>
+                  <option value="morning">Somente de manhã</option>
+                  <option value="afternoon">Somente à tarde</option>
+                  <option value="night">Somente à noite</option>
+                  <option value="daytime">De manhã ou à tarde</option>
+                  <option value="afternoon-night">À tarde ou à noite</option>
+                </select>
+                <small class="field-help">Turmas fora da faixa escolhida serão removidas.</small>
+              </label>
+
+              <label class="toggle-row">
+                <span>
+                  <strong>Evitar sexta-feira</strong>
+                  <small>Reduz a nota, mas não remove a turma.</small>
+                </span>
+                <input id="avoid-friday" type="checkbox" role="switch">
+                <i aria-hidden="true"></i>
+              </label>
+
+              <button class="primary-action" id="rank-button" type="submit">
+                <span>Montar meu ranking</span>
+                <b aria-hidden="true">↗</b>
+              </button>
+              <p class="privacy-note">Seu perfil e RA ficam somente neste banco local.</p>
+            </section>
+          </form>
+        </aside>
+
+        <section class="results-column" id="results-panel" aria-labelledby="results-title">
+          <div class="results-heading">
+            <div>
+              <p class="eyebrow">Recomendação explicável</p>
+              <h2 id="results-title">Turmas para você</h2>
+            </div>
+            <div class="result-meta" id="result-meta" hidden></div>
+          </div>
+
+          <div id="results" aria-live="polite" aria-busy="false">
+            <div class="empty-state">
+              <div class="empty-illustration" aria-hidden="true">
+                <span>1</span><span>2</span><span>3</span>
+              </div>
+              <h3>Seu ranking começa ao lado.</h3>
+              <p>Preencha o perfil e as preferências. As melhores turmas aparecerão aqui.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

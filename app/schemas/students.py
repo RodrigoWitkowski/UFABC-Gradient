@@ -12,10 +12,12 @@ from app.models.enums import (
 
 
 class StudentCreate(BaseModel):
+    ra: str | None = Field(default=None, pattern=r"^\d{8,16}$")
     display_name: str | None = Field(default=None, max_length=255)
     admission_year: int = Field(ge=2006, le=2100)
     admission_shift: str | None = Field(default=None, max_length=32)
     campus: str | None = Field(default=None, max_length=32)
+    max_quarter_credits: Decimal | None = Field(default=None, ge=0, le=60)
 
 
 class StudentCourseInput(BaseModel):
@@ -45,11 +47,13 @@ class StudentPreferencesInput(BaseModel):
 
 
 class AcademicProfileUpdate(BaseModel):
+    ra: str | None = Field(default=None, pattern=r"^\d{8,16}$")
     admission_year: int = Field(ge=2006, le=2100)
     admission_shift: str | None = Field(default=None, max_length=32)
     campus: str | None = Field(default=None, max_length=32)
     cr: Decimal | None = Field(default=None, ge=0, le=4)
     ca: Decimal | None = Field(default=None, ge=0, le=4)
+    max_quarter_credits: Decimal | None = Field(default=None, ge=0, le=60)
     accumulated_credits: Decimal | None = Field(default=None, ge=0)
     course_strategy: CourseStrategy = CourseStrategy.PRIMARY_COURSE
     courses: list[StudentCourseInput] = Field(min_length=1)
@@ -118,12 +122,14 @@ class StudentPreferencesRead(BaseModel):
 
 class StudentRead(BaseModel):
     id: uuid.UUID
+    ra: str | None
     display_name: str | None
     admission_year: int
     admission_shift: str | None
     campus: str | None
     cr: Decimal | None
     ca: Decimal | None
+    max_quarter_credits: Decimal | None
     accumulated_credits: Decimal
     course_strategy: CourseStrategy
     courses: list[StudentCourseRead]

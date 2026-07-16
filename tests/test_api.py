@@ -25,6 +25,24 @@ def client(session: Session) -> Generator[TestClient, None, None]:
     app.dependency_overrides.clear()
 
 
+def test_web_interface_and_assets_are_served(client: TestClient) -> None:
+    page = client.get("/")
+    stylesheet = client.get("/assets/styles.css")
+    script = client.get("/assets/app.js")
+
+    assert page.status_code == 200
+    assert "Trajeto UFABC" in page.text
+    assert 'id="ranking-form"' in page.text
+    assert 'id="current-term"' in page.text
+    assert 'id="period-window"' in page.text
+    assert 'id="max-subject-credits"' not in page.text
+    assert stylesheet.status_code == 200
+    assert "--green:" in stylesheet.text
+    assert script.status_code == 200
+    assert 'fetchJson("/rankings/sections"' in script.text
+    assert "compatibilidade" in script.text
+
+
 def test_offer_import_and_status_endpoints(
     client: TestClient,
     tmp_path: Path,
@@ -120,6 +138,7 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
     create_response = client.post(
         "/students",
         json={
+            "ra": "11234567890",
             "display_name": "Aluno de teste",
             "admission_year": 2025,
             "admission_shift": "Noturno",
@@ -131,10 +150,12 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
     update_response = client.put(
         f"/students/{student_id}/academic-profile",
         json={
+            "ra": "11234567890",
             "admission_year": 2025,
             "admission_shift": "Noturno",
             "cr": 3.1,
             "ca": 3.3,
+            "max_quarter_credits": 27,
             "courses": [
                 {
                     "course_code": "BCC",
@@ -148,7 +169,9 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
         },
     )
     assert update_response.status_code == 200
+    assert update_response.json()["ra"] == "11234567890"
     assert update_response.json()["ca"] == "3.3"
+    assert update_response.json()["max_quarter_credits"] == "27"
     assert update_response.json()["courses"][0]["curriculum_version"] == "2025"
 
     classification_response = client.get(

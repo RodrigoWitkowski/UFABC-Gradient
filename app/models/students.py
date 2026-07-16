@@ -12,12 +12,14 @@ from app.models.enums import CourseStrategy
 class StudentProfile(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __tablename__ = "student_profiles"
 
+    ra: Mapped[str | None] = mapped_column(String(32), unique=True, index=True)
     display_name: Mapped[str | None] = mapped_column(String(255))
     admission_year: Mapped[int]
     admission_shift: Mapped[str | None] = mapped_column(String(32))
     campus: Mapped[str | None] = mapped_column(String(32))
     cr: Mapped[Decimal | None] = mapped_column(Numeric(6, 4))
     ca: Mapped[Decimal | None] = mapped_column(Numeric(6, 4))
+    max_quarter_credits: Mapped[Decimal | None] = mapped_column(Numeric(6, 2))
     accumulated_credits: Mapped[Decimal] = mapped_column(Numeric(8, 2), default=0)
     course_strategy: Mapped[CourseStrategy] = mapped_column(
         Enum(CourseStrategy, native_enum=False, length=48),

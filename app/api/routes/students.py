@@ -18,9 +18,14 @@ router = APIRouter(prefix="/students", tags=["students"])
 
 @router.post("", response_model=StudentRead, status_code=status.HTTP_201_CREATED)
 def create_student(payload: StudentCreate, db: DatabaseSession) -> StudentRead:
-    profile = StudentService(db).create_student(payload)
-    db.commit()
-    return serialize_student(StudentService(db).get_student(profile.id))
+    service = StudentService(db)
+    try:
+        profile = service.create_student(payload)
+        db.commit()
+        return serialize_student(service.get_student(profile.id))
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="RA ja cadastrado") from exc
 
 
 @router.get("/{student_id}", response_model=StudentRead)

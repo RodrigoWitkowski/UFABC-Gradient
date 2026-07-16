@@ -38,10 +38,12 @@ class StudentService:
 
     def create_student(self, payload: StudentCreate) -> StudentProfile:
         profile = StudentProfile(
+            ra=clean_text(payload.ra),
             display_name=clean_text(payload.display_name),
             admission_year=payload.admission_year,
             admission_shift=clean_text(payload.admission_shift),
             campus=clean_text(payload.campus),
+            max_quarter_credits=payload.max_quarter_credits,
             accumulated_credits=Decimal(0),
             preferences=StudentPreference(hard_constraints={}, soft_preferences={}),
         )
@@ -81,11 +83,13 @@ class StudentService:
         payload: AcademicProfileUpdate,
     ) -> StudentProfile:
         profile = self.get_student(student_id)
+        profile.ra = clean_text(payload.ra)
         profile.admission_year = payload.admission_year
         profile.admission_shift = clean_text(payload.admission_shift)
         profile.campus = clean_text(payload.campus)
         profile.cr = payload.cr
         profile.ca = payload.ca
+        profile.max_quarter_credits = payload.max_quarter_credits
         profile.course_strategy = payload.course_strategy
 
         profile.courses.clear()

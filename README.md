@@ -2,11 +2,13 @@
 
 As definicoes e decisoes de dominio sobre disciplinas obrigatorias, de opcao limitada e
 livres estao registradas em [REGRAS_UFABC.md](REGRAS_UFABC.md).
+O estudo de importacao do historico e da pagina de matricula esta em
+[IMPORTACAO_DADOS_ALUNO.md](IMPORTACAO_DADOS_ALUNO.md).
 
 Backend incremental para importar e normalizar ofertas de turmas da UFABC, manter matrizes
 curriculares versionadas, sincronizar dados públicos do UFABC Next e calcular indicadores
-estatísticos e rankings explicáveis. Esta entrega ainda não inclui a interface para alunos
-nem o gerador de grades completas.
+estatísticos e rankings explicáveis. A interface para alunos já está disponível; o gerador
+de grades completas ainda não foi implementado.
 
 ## O que já funciona
 
@@ -18,7 +20,9 @@ nem o gerador de grades completas.
 - revisão por turma e comparação de docentes, encontros, salas, campus e vagas;
 - erros e avisos por linha sem interromper as demais ofertas;
 - cursos, matrizes versionadas, requisitos e classificação curricular por curso;
-- perfis acadêmicos com múltiplos cursos, matriz por curso, CR, CA, CP, IK e curso principal;
+- interface web local para perfil, filtros e ranking de turmas;
+- perfis acadêmicos com RA, limite total de créditos, múltiplos cursos, matriz por curso,
+  CR, CA, CP, IK e curso principal;
 - disciplinas concluídas e em andamento, preferências e restrições do aluno;
 - sugestão de matriz pelo ano de ingresso, com possibilidade de escolha manual;
 - sincronização manual de componentes e reviews do UFABC Next, com cache e auditoria;
@@ -35,6 +39,10 @@ aba ` turmas sistema atual`. Abas derivadas ou auxiliares não são tratadas com
 ```bash
 docker compose up --build
 ```
+
+Depois da inicialização, abra `http://localhost:8000` para usar a interface web. A página
+permite criar o perfil acadêmico, selecionar BCT, BCH e BCC, aplicar filtros e consultar o
+ranking. A documentação técnica da API continua disponível em `http://localhost:8000/docs`.
 
 A API fica em `http://localhost:8000` e a documentação interativa em
 `http://localhost:8000/docs`. O container da API aplica as migrations antes de iniciar.
@@ -348,10 +356,12 @@ Primeiro crie o perfil básico:
 curl -X POST http://localhost:8000/students \
   -H "Content-Type: application/json" \
   -d '{
+    "ra": "11234567890",
     "display_name": "Aluno",
     "admission_year": 2025,
     "admission_shift": "Noturno",
-    "campus": "SA"
+    "campus": "SA",
+    "max_quarter_credits": 27
   }'
 ```
 
@@ -362,11 +372,13 @@ o sistema sugere a matriz compatível com o ano de ingresso.
 curl -X PUT http://localhost:8000/students/UUID_DO_ALUNO/academic-profile \
   -H "Content-Type: application/json" \
   -d '{
+    "ra": "11234567890",
     "admission_year": 2025,
     "admission_shift": "Noturno",
     "campus": "SA",
     "cr": 3.1,
     "ca": 3.3,
+    "max_quarter_credits": 27,
     "course_strategy": "weighted_courses",
     "courses": [
       {"course_code": "BCT", "is_primary": false, "weight": 0.4, "cp": 0.72, "ik": 0.68},

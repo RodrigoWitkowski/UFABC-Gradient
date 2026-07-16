@@ -230,6 +230,28 @@ solicitacao. Existem tambem regras especiais para ingressantes e grupos com vaga
 essas condicoes precisam ser informadas explicitamente antes de entrarem em uma estimativa
 individual.
 
+## Limite de creditos por quadrimestre
+
+O limite e do conjunto de disciplinas solicitado pelo aluno, nao de cada disciplina. De
+acordo com o Art. 8 da Resolucao ConsEPE 260/2023:
+
+```text
+C = 20 + 2 * CA
+```
+
+Se o resultado nao for inteiro, ele e arredondado para o primeiro inteiro superior. O
+valor de uma disciplina para esse limite e `T + P`; componentes integralizadores como
+estagio, TCC, TG e monografia nao entram na soma. O perfil armazena o limite calculado,
+mas permite correcao manual. A verificacao da soma sera responsabilidade do gerador de
+grades, pois o ranking atual avalia uma turma por vez.
+
+## Codigos de disciplina e turma
+
+O codigo como `BCL0306-15` identifica o componente curricular. Um codigo como
+`NA1BCL0306-15SA` identifica uma turma especifica daquele componente em uma oferta. A
+mesma disciplina pode ter varias turmas, docentes e horarios; por isso os dois codigos
+sao corretos e devem ser exibidos separadamente.
+
 ## O que nao determina a categoria
 
 Os seguintes dados nao sao fontes suficientes para classificar uma disciplina:
