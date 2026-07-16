@@ -23,6 +23,14 @@ from app.models.students import (
     StudentPreference,
     StudentProfile,
 )
+from app.models.ufabc_next import (
+    ExternalSubjectIdentifier,
+    SubjectReviewSnapshot,
+    TeacherReviewSnapshot,
+    UfabcNextCacheEntry,
+    UfabcNextComponentSnapshot,
+    UfabcNextSyncRun,
+)
 
 __all__ = [
     "Course",
@@ -30,6 +38,7 @@ __all__ = [
     "CurriculumRequirement",
     "CurriculumVersion",
     "ExternalTeacherIdentifier",
+    "ExternalSubjectIdentifier",
     "ImportBatch",
     "ImportFile",
     "ImportIssue",
@@ -39,6 +48,7 @@ __all__ = [
     "SectionRevision",
     "SectionTeacher",
     "Subject",
+    "SubjectReviewSnapshot",
     "StudentCompletedSubject",
     "StudentCourse",
     "StudentInProgressSubject",
@@ -46,5 +56,9 @@ __all__ = [
     "StudentProfile",
     "Teacher",
     "TeacherAlias",
+    "TeacherReviewSnapshot",
     "Term",
+    "UfabcNextCacheEntry",
+    "UfabcNextComponentSnapshot",
+    "UfabcNextSyncRun",
 ]

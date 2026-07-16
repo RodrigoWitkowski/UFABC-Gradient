@@ -16,7 +16,15 @@ class JsonFormatter(logging.Formatter):
             payload["exception"] = self.formatException(record.exc_info)
         context = {
             key: getattr(record, key)
-            for key in ("batch_id", "term", "filename")
+            for key in (
+                "batch_id",
+                "term",
+                "filename",
+                "sync_run_id",
+                "provider",
+                "path",
+                "status_code",
+            )
             if hasattr(record, key)
         }
         if context:

@@ -4,8 +4,8 @@ As definicoes e decisoes de dominio sobre disciplinas obrigatorias, de opcao lim
 livres estao registradas em [REGRAS_UFABC.md](REGRAS_UFABC.md).
 
 Backend incremental para importar e normalizar ofertas de turmas da UFABC, manter matrizes
-curriculares versionadas e, nas próximas fases, calcular rankings explicáveis. Esta entrega não
-inclui o ranking, a integração com o UFABC Next nem o gerador de grades.
+curriculares versionadas, sincronizar dados públicos do UFABC Next e, nas próximas fases,
+calcular rankings explicáveis. Esta entrega ainda não inclui o ranking nem o gerador de grades.
 
 ## O que já funciona
 
@@ -20,6 +20,7 @@ inclui o ranking, a integração com o UFABC Next nem o gerador de grades.
 - perfis acadêmicos com múltiplos cursos, matriz por curso, CR, CP, IK e curso principal;
 - disciplinas concluídas e em andamento, preferências e restrições do aluno;
 - sugestão de matriz pelo ano de ingresso, com possibilidade de escolha manual;
+- sincronização manual de componentes e reviews do UFABC Next, com cache e auditoria;
 - API FastAPI, PostgreSQL, Alembic e testes automatizados.
 
 Na planilha `matriculas_2026_3_turmas_ofertadas.xlsx`, o importador seleciona automaticamente a
@@ -113,6 +114,54 @@ curl http://localhost:8000/courses
 curl http://localhost:8000/courses/UUID_DO_CURSO/curriculums
 ```
 
+## Sincronizar o UFABC Next
+
+Por padrão, o endpoint consulta apenas os componentes do quadrimestre e associa os códigos
+de turma que também existem na planilha oficial:
+
+```bash
+curl -X POST http://localhost:8000/sync/ufabc-next \
+  -H "Content-Type: application/json" \
+  -d '{"season":"2026:3"}'
+```
+
+Reviews são opcionais e possuem limite explícito para evitar centenas de requisições em um
+teste. Este exemplo sincroniza no máximo dez professores e dez disciplinas:
+
+```bash
+curl -X POST http://localhost:8000/sync/ufabc-next \
+  -H "Content-Type: application/json" \
+  -d '{
+    "season":"2026:3",
+    "include_teacher_reviews":true,
+    "include_subject_reviews":true,
+    "review_limit":10
+  }'
+```
+
+Consultar a execução mais recente ou uma execução específica:
+
+```bash
+curl http://localhost:8000/sync/ufabc-next/status
+curl "http://localhost:8000/sync/ufabc-next/status?run_id=UUID_DA_EXECUCAO"
+```
+
+Cada status informa chamadas remotas, cache hits, HTTP retornado, itens recebidos,
+correspondências e avisos. O cache impede novas chamadas dentro do TTL. Use
+`"force_refresh":true` somente quando for necessário ignorar o cache.
+
+A integração pode ser desligada com `UFABC_NEXT_ENABLED=false`. Timeout, retries, backoff,
+intervalo mínimo e TTLs são configurados pelas variáveis `UFABC_NEXT_*` do `.env.example`.
+O sistema não persiste a lista de alunos matriculados, RA, login, e-mail, SIAPE ou chaves
+internas recebidas nos payloads.
+
+Para uma sincronização periódica, agende este comando no cron ou no Agendador de Tarefas do
+Windows. O projeto não ativa chamadas automáticas sem configuração explícita:
+
+```bash
+docker compose exec api python -m app.cli.sync_ufabc_next --season 2026:3
+```
+
 ## Perfil acadêmico
 
 Primeiro crie o perfil básico:
@@ -176,5 +225,5 @@ Com PostgreSQL disponível e `DATABASE_URL` configurada:
 .venv/Scripts/ruff check app tests
 ```
 
-Os arquivos originais são gravados em `IMPORT_STORAGE_PATH` e não devem ser versionados. Não há
-credenciais do SIGAA nem chamadas ao UFABC Next nesta fase.
+Os arquivos originais são gravados em `IMPORT_STORAGE_PATH` e não devem ser versionados.
+Não há credenciais do SIGAA ou do UFABC Next armazenadas pelo projeto.

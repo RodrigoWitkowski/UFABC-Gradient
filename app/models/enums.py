@@ -54,3 +54,10 @@ class CourseStrategy(StrEnum):
     MAXIMIZE_ANY_COURSE_PROGRESS = "maximize_any_course_progress"
     MAXIMIZE_ALL_COURSES_PROGRESS = "maximize_all_courses_progress"
     WEIGHTED_COURSES = "weighted_courses"
+
+
+class ExternalSyncStatus(StrEnum):
+    RUNNING = "running"
+    COMPLETED = "completed"
+    COMPLETED_WITH_WARNINGS = "completed_with_warnings"
+    FAILED = "failed"
