@@ -49,6 +49,7 @@ def test_web_interface_and_assets_are_served(client: TestClient) -> None:
     assert script.status_code == 200
     assert 'fetchJson("/rankings/sections"' in script.text
     assert "compatibilidade" in script.text
+    assert "disciplinas sendo cursadas atualmente" in script.text
     assert client.get("/docs").status_code == 404
 
 

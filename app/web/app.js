@@ -113,7 +113,10 @@ async function handleHistoryUpload(event) {
     const completionSummary = repeatedApprovals > 0
       ? `${result.completed_count} disciplinas únicas concluídas (${result.completed_attempt_count} aprovações no histórico)`
       : `${result.completed_count} disciplinas concluídas`;
-    elements.historyStatus.textContent = `${completionSummary} e ${result.in_progress_count} em andamento.${replacement}`;
+    const currentSummary = result.in_progress_count === 1
+      ? "1 disciplina sendo cursada atualmente"
+      : `${result.in_progress_count} disciplinas sendo cursadas atualmente`;
+    elements.historyStatus.textContent = `${completionSummary}; ${currentSummary}.${replacement}`;
     elements.historyStatus.hidden = false;
     historyStatusTimer = window.setTimeout(() => { elements.historyStatus.hidden = true; }, 9000);
     showToast("Histórico importado e perfil atualizado.");
