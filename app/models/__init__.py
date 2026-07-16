@@ -16,6 +16,13 @@ from app.models.offerings import (
     Teacher,
     TeacherAlias,
 )
+from app.models.statistics import (
+    StatisticsBuild,
+    SubjectStatistics,
+    TeacherStatistics,
+    TeacherSubjectStatistics,
+    TeacherTermStatistics,
+)
 from app.models.students import (
     StudentCompletedSubject,
     StudentCourse,
@@ -54,10 +61,15 @@ __all__ = [
     "StudentInProgressSubject",
     "StudentPreference",
     "StudentProfile",
+    "StatisticsBuild",
     "Teacher",
     "TeacherAlias",
     "TeacherReviewSnapshot",
+    "TeacherStatistics",
+    "TeacherSubjectStatistics",
+    "TeacherTermStatistics",
     "Term",
+    "SubjectStatistics",
     "UfabcNextCacheEntry",
     "UfabcNextComponentSnapshot",
     "UfabcNextSyncRun",

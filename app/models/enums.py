@@ -61,3 +61,25 @@ class ExternalSyncStatus(StrEnum):
     COMPLETED = "completed"
     COMPLETED_WITH_WARNINGS = "completed_with_warnings"
     FAILED = "failed"
+
+
+class TeacherStatisticsMode(StrEnum):
+    ALL_HISTORY = "all_history"
+    SAME_SUBJECT = "same_subject"
+    RECENT_HISTORY = "recent_history"
+    BLENDED = "blended"
+
+
+class StatisticsConfidence(StrEnum):
+    NONE = "none"
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+
+
+class TeacherScoreMetric(StrEnum):
+    A_RATE = "a_rate"
+    AB_RATE = "ab_rate"
+    FAILURE_RATE = "failure_rate"
+    FO_RATE = "fo_rate"
+    MEAN_GRADE = "mean_grade"

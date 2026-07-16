@@ -4,8 +4,8 @@ As definicoes e decisoes de dominio sobre disciplinas obrigatorias, de opcao lim
 livres estao registradas em [REGRAS_UFABC.md](REGRAS_UFABC.md).
 
 Backend incremental para importar e normalizar ofertas de turmas da UFABC, manter matrizes
-curriculares versionadas, sincronizar dados públicos do UFABC Next e, nas próximas fases,
-calcular rankings explicáveis. Esta entrega ainda não inclui o ranking nem o gerador de grades.
+curriculares versionadas, sincronizar dados públicos do UFABC Next e calcular indicadores
+estatísticos explicáveis. Esta entrega ainda não inclui o ranking final nem o gerador de grades.
 
 ## O que já funciona
 
@@ -21,6 +21,7 @@ calcular rankings explicáveis. Esta entrega ainda não inclui o ranking nem o g
 - disciplinas concluídas e em andamento, preferências e restrições do aluno;
 - sugestão de matriz pelo ano de ingresso, com possibilidade de escolha manual;
 - sincronização manual de componentes e reviews do UFABC Next, com cache e auditoria;
+- estatísticas gerais e por disciplina dos docentes, com ajuste bayesiano e amostra explícita;
 - API FastAPI, PostgreSQL, Alembic e testes automatizados.
 
 Na planilha `matriculas_2026_3_turmas_ofertadas.xlsx`, o importador seleciona automaticamente a
@@ -161,6 +162,58 @@ Windows. O projeto não ativa chamadas automáticas sem configuração explícit
 ```bash
 docker compose exec api python -m app.cli.sync_ufabc_next --season 2026:3
 ```
+
+## Estatísticas de docentes
+
+Depois de sincronizar reviews, reconstrua as tabelas derivadas. Esse endpoint lê somente os
+snapshots já salvos no PostgreSQL e não faz chamadas ao UFABC Next:
+
+```bash
+curl -X POST http://localhost:8000/statistics/rebuild \
+  -H "Content-Type: application/json" \
+  -d '{"prior_weight":20}'
+curl http://localhost:8000/statistics/status
+```
+
+O sistema usa as contagens de conceitos `A`, `B`, `C`, `D`, `F` e `O`. O valor `count` é a
+amostra; o campo auxiliar `amount` do UFABC Next não é usado como denominador. Para evitar que
+três avaliações perfeitas superem automaticamente centenas de avaliações boas, a taxa ajustada
+é calculada assim:
+
+```text
+taxa ajustada = (contagem + peso do prior * taxa de referência)
+                / (tamanho da amostra + peso do prior)
+```
+
+O `prior_weight` padrão é 20. Quanto menor a amostra, maior a aproximação à distribuição de
+referência; com amostras grandes, o resultado se aproxima da taxa observada. A resposta sempre
+expõe contagens, amostra, confiança, taxas brutas, taxas ajustadas e pesos usados.
+
+Exemplo de avaliação combinando o histórico geral e o histórico na disciplina:
+
+```bash
+curl -X POST http://localhost:8000/statistics/teachers/evaluate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "teacher_id":"UUID_DO_DOCENTE",
+    "subject_id":"UUID_DA_DISCIPLINA",
+    "mode":"blended",
+    "metric":"ab_rate",
+    "use_bayesian_adjustment":true
+  }'
+```
+
+Modos disponíveis:
+
+- `all_history`: usa todo o histórico conhecido do docente;
+- `same_subject`: usa somente o histórico do docente naquela disciplina;
+- `blended`: combina os dois, aumentando o peso específico conforme sua amostra;
+- `recent_history`: reservado, mas atualmente retorna indisponível porque os snapshots públicos
+  não separam as avaliações por quadrimestre.
+
+As métricas de pontuação são `a_rate`, `ab_rate`, `failure_rate`, `fo_rate` e `mean_grade`.
+Para `failure_rate` e `fo_rate`, uma taxa menor gera pontuação maior. Os pesos padrão da média
+são `A=4`, `B=3`, `C=2`, `D=1`, `F=0` e `O=0`.
 
 ## Perfil acadêmico
 

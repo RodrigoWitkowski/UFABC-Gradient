@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.api.routes import courses, imports, students, terms, ufabc_next
+from app.api.routes import courses, imports, statistics, students, terms, ufabc_next
 from app.core.config import get_settings
 from app.core.logging import configure_logging
 
@@ -17,7 +17,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(
     title=get_settings().app_name,
-    version="0.3.0",
+    version="0.4.0",
     lifespan=lifespan,
 )
 app.include_router(imports.router)
@@ -25,6 +25,7 @@ app.include_router(terms.router)
 app.include_router(courses.router)
 app.include_router(students.router)
 app.include_router(ufabc_next.router)
+app.include_router(statistics.router)
 
 
 @app.get("/health", tags=["health"])
