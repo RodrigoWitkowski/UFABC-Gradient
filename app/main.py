@@ -11,6 +11,7 @@ from app.core.config import get_settings
 from app.core.logging import configure_logging
 
 WEB_DIRECTORY = Path(__file__).parent / "web"
+SETTINGS = get_settings()
 
 
 @asynccontextmanager
@@ -21,8 +22,11 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(
-    title=get_settings().app_name,
-    version="0.9.0",
+    title=SETTINGS.app_name,
+    version="0.10.0",
+    docs_url="/docs" if SETTINGS.api_docs_enabled else None,
+    redoc_url="/redoc" if SETTINGS.api_docs_enabled else None,
+    openapi_url="/openapi.json" if SETTINGS.api_docs_enabled else None,
     lifespan=lifespan,
 )
 app.mount("/assets", StaticFiles(directory=WEB_DIRECTORY), name="assets")

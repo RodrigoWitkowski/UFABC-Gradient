@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ufabc-class-ranking"
-version = "0.9.0"
+version = "0.10.0"
 description = "Backend para importacao, classificacao curricular e ranking de turmas da UFABC"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,6 +15,7 @@ dependencies = [
   "openpyxl>=3.1,<4",
   "pandas>=2.2,<4",
   "psycopg[binary]>=3.2,<4",
+  "pypdf>=5,<7",
   "pydantic-settings>=2.7,<3",
   "python-multipart>=0.0.20,<1",
   "sqlalchemy>=2.0.36,<3",
@@ -25,7 +26,6 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "mypy>=1.14,<2",
-  "pypdf>=5,<6",
   "pytest>=8.3,<10",
   "pytest-cov>=6,<8",
   "ruff>=0.9,<1",

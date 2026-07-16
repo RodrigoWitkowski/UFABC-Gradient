@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 from decimal import Decimal
 from typing import Any
 
@@ -17,7 +18,6 @@ class StudentCreate(BaseModel):
     admission_year: int = Field(ge=2006, le=2100)
     admission_shift: str | None = Field(default=None, max_length=32)
     campus: str | None = Field(default=None, max_length=32)
-    max_quarter_credits: Decimal | None = Field(default=None, ge=0, le=60)
 
 
 class StudentCourseInput(BaseModel):
@@ -53,7 +53,6 @@ class AcademicProfileUpdate(BaseModel):
     campus: str | None = Field(default=None, max_length=32)
     cr: Decimal | None = Field(default=None, ge=0, le=4)
     ca: Decimal | None = Field(default=None, ge=0, le=4)
-    max_quarter_credits: Decimal | None = Field(default=None, ge=0, le=60)
     accumulated_credits: Decimal | None = Field(default=None, ge=0)
     course_strategy: CourseStrategy = CourseStrategy.PRIMARY_COURSE
     courses: list[StudentCourseInput] = Field(min_length=1)
@@ -136,6 +135,19 @@ class StudentRead(BaseModel):
     completed_subjects: list[CompletedSubjectRead]
     in_progress_subjects: list[StudentSubjectRead]
     preferences: StudentPreferencesRead
+
+
+class StudentHistoryImportRead(BaseModel):
+    student: StudentRead
+    original_filename: str
+    sha256: str
+    issued_at: datetime | None
+    imported_at: datetime
+    replaced_existing: bool
+    completed_count: int
+    in_progress_count: int
+    ignored_attempt_count: int
+    warnings: list[str]
 
 
 class StudentSubjectClassificationRead(BaseModel):

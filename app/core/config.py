@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     database_url: str = "postgresql+psycopg://ufabc:ufabc@localhost:5432/ufabc_ranking"
     import_storage_path: Path = Path("var/imports")
     log_level: str = Field(default="INFO", pattern=r"^(DEBUG|INFO|WARNING|ERROR|CRITICAL)$")
+    api_docs_enabled: bool = False
     ufabc_next_enabled: bool = True
     ufabc_next_base_url: str = "https://api.v2.ufabcnext.com"
     ufabc_next_timeout_seconds: float = Field(default=15.0, gt=0, le=120)

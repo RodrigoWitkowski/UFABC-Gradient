@@ -27,6 +27,7 @@ from app.models.statistics import (
 from app.models.students import (
     StudentCompletedSubject,
     StudentCourse,
+    StudentHistoryImport,
     StudentInProgressSubject,
     StudentPreference,
     StudentProfile,
@@ -61,6 +62,7 @@ __all__ = [
     "SubjectReviewSnapshot",
     "StudentCompletedSubject",
     "StudentCourse",
+    "StudentHistoryImport",
     "StudentInProgressSubject",
     "StudentPreference",
     "StudentProfile",

@@ -241,9 +241,10 @@ C = 20 + 2 * CA
 
 Se o resultado nao for inteiro, ele e arredondado para o primeiro inteiro superior. O
 valor de uma disciplina para esse limite e `T + P`; componentes integralizadores como
-estagio, TCC, TG e monografia nao entram na soma. O perfil armazena o limite calculado,
-mas permite correcao manual. A verificacao da soma sera responsabilidade do gerador de
-grades, pois o ranking atual avalia uma turma por vez.
+estagio, TCC, TG e monografia nao entram na soma. O CA e extraido do historico do SIGAA e
+o perfil armazena o limite calculado com aritmetica decimal e arredondamento para cima. A
+verificacao da soma e aplicada as turmas fixadas e tambem sera usada pelo futuro gerador
+de grades.
 
 ## Codigos de disciplina e turma
 

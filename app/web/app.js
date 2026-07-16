@@ -2,6 +2,8 @@ const state = {
   courses: [],
   terms: [],
   profile: null,
+  ranking: null,
+  selectedSections: new Map(),
   studentId: window.localStorage.getItem("trajeto_student_id"),
 };
 
@@ -12,9 +14,11 @@ const elements = {
   currentTerm: document.querySelector("#current-term"),
   results: document.querySelector("#results"),
   resultMeta: document.querySelector("#result-meta"),
+  selectedShelf: document.querySelector("#selected-shelf"),
   button: document.querySelector("#rank-button"),
-  apiStatus: document.querySelector("#api-status"),
-  statusDot: document.querySelector(".status-dot"),
+  historyInput: document.querySelector("#history-pdf"),
+  historyLabel: document.querySelector("#history-upload-label"),
+  historyStatus: document.querySelector("#history-status"),
   toast: document.querySelector("#toast"),
 };
 
@@ -52,12 +56,7 @@ document.addEventListener("DOMContentLoaded", initialize);
 async function initialize() {
   bindEvents();
   try {
-    const [health, courses, terms] = await Promise.all([
-      fetchJson("/health"),
-      fetchJson("/courses"),
-      fetchJson("/terms"),
-    ]);
-    setApiStatus(health.status === "ok");
+    const [courses, terms] = await Promise.all([fetchJson("/courses"), fetchJson("/terms")]);
     state.courses = courses.filter((course) => supportedCourses.has(course.code));
     state.terms = terms;
     renderCourses();
@@ -68,7 +67,6 @@ async function initialize() {
       selectDefaultCourse();
     }
   } catch (error) {
-    setApiStatus(false);
     showError("Não foi possível iniciar a interface", error.message);
   }
 }
@@ -76,7 +74,9 @@ async function initialize() {
 function bindEvents() {
   elements.form.addEventListener("submit", handleRankingSubmit);
   elements.courseOptions.addEventListener("change", handleCourseChange);
-  document.querySelector("#ca").addEventListener("change", suggestCreditLimit);
+  elements.historyInput.addEventListener("change", handleHistoryUpload);
+  elements.results.addEventListener("click", handleResultAction);
+  elements.selectedShelf.addEventListener("click", handleSelectedAction);
   document.querySelectorAll("[data-step-target]").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelector(`#${button.dataset.stepTarget}`).scrollIntoView({ block: "start" });
@@ -84,6 +84,37 @@ function bindEvents() {
       button.classList.add("is-active");
     });
   });
+}
+
+async function handleHistoryUpload(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  elements.historyLabel.classList.add("is-loading");
+  elements.historyStatus.hidden = true;
+  const formData = new FormData();
+  formData.append("file", file);
+  if (state.studentId) formData.append("student_id", state.studentId);
+  try {
+    const result = await fetchJson("/students/history/pdf", {
+      method: "POST",
+      body: formData,
+    });
+    state.studentId = result.student.id;
+    state.profile = result.student;
+    window.localStorage.setItem("trajeto_student_id", state.studentId);
+    fillProfile(state.profile);
+    const replacement = result.replaced_existing ? " O histórico anterior foi substituído." : "";
+    elements.historyStatus.textContent = `${result.completed_count} concluídas e ${result.in_progress_count} em andamento.${replacement}`;
+    elements.historyStatus.hidden = false;
+    showToast("Histórico importado e perfil atualizado.");
+  } catch (error) {
+    elements.historyStatus.textContent = error.message;
+    elements.historyStatus.hidden = false;
+    showToast(error.message);
+  } finally {
+    elements.historyLabel.classList.remove("is-loading");
+    event.target.value = "";
+  }
 }
 
 async function loadStoredProfile() {
@@ -170,8 +201,8 @@ function fillProfile(profile) {
   setValue("#admission-year", profile.admission_year);
   setValue("#admission-shift", profile.admission_shift);
   setValue("#student-campus", profile.campus);
-  setValue("#ca", profile.ca);
-  setValue("#max-quarter-credits", profile.max_quarter_credits);
+  setDecimalDisplay("#ca", profile.ca, 4);
+  setDecimalDisplay("#max-quarter-credits", profile.max_quarter_credits, 0);
   setValue("#cr", profile.cr);
   setValue("#accumulated-credits", profile.accumulated_credits);
 
@@ -192,7 +223,6 @@ function fillProfile(profile) {
   restoreChecks("allowed_campus", hard.allowed_campuses);
   setValue("#period-window", inferScheduleWindow(hard));
   document.querySelector("#avoid-friday").checked = Number(soft.avoid_friday || 0) > 0;
-  suggestCreditLimit();
 }
 
 function restoreChecks(name, values) {
@@ -285,7 +315,6 @@ async function saveProfile() {
     admission_year: numberValue("#admission-year"),
     admission_shift: valueOrNull("#admission-shift"),
     campus: valueOrNull("#student-campus"),
-    max_quarter_credits: decimalValue("#max-quarter-credits"),
   };
   if (!state.studentId) {
     const created = await fetchJson("/students", {
@@ -326,7 +355,6 @@ function buildAcademicProfile() {
     campus: valueOrNull("#student-campus"),
     cr: decimalValue("#cr"),
     ca: decimalValue("#ca"),
-    max_quarter_credits: decimalValue("#max-quarter-credits"),
     accumulated_credits: decimalValue("#accumulated-credits"),
     course_strategy: "primary_course",
     courses: selectedCoursePayloads(),
@@ -388,6 +416,7 @@ function buildSoftPreferences() {
 function renderLoading() {
   elements.results.setAttribute("aria-busy", "true");
   elements.resultMeta.hidden = true;
+  elements.selectedShelf.hidden = true;
   elements.results.innerHTML = `
     <div class="loading-state" aria-label="Calculando ranking">
       <div class="skeleton result-skeleton"></div>
@@ -397,9 +426,19 @@ function renderLoading() {
 }
 
 function renderRanking(ranking) {
+  state.ranking = ranking;
+  state.selectedSections.clear();
+  renderRankingView();
+}
+
+function renderRankingView() {
+  const ranking = state.ranking;
+  if (!ranking) return;
   elements.results.setAttribute("aria-busy", "false");
   elements.resultMeta.hidden = false;
-  elements.resultMeta.innerHTML = `<strong>${ranking.item_count}</strong> turmas exibidas`;
+  const visibleItems = ranking.items.filter((item) => isCompatibleWithSelection(item));
+  elements.resultMeta.innerHTML = `<strong>${visibleItems.length}</strong> turmas sem conflito`;
+  renderSelectedShelf();
   if (!ranking.items.length) {
     elements.results.innerHTML = `
       <div class="empty-state">
@@ -408,17 +447,112 @@ function renderRanking(ranking) {
       </div>`;
     return;
   }
+  if (!visibleItems.length) {
+    elements.results.innerHTML = `
+      <div class="empty-state">
+        <h3>Nenhuma outra turma cabe nos horários escolhidos.</h3>
+        <p>Remova uma turma fixada para liberar os horários conflitantes.</p>
+      </div>`;
+    return;
+  }
 
-  const knownDemand = ranking.items.filter((item) => item.seat_probability.estimated_probability !== null);
+  const knownDemand = visibleItems.filter((item) => item.seat_probability.estimated_probability !== null);
   elements.results.innerHTML = `
     <div class="ranking-summary">
-      <div class="summary-cell"><span>Turmas compatíveis</span><strong>${ranking.candidate_count}</strong></div>
-      <div class="summary-cell"><span>Exibidas</span><strong>${ranking.item_count}</strong></div>
-      <div class="summary-cell"><span>Demanda disponível</span><strong>${knownDemand.length}/${ranking.item_count}</strong></div>
+      <div class="summary-cell"><span>Após filtros</span><strong>${ranking.candidate_count}</strong></div>
+      <div class="summary-cell"><span>Sem conflito</span><strong>${visibleItems.length}</strong></div>
+      <div class="summary-cell"><span>Demanda disponível</span><strong>${knownDemand.length}/${visibleItems.length}</strong></div>
     </div>
     <div class="ranking-list">
-      ${ranking.items.map((item) => renderRankingCard(item, ranking.config.weights)).join("")}
+      ${visibleItems.map((item) => renderRankingCard(item, ranking.config.weights)).join("")}
     </div>`;
+}
+
+function handleResultAction(event) {
+  const button = event.target.closest(".select-section");
+  if (!button || !state.ranking) return;
+  const item = state.ranking.items.find((candidate) => candidate.section.id === button.dataset.sectionId);
+  if (!item) return;
+  const credits = getItemCredits(item);
+  const limit = decimalValue("#max-quarter-credits");
+  const selectedCredits = [...state.selectedSections.values()]
+    .reduce((total, selected) => total + (getItemCredits(selected) || 0), 0);
+  if (limit !== null && credits !== null && selectedCredits + credits > limit) {
+    showToast(`Essa turma ultrapassaria seu limite total de ${formatNumber(limit)} créditos.`);
+    return;
+  }
+  state.selectedSections.set(item.section.id, item);
+  renderRankingView();
+}
+
+function handleSelectedAction(event) {
+  const button = event.target.closest("[data-remove-section]");
+  if (!button) return;
+  state.selectedSections.delete(button.dataset.removeSection);
+  renderRankingView();
+}
+
+function renderSelectedShelf() {
+  const selected = [...state.selectedSections.values()];
+  elements.selectedShelf.hidden = selected.length === 0;
+  if (!selected.length) {
+    elements.selectedShelf.innerHTML = "";
+    return;
+  }
+  const knownCredits = selected.map(getItemCredits).filter((value) => value !== null);
+  const totalCredits = knownCredits.reduce((total, value) => total + value, 0);
+  const limit = decimalValue("#max-quarter-credits");
+  const creditSummary = limit === null
+    ? `${formatNumber(totalCredits)} créditos selecionados`
+    : `${formatNumber(totalCredits)} de ${formatNumber(limit)} créditos`;
+  elements.selectedShelf.innerHTML = `
+    <div class="selected-shelf-header">
+      <strong>Turmas fixadas</strong>
+      <span>${creditSummary}</span>
+    </div>
+    <div class="selected-list">
+      ${selected.map((item) => `
+        <span class="selected-chip" title="${escapeHtml(item.section.subject.name)}">
+          ${escapeHtml(item.section.subject.code)} · ${escapeHtml(item.section.code)}
+          <button type="button" data-remove-section="${escapeHtml(item.section.id)}" aria-label="Remover ${escapeHtml(item.section.subject.name)}">×</button>
+        </span>
+      `).join("")}
+    </div>`;
+}
+
+function isCompatibleWithSelection(item) {
+  return [...state.selectedSections.values()].every((selected) => (
+    selected.section.id !== item.section.id
+    && selected.section.subject.id !== item.section.subject.id
+    && !sectionsConflict(selected.section, item.section)
+  ));
+}
+
+function sectionsConflict(first, second) {
+  return first.meetings.some((left) => second.meetings.some((right) => (
+    left.weekday === right.weekday
+    && timeToMinutes(left.start_time) < timeToMinutes(right.end_time)
+    && timeToMinutes(right.start_time) < timeToMinutes(left.end_time)
+  )));
+}
+
+function timeToMinutes(value) {
+  const [hours, minutes] = String(value).split(":").map(Number);
+  return (hours * 60) + minutes;
+}
+
+function getItemCredits(item) {
+  const primaryCourse = state.profile?.courses?.find((course) => course.is_primary)?.course_code;
+  const preferred = item.curriculum_classifications.find((classification) => (
+    classification.course_code === primaryCourse && classification.credits !== null
+  ));
+  const fallback = item.curriculum_classifications.find((classification) => classification.credits !== null);
+  const value = preferred?.credits ?? fallback?.credits;
+  if (value !== null && value !== undefined) return Number(value);
+
+  const workload = String(item.section.workload_code || "").split("-").map(Number);
+  if (workload.length < 3 || workload.some((part) => !Number.isFinite(part))) return null;
+  return workload[0] + workload[1];
 }
 
 function renderRankingCard(item, weights) {
@@ -434,9 +568,9 @@ function renderRankingCard(item, weights) {
   const teachers = section.teachers.length
     ? section.teachers.map((teacher) => {
       const role = teacherRoleLabels[teacher.role] || "Docente";
-      return `${escapeHtml(role)}: ${escapeHtml(teacher.name)}`;
-    }).join(" · ")
-    : "Docente ainda não informado";
+      return `<p class="teacher-line"><strong>${escapeHtml(role)}:</strong> ${escapeHtml(teacher.name)}</p>`;
+    }).join("")
+    : '<p class="teacher-line">Docente ainda não informado</p>';
   const meetings = section.meetings.length
     ? [...section.meetings].sort(compareMeetings).map((meeting) => `
       <p>${weekdays[meeting.weekday] || "Dia"} · ${shortTime(meeting.start_time)}–${shortTime(meeting.end_time)}</p>
@@ -465,7 +599,7 @@ function renderRankingCard(item, weights) {
       <div class="card-main">
         <div class="card-topline">
           <div>
-            <p class="subject-code">${escapeHtml(section.subject.code)}</p>
+            <p class="subject-code"><span>Disciplina</span>${escapeHtml(section.subject.code)}</p>
             <h3>${escapeHtml(section.subject.name)}</h3>
           </div>
           <div class="total-score"><strong>${Math.round(item.total_score)}</strong><span>compatibilidade</span></div>
@@ -480,7 +614,7 @@ function renderRankingCard(item, weights) {
           <div class="detail-box">
             <span class="detail-label">Quando e com quem</span>
             ${meetings}
-            <p>${teachers}</p>
+            <div class="teacher-list">${teachers}</div>
           </div>
           <div class="detail-box">
             <span class="detail-label">Demanda da turma</span>
@@ -496,6 +630,9 @@ function renderRankingCard(item, weights) {
           ${criteria}
           <span class="tag">Grupo: ${escapeHtml(formatPool(priority.competition_pool))}</span>
         </div>
+        <button class="select-section" type="button" data-section-id="${escapeHtml(section.id)}">
+          Fixar esta turma e remover conflitos
+        </button>
         <details class="card-disclosure">
           <summary>Por que esta turma ficou aqui?</summary>
           <ul class="explanation-list">
@@ -528,6 +665,7 @@ function formatPool(pool) {
 
 function showError(title, message) {
   elements.results.setAttribute("aria-busy", "false");
+  elements.selectedShelf.hidden = true;
   elements.results.innerHTML = `
     <div class="error-state">
       <h3>${escapeHtml(title)}</h3>
@@ -544,12 +682,6 @@ function setActiveStep(target) {
   document.querySelectorAll(".step").forEach((step) => {
     step.classList.toggle("is-active", step.dataset.stepTarget === target);
   });
-}
-
-function setApiStatus(online) {
-  elements.apiStatus.textContent = online ? "Sistema local conectado" : "Sistema indisponível";
-  elements.statusDot.classList.toggle("is-online", online);
-  elements.statusDot.classList.toggle("is-offline", !online);
 }
 
 let toastTimer;
@@ -606,6 +738,14 @@ function setElementValue(element, value) {
   if (element && value !== null && value !== undefined) element.value = value;
 }
 
+function setDecimalDisplay(selector, value, maximumFractionDigits) {
+  const element = document.querySelector(selector);
+  if (!element) return;
+  element.value = value === null || value === undefined
+    ? ""
+    : Number(value).toLocaleString("pt-BR", { maximumFractionDigits });
+}
+
 function formatPercent(value) {
   return value === null || value === undefined ? "Sem dados" : `${Math.round(value * 100)}%`;
 }
@@ -620,13 +760,6 @@ function shortTime(value) {
 
 function compareMeetings(a, b) {
   return a.weekday - b.weekday || a.start_time.localeCompare(b.start_time);
-}
-
-function suggestCreditLimit() {
-  const input = document.querySelector("#max-quarter-credits");
-  if (input.value.trim()) return;
-  const ca = decimalValue("#ca");
-  if (ca !== null) input.value = Math.ceil(20 + (2 * ca));
 }
 
 function inferScheduleWindow(hard) {

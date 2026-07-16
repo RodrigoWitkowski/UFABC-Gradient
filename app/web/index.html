@@ -19,28 +19,25 @@
           <small>UFABC</small>
         </span>
       </a>
-      <div class="header-status">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span id="api-status">Conectando ao sistema</span>
-      </div>
-      <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API /docs</a>
     </header>
 
     <main id="main-content">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow">Planejamento acadêmico, sem caixa-preta</p>
+          <p class="eyebrow">Planejamento acadêmico personalizado.</p>
           <h1 id="hero-title">Escolha turmas com mais <em>contexto</em>.</h1>
           <p>
-            Compare encaixe curricular, docentes, horários e demanda. Cada nota mostra
-            de onde veio, e a prioridade de matrícula segue as regras da UFABC.
+            Compare disciplinas, docentes, horários e demanda seguindo as regras da UFABC.
           </p>
         </div>
         <aside class="hero-note" aria-label="Como interpretar a estimativa">
           <span class="note-index">01</span>
           <div>
             <strong>Estimativa, não promessa.</strong>
-            <p>Vagas ÷ solicitações mede a disputa da turma. Sua prioridade aparece separada.</p>
+            <p>
+              Se há mais solicitações que vagas, existe concorrência. Sua posição real ainda
+              depende de curso, turno, CP e CA.
+            </p>
           </div>
         </aside>
       </section>
@@ -68,6 +65,16 @@
                   <h2>Perfil acadêmico</h2>
                 </div>
               </div>
+
+              <label class="history-upload" id="history-upload-label">
+                <input id="history-pdf" type="file" accept="application/pdf,.pdf">
+                <span>
+                  <strong>Importar histórico do SIGAA</strong>
+                  <small>Preenche RA, CA, coeficientes e disciplinas já cursadas.</small>
+                </span>
+                <b aria-hidden="true">PDF</b>
+              </label>
+              <p class="history-status" id="history-status" hidden></p>
 
               <div class="field-grid two-columns">
                 <label class="field field-wide">
@@ -101,14 +108,15 @@
                 </label>
                 <label class="field">
                   <span>CA <small>0 a 4</small></span>
-                  <input id="ca" name="ca" type="number" min="0" max="4" step="0.0001"
-                    placeholder="Ex.: 3,20" inputmode="decimal">
+                  <input id="ca" name="ca" type="text" placeholder="Importe o histórico"
+                    inputmode="decimal" readonly>
+                  <small class="field-help">Valor extraído do histórico do SIGAA.</small>
                 </label>
                 <label class="field">
                   <span>Limite total de créditos</span>
-                  <input id="max-quarter-credits" name="max_quarter_credits" type="number"
-                    min="0" max="60" step="1" placeholder="Calculado pelo CA" inputmode="numeric">
-                  <small class="field-help">Sugestão: arredondar 20 + 2 × CA para cima.</small>
+                  <input id="max-quarter-credits" name="max_quarter_credits" type="text"
+                    placeholder="Calculado pelo CA" inputmode="numeric" readonly>
+                  <small class="field-help">Calculado pela regra oficial: teto de 20 + 2 × CA.</small>
                 </label>
               </div>
 
@@ -201,6 +209,8 @@
             </div>
             <div class="result-meta" id="result-meta" hidden></div>
           </div>
+
+          <section class="selected-shelf" id="selected-shelf" aria-label="Turmas selecionadas" hidden></section>
 
           <div id="results" aria-live="polite" aria-busy="false">
             <div class="empty-state">

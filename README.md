@@ -24,6 +24,7 @@ de grades completas ainda não foi implementado.
 - perfis acadêmicos com RA, limite total de créditos, múltiplos cursos, matriz por curso,
   CR, CA, CP, IK e curso principal;
 - disciplinas concluídas e em andamento, preferências e restrições do aluno;
+- importação substitutiva do Histórico Escolar do SIGAA por RA, sem guardar o PDF bruto;
 - sugestão de matriz pelo ano de ingresso, com possibilidade de escolha manual;
 - sincronização manual de componentes e reviews do UFABC Next, com cache e auditoria;
 - estatísticas gerais e por disciplina dos docentes, com ajuste bayesiano e amostra explícita;
@@ -42,10 +43,10 @@ docker compose up --build
 
 Depois da inicialização, abra `http://localhost:8000` para usar a interface web. A página
 permite criar o perfil acadêmico, selecionar BCT, BCH e BCC, aplicar filtros e consultar o
-ranking. A documentação técnica da API continua disponível em `http://localhost:8000/docs`.
+ranking. O container da API aplica as migrations antes de iniciar.
 
-A API fica em `http://localhost:8000` e a documentação interativa em
-`http://localhost:8000/docs`. O container da API aplica as migrations antes de iniciar.
+A documentação interativa existe, mas fica desativada por padrão. Para desenvolvimento,
+defina `API_DOCS_ENABLED=true` e abra `http://localhost:8000/docs`.
 
 Configuração local opcional:
 
@@ -360,12 +361,20 @@ curl -X POST http://localhost:8000/students \
     "display_name": "Aluno",
     "admission_year": 2025,
     "admission_shift": "Noturno",
-    "campus": "SA",
-    "max_quarter_credits": 27
+    "campus": "SA"
   }'
 ```
 
-Depois associe cursos, matrizes e histórico acadêmico. Quando `curriculum_version` não é enviado,
+Importar ou substituir o histórico do aluno. RA, CA, CR, disciplinas e limite total de
+créditos são extraídos ou calculados nesse processo:
+
+```bash
+curl -X POST http://localhost:8000/students/history/pdf \
+  -F "file=@historico.pdf" \
+  -F "student_id=UUID_DO_ALUNO"
+```
+
+Depois ajuste cursos, matrizes e preferências. Quando `curriculum_version` não é enviado,
 o sistema sugere a matriz compatível com o ano de ingresso.
 
 ```bash
@@ -377,8 +386,6 @@ curl -X PUT http://localhost:8000/students/UUID_DO_ALUNO/academic-profile \
     "admission_shift": "Noturno",
     "campus": "SA",
     "cr": 3.1,
-    "ca": 3.3,
-    "max_quarter_credits": 27,
     "course_strategy": "weighted_courses",
     "courses": [
       {"course_code": "BCT", "is_primary": false, "weight": 0.4, "cp": 0.72, "ik": 0.68},
@@ -416,5 +423,6 @@ Com PostgreSQL disponível e `DATABASE_URL` configurada:
 .venv/Scripts/ruff check app tests
 ```
 
-Os arquivos originais são gravados em `IMPORT_STORAGE_PATH` e não devem ser versionados.
-Não há credenciais do SIGAA ou do UFABC Next armazenadas pelo projeto.
+As planilhas originais de oferta são gravadas em `IMPORT_STORAGE_PATH` e não devem ser
+versionadas. O PDF bruto do histórico é descartado após a extração. Não há credenciais
+do SIGAA ou do UFABC Next armazenadas pelo projeto.

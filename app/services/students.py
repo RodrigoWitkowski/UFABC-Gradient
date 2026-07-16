@@ -20,6 +20,7 @@ from app.schemas.students import (
     StudentCreate,
     StudentSubjectClassificationsRead,
 )
+from app.services.credit_limits import calculate_max_quarter_credits
 from app.services.normalization.text import (
     clean_text,
     normalize_code,
@@ -43,7 +44,6 @@ class StudentService:
             admission_year=payload.admission_year,
             admission_shift=clean_text(payload.admission_shift),
             campus=clean_text(payload.campus),
-            max_quarter_credits=payload.max_quarter_credits,
             accumulated_credits=Decimal(0),
             preferences=StudentPreference(hard_constraints={}, soft_preferences={}),
         )
@@ -71,6 +71,7 @@ class StudentService:
                     StudentInProgressSubject.term
                 ),
                 selectinload(StudentProfile.preferences),
+                selectinload(StudentProfile.history_import),
             )
         )
         if profile is None:
@@ -88,8 +89,9 @@ class StudentService:
         profile.admission_shift = clean_text(payload.admission_shift)
         profile.campus = clean_text(payload.campus)
         profile.cr = payload.cr
-        profile.ca = payload.ca
-        profile.max_quarter_credits = payload.max_quarter_credits
+        if profile.history_import is None:
+            profile.ca = payload.ca
+            profile.max_quarter_credits = calculate_max_quarter_credits(payload.ca)
         profile.course_strategy = payload.course_strategy
 
         profile.courses.clear()

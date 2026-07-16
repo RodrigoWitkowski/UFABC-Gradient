@@ -1,7 +1,7 @@
 # Importacao de dados do aluno
 
-Este documento registra o estudo inicial do historico do SIGAA e do HTML do sistema de
-matriculas. Nenhum desses importadores esta ativo ainda.
+Este documento registra as decisoes sobre o historico do SIGAA e o HTML do sistema de
+matriculas. O importador de PDF esta ativo; o importador de HTML ainda nao foi implementado.
 
 ## Historico do SIGAA em PDF
 
@@ -14,13 +14,14 @@ O PDF analisado possui texto extraivel e estrutura suficiente para recuperar:
 - convalidacoes e equivalencias.
 
 O arquivo tambem contem dados pessoais que o ranking nao precisa, como documentos de
-identidade e data de nascimento. O fluxo proposto e:
+identidade e data de nascimento. O fluxo implementado e:
 
 1. o aluno envia o PDF;
 2. o servidor extrai somente os dados academicos;
-3. a interface mostra uma previa para correcao e confirmacao;
-4. os registros confirmados sao associados ao perfil pelo RA;
-5. o PDF bruto e descartado, mantendo apenas hash, data de emissao e resultado da
+3. os registros validados sao associados ao perfil pelo RA;
+4. CA, CR, CP e IK sao atualizados e o limite e calculado por `ceil(20 + 2 * CA)`;
+5. uma nova importacao do mesmo RA substitui o historico anterior;
+6. o PDF bruto e descartado, mantendo apenas hash, data de emissao e resultado da
    importacao para evitar duplicidade.
 
 As situacoes aprovadas, dispensadas ou incorporadas devem marcar o componente ou sua
@@ -65,6 +66,5 @@ sobrescrever as classificacoes curriculares obtidas dos PPCs oficiais.
 
 ## Decisao atual
 
-O proximo importador recomendado e o PDF do historico, com previa obrigatoria. A importacao
-do HTML de matricula e tecnicamente valiosa para demanda, mas so deve ser implementada depois
-da aprovacao explicita deste desenho de sanitizacao.
+A importacao do HTML de matricula e tecnicamente valiosa para demanda e pode ser a proxima
+fonte implementada. Ela deve seguir o desenho de sanitizacao descrito acima.

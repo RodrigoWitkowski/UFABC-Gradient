@@ -91,7 +91,7 @@ a:focus-visible {
 
 .site-header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   max-width: 1440px;
   min-height: 82px;
@@ -158,42 +158,6 @@ main,
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.25em;
-}
-
-.header-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--ink-soft);
-  font-size: 13px;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--yellow);
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px rgba(232, 189, 84, 0.18);
-}
-
-.status-dot.is-online {
-  background: #36a572;
-  box-shadow: 0 0 0 5px rgba(54, 165, 114, 0.16);
-}
-
-.status-dot.is-offline {
-  background: var(--orange);
-  box-shadow: 0 0 0 5px rgba(236, 107, 69, 0.16);
-}
-
-.docs-link {
-  justify-self: end;
-  padding-bottom: 2px;
-  color: var(--ink);
-  border-bottom: 1px solid currentcolor;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
 }
 
 main {
@@ -328,6 +292,11 @@ main {
 .control-column {
   position: sticky;
   top: 18px;
+  max-height: calc(100vh - 36px);
+  padding-right: 6px;
+  overflow-y: auto;
+  scrollbar-color: var(--mint) transparent;
+  scrollbar-width: thin;
 }
 
 .control-column form {
@@ -397,6 +366,7 @@ main {
 
 .field {
   display: grid;
+  align-content: start;
   gap: 7px;
 }
 
@@ -442,6 +412,80 @@ main {
   border-color: var(--green);
   box-shadow: 0 0 0 4px rgba(11, 92, 80, 0.09);
   outline: none;
+}
+
+.field input[readonly] {
+  color: var(--ink);
+  background: rgba(220, 233, 223, 0.48);
+  cursor: default;
+}
+
+.history-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding: 14px;
+  color: var(--green-dark);
+  background: rgba(220, 233, 223, 0.62);
+  border: 1px dashed rgba(11, 92, 80, 0.45);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.history-upload:hover {
+  background: rgba(220, 233, 223, 0.92);
+  border-style: solid;
+}
+
+.history-upload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.history-upload span {
+  min-width: 0;
+}
+
+.history-upload strong,
+.history-upload small {
+  display: block;
+}
+
+.history-upload strong {
+  font-size: 13px;
+}
+
+.history-upload small {
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: 10px;
+}
+
+.history-upload b {
+  margin-left: auto;
+  padding: 6px 8px;
+  color: white;
+  background: var(--green);
+  border-radius: 7px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.history-upload.is-loading {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.history-status {
+  margin: -10px 0 20px;
+  padding: 10px 12px;
+  color: var(--green-dark);
+  background: rgba(232, 189, 84, 0.18);
+  border-radius: 10px;
+  font-size: 11px;
 }
 
 .course-fieldset,
@@ -746,8 +790,72 @@ main {
 
 .results-column {
   min-height: 700px;
-  overflow: hidden;
+  overflow: visible;
   padding: 32px;
+}
+
+.selected-shelf {
+  position: sticky;
+  top: 12px;
+  z-index: 8;
+  margin: 16px 0;
+  padding: 14px;
+  color: white;
+  background: rgba(7, 63, 56, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(7, 63, 56, 0.24);
+  backdrop-filter: blur(12px);
+}
+
+.selected-shelf-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.selected-shelf-header strong {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.selected-shelf-header span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+}
+
+.selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.selected-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 7px 6px 9px;
+  color: var(--green-dark);
+  background: var(--paper-light);
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.selected-chip button {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  padding: 0;
+  color: white;
+  background: var(--orange);
+  border: 0;
+  border-radius: 6px;
+  font-size: 13px;
+  place-items: center;
 }
 
 .results-heading {
@@ -954,11 +1062,24 @@ main {
 }
 
 .subject-code {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
   margin: 0 0 3px;
   color: var(--green);
-  font-size: 10px;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.subject-code span {
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 8px;
   font-weight: 900;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .ranking-card h3 {
@@ -1045,6 +1166,33 @@ main {
 .detail-box p {
   margin: 2px 0;
   font-size: 12px;
+}
+
+.teacher-list {
+  display: grid;
+  gap: 3px;
+  margin-top: 8px;
+}
+
+.teacher-line {
+  padding-top: 3px;
+  border-top: 1px solid rgba(16, 47, 44, 0.09);
+}
+
+.select-section {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px 12px;
+  color: white;
+  background: var(--green);
+  border: 0;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.select-section:hover {
+  background: var(--green-dark);
 }
 
 .availability-head {
@@ -1178,13 +1326,17 @@ main {
 }
 
 @media (max-width: 820px) {
-  .site-header { grid-template-columns: 1fr auto; }
-  .header-status { display: none; }
+  .site-header { grid-template-columns: 1fr; }
   .hero { grid-template-columns: 1fr; padding: 52px 0 38px; }
   .hero-note { max-width: 540px; }
   .step-nav { display: flex; }
   .app-shell { grid-template-columns: 1fr; }
-  .control-column { position: static; }
+  .control-column {
+    position: static;
+    max-height: none;
+    padding-right: 0;
+    overflow: visible;
+  }
   .results-column { min-height: 560px; }
   .empty-state { min-height: 430px; }
 }
@@ -1192,8 +1344,7 @@ main {
 @media (max-width: 560px) {
   .site-header,
   main { padding-right: 16px; padding-left: 16px; }
-  .site-header { grid-template-columns: minmax(0, 1fr) auto; min-height: 70px; }
-  .docs-link { font-size: 11px; }
+  .site-header { grid-template-columns: 1fr; min-height: 70px; }
   .hero h1 { font-size: 47px; }
   .hero-copy > p:last-child { font-size: 16px; }
   .hero-note { gap: 14px; }

@@ -1,5 +1,7 @@
 import json
 from collections.abc import Generator
+from datetime import UTC, datetime
+from decimal import Decimal
 from pathlib import Path
 
 import pytest
@@ -12,6 +14,7 @@ from app.main import app
 from app.models.enums import CurriculumCategory
 from app.schemas.curriculum import CurriculumImportRequest
 from app.services.curriculum import CurriculumService
+from app.services.student_history import HistoryEntry, HistoryPdfParser, ParsedStudentHistory
 
 
 @pytest.fixture
@@ -35,12 +38,16 @@ def test_web_interface_and_assets_are_served(client: TestClient) -> None:
     assert 'id="ranking-form"' in page.text
     assert 'id="current-term"' in page.text
     assert 'id="period-window"' in page.text
+    assert 'id="history-pdf"' in page.text
+    assert 'id="selected-shelf"' in page.text
     assert 'id="max-subject-credits"' not in page.text
+    assert "API /docs" not in page.text
     assert stylesheet.status_code == 200
     assert "--green:" in stylesheet.text
     assert script.status_code == 200
     assert 'fetchJson("/rankings/sections"' in script.text
     assert "compatibilidade" in script.text
+    assert client.get("/docs").status_code == 404
 
 
 def test_offer_import_and_status_endpoints(
@@ -181,3 +188,68 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
     classification = classification_response.json()["classifications"][0]
     assert classification["course_code"] == "BCC"
     assert classification["category"] == "mandatory"
+
+
+def test_history_pdf_api_replaces_existing_ra(
+    client: TestClient,
+    session: Session,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    CurriculumService(session).import_curriculum(
+        CurriculumImportRequest.model_validate(
+            {
+                "course": {"code": "BCT", "name": "Bacharelado em Ciencia e Tecnologia"},
+                "version": "2015",
+                "admission_year_start": 2015,
+                "admission_year_end": 2022,
+                "unlisted_subject_category": "free",
+                "subjects": [],
+            }
+        )
+    )
+    parsed = ParsedStudentHistory(
+        ra="11234567890",
+        admission_year=2021,
+        admission_shift="Noturno",
+        campus="SA",
+        course_code="BCT",
+        curriculum_version="2015",
+        cr=Decimal("2.1"),
+        ca=Decimal("2.85"),
+        cp=Decimal("0.82"),
+        ik=Decimal("0.73"),
+        issued_at=datetime(2026, 7, 15, 19, 12, tzinfo=UTC),
+        page_count=5,
+        entries=(
+            HistoryEntry(
+                code="BIJ0207-15",
+                name="Bases Conceituais da Energia",
+                term="2021:3",
+                status="APR",
+                category="OBR",
+                grade="A",
+                credits=Decimal(2),
+                hours=24,
+                extension_hours=0,
+            ),
+        ),
+        warnings=(),
+    )
+    monkeypatch.setattr(HistoryPdfParser, "parse", lambda _self, _content: parsed)
+
+    first = client.post(
+        "/students/history/pdf",
+        files={"file": ("historico.pdf", b"%PDF-test", "application/pdf")},
+    )
+    second = client.post(
+        "/students/history/pdf",
+        files={"file": ("historico-atualizado.pdf", b"%PDF-test-2", "application/pdf")},
+    )
+
+    assert first.status_code == 200
+    assert first.json()["student"]["ca"] == "2.85"
+    assert first.json()["student"]["max_quarter_credits"] == "26"
+    assert first.json()["replaced_existing"] is False
+    assert second.status_code == 200
+    assert second.json()["student"]["id"] == first.json()["student"]["id"]
+    assert second.json()["replaced_existing"] is True

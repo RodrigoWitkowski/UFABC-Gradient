@@ -1,8 +1,19 @@
 import uuid
+from datetime import datetime
 from decimal import Decimal
 from typing import Any
 
-from sqlalchemy import JSON, Enum, ForeignKey, Index, Numeric, String, UniqueConstraint
+from sqlalchemy import (
+    JSON,
+    DateTime,
+    Enum,
+    ForeignKey,
+    Index,
+    Integer,
+    Numeric,
+    String,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base, TimestampMixin, UUIDPrimaryKeyMixin
@@ -36,6 +47,11 @@ class StudentProfile(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         back_populates="student_profile", cascade="all, delete-orphan"
     )
     preferences: Mapped["StudentPreference | None"] = relationship(
+        back_populates="student_profile",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )
+    history_import: Mapped["StudentHistoryImport | None"] = relationship(
         back_populates="student_profile",
         cascade="all, delete-orphan",
         uselist=False,
@@ -123,6 +139,24 @@ class StudentPreference(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     soft_preferences: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
     student_profile: Mapped[StudentProfile] = relationship(back_populates="preferences")
+
+
+class StudentHistoryImport(UUIDPrimaryKeyMixin, TimestampMixin, Base):
+    __tablename__ = "student_history_imports"
+
+    student_profile_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("student_profiles.id", ondelete="CASCADE"), unique=True, index=True
+    )
+    ra: Mapped[str] = mapped_column(String(32), unique=True, index=True)
+    original_filename: Mapped[str] = mapped_column(String(255))
+    sha256: Mapped[str] = mapped_column(String(64))
+    parser_version: Mapped[str] = mapped_column(String(32))
+    page_count: Mapped[int] = mapped_column(Integer)
+    issued_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    imported_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    extracted_data: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+
+    student_profile: Mapped[StudentProfile] = relationship(back_populates="history_import")
 
 
 from app.models.curriculum import Course, CurriculumVersion  # noqa: E402
