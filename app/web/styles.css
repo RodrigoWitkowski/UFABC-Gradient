@@ -14,6 +14,7 @@
   --radius: 24px;
   --font-display: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   --font-body: Aptos, Candara, "Trebuchet MS", sans-serif;
+  --font-data: var(--font-display);
 }
 
 * {
@@ -57,6 +58,12 @@ input,
 select {
   color: inherit;
   font: inherit;
+}
+
+input,
+select {
+  font-family: var(--font-data);
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 button,
@@ -297,6 +304,24 @@ main {
   overflow-y: auto;
   scrollbar-color: var(--mint) transparent;
   scrollbar-width: thin;
+}
+
+.control-column::before {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: block;
+  height: 24px;
+  margin-bottom: -24px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255, 253, 246, 0.98), rgba(255, 253, 246, 0));
+  content: "";
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.control-column.is-scrolled::before {
+  opacity: 1;
 }
 
 .control-column form {
@@ -587,23 +612,6 @@ main {
   padding: 0 8px;
   border-radius: 8px;
   font-size: 12px;
-}
-
-.advanced-profile {
-  margin-top: 18px;
-  border-top: 1px solid var(--line);
-}
-
-.advanced-profile summary {
-  padding: 16px 0 0;
-  color: var(--green);
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.details-body {
-  margin-top: 14px;
 }
 
 .segmented {
@@ -1067,7 +1075,8 @@ main {
   gap: 7px;
   margin: 0 0 3px;
   color: var(--green);
-  font-family: "Cascadia Mono", Consolas, monospace;
+  font-family: var(--font-data);
+  font-variant-numeric: lining-nums tabular-nums;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0;
@@ -1131,8 +1140,10 @@ main {
   color: var(--ink-soft);
   background: var(--paper);
   border-radius: 7px;
+  font-family: var(--font-data);
   font-size: 10px;
   font-weight: 700;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .tag.is-category {
@@ -1165,7 +1176,9 @@ main {
 
 .detail-box p {
   margin: 2px 0;
+  font-family: var(--font-data);
   font-size: 12px;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .teacher-list {
@@ -1200,7 +1213,9 @@ main {
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 7px;
+  font-family: var(--font-data);
   font-size: 12px;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .availability-head strong {
@@ -1246,8 +1261,10 @@ main {
   background: white;
   border: 1px solid var(--line);
   border-radius: 20px;
+  font-family: var(--font-data);
   font-size: 9px;
   font-weight: 800;
+  font-variant-numeric: lining-nums tabular-nums;
   text-transform: uppercase;
 }
 
@@ -1337,6 +1354,7 @@ main {
     padding-right: 0;
     overflow: visible;
   }
+  .control-column::before { display: none; }
   .results-column { min-height: 560px; }
   .empty-state { min-height: 430px; }
 }

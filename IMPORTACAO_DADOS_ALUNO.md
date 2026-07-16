@@ -28,6 +28,11 @@ As situacoes aprovadas, dispensadas ou incorporadas devem marcar o componente ou
 equivalencia como concluido. `MATR` deve entrar como disciplina em andamento. Reprovacoes
 continuam elegiveis para recomendacao e nao podem ser tratadas como conclusao.
 
+O resumo diferencia aprovacoes de disciplinas unicas. Se um mesmo codigo foi aprovado em
+dois quadrimestres, as duas ocorrencias continuam no registro extraido, mas o ranking marca
+a disciplina como concluida apenas uma vez. CR e creditos acumulados tambem sao preservados,
+sem aparecer no formulario porque nao definem a prioridade de matricula.
+
 A extracao precisa validar codigos e totais, pois quebras de linha do PDF podem separar o
 codigo da turma, o codigo da disciplina ou partes do nome. A importacao nao deve ser salva
 silenciosamente quando houver linhas ambiguas.

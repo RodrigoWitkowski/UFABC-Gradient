@@ -216,6 +216,8 @@ Consequencias para o projeto:
   curso interdisciplinar de ingresso;
 - CA e global no perfil e aparece depois do CP;
 - CR e IK nao aparecem na ordem de alocacao de turmas regulares da Resolucao 260;
+- CR e creditos acumulados podem ser preservados do historico para usos academicos futuros,
+  mas nao sao solicitados nem exibidos no formulario de matricula deste projeto;
 - CP proximo de 1 e favoravel dentro do mesmo grupo, mas nao garante vaga porque curso e
   turno vem antes, e os coeficientes dos outros solicitantes nao sao conhecidos.
 

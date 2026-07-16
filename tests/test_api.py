@@ -41,6 +41,8 @@ def test_web_interface_and_assets_are_served(client: TestClient) -> None:
     assert 'id="history-pdf"' in page.text
     assert 'id="selected-shelf"' in page.text
     assert 'id="max-subject-credits"' not in page.text
+    assert 'id="accumulated-credits"' not in page.text
+    assert 'id="cr"' not in page.text
     assert "API /docs" not in page.text
     assert stylesheet.status_code == 200
     assert "--green:" in stylesheet.text
@@ -232,6 +234,17 @@ def test_history_pdf_api_replaces_existing_ra(
                 hours=24,
                 extension_hours=0,
             ),
+            HistoryEntry(
+                code="BIJ0207-15",
+                name="Bases Conceituais da Energia",
+                term="2022:1",
+                status="APR",
+                category="OBR",
+                grade="B",
+                credits=Decimal(2),
+                hours=24,
+                extension_hours=0,
+            ),
         ),
         warnings=(),
     )
@@ -249,6 +262,8 @@ def test_history_pdf_api_replaces_existing_ra(
     assert first.status_code == 200
     assert first.json()["student"]["ca"] == "2.85"
     assert first.json()["student"]["max_quarter_credits"] == "26"
+    assert first.json()["completed_count"] == 1
+    assert first.json()["completed_attempt_count"] == 2
     assert first.json()["replaced_existing"] is False
     assert second.status_code == 200
     assert second.json()["student"]["id"] == first.json()["student"]["id"]

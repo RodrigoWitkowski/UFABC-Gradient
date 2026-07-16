@@ -15,6 +15,7 @@ const elements = {
   results: document.querySelector("#results"),
   resultMeta: document.querySelector("#result-meta"),
   selectedShelf: document.querySelector("#selected-shelf"),
+  controlColumn: document.querySelector(".control-column"),
   button: document.querySelector("#rank-button"),
   historyInput: document.querySelector("#history-pdf"),
   historyLabel: document.querySelector("#history-upload-label"),
@@ -51,6 +52,8 @@ const scheduleWindows = {
   "afternoon-night": { earliest_start_time: "12:00" },
 };
 
+let historyStatusTimer;
+
 document.addEventListener("DOMContentLoaded", initialize);
 
 async function initialize() {
@@ -77,6 +80,7 @@ function bindEvents() {
   elements.historyInput.addEventListener("change", handleHistoryUpload);
   elements.results.addEventListener("click", handleResultAction);
   elements.selectedShelf.addEventListener("click", handleSelectedAction);
+  elements.controlColumn.addEventListener("scroll", updateControlFade, { passive: true });
   document.querySelectorAll("[data-step-target]").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelector(`#${button.dataset.stepTarget}`).scrollIntoView({ block: "start" });
@@ -89,6 +93,7 @@ function bindEvents() {
 async function handleHistoryUpload(event) {
   const file = event.target.files?.[0];
   if (!file) return;
+  window.clearTimeout(historyStatusTimer);
   elements.historyLabel.classList.add("is-loading");
   elements.historyStatus.hidden = true;
   const formData = new FormData();
@@ -104,8 +109,13 @@ async function handleHistoryUpload(event) {
     window.localStorage.setItem("trajeto_student_id", state.studentId);
     fillProfile(state.profile);
     const replacement = result.replaced_existing ? " O histórico anterior foi substituído." : "";
-    elements.historyStatus.textContent = `${result.completed_count} concluídas e ${result.in_progress_count} em andamento.${replacement}`;
+    const repeatedApprovals = result.completed_attempt_count - result.completed_count;
+    const completionSummary = repeatedApprovals > 0
+      ? `${result.completed_count} disciplinas únicas concluídas (${result.completed_attempt_count} aprovações no histórico)`
+      : `${result.completed_count} disciplinas concluídas`;
+    elements.historyStatus.textContent = `${completionSummary} e ${result.in_progress_count} em andamento.${replacement}`;
     elements.historyStatus.hidden = false;
+    historyStatusTimer = window.setTimeout(() => { elements.historyStatus.hidden = true; }, 9000);
     showToast("Histórico importado e perfil atualizado.");
   } catch (error) {
     elements.historyStatus.textContent = error.message;
@@ -115,6 +125,10 @@ async function handleHistoryUpload(event) {
     elements.historyLabel.classList.remove("is-loading");
     event.target.value = "";
   }
+}
+
+function updateControlFade() {
+  elements.controlColumn.classList.toggle("is-scrolled", elements.controlColumn.scrollTop > 6);
 }
 
 async function loadStoredProfile() {
@@ -203,8 +217,6 @@ function fillProfile(profile) {
   setValue("#student-campus", profile.campus);
   setDecimalDisplay("#ca", profile.ca, 4);
   setDecimalDisplay("#max-quarter-credits", profile.max_quarter_credits, 0);
-  setValue("#cr", profile.cr);
-  setValue("#accumulated-credits", profile.accumulated_credits);
 
   document.querySelectorAll(".course-card").forEach((card) => {
     const saved = profile.courses.find((course) => course.course_code === card.dataset.courseCode);
@@ -353,9 +365,9 @@ function buildAcademicProfile() {
     admission_year: numberValue("#admission-year"),
     admission_shift: valueOrNull("#admission-shift"),
     campus: valueOrNull("#student-campus"),
-    cr: decimalValue("#cr"),
+    cr: state.profile?.cr ?? null,
     ca: decimalValue("#ca"),
-    accumulated_credits: decimalValue("#accumulated-credits"),
+    accumulated_credits: state.profile?.accumulated_credits ?? null,
     course_strategy: "primary_course",
     courses: selectedCoursePayloads(),
     completed_subjects: completed,
@@ -512,7 +524,7 @@ function renderSelectedShelf() {
     </div>
     <div class="selected-list">
       ${selected.map((item) => `
-        <span class="selected-chip" title="${escapeHtml(item.section.subject.name)}">
+        <span class="selected-chip" title="${escapeHtml(formatSectionDisplayName(item.section))}">
           ${escapeHtml(item.section.subject.code)} · ${escapeHtml(item.section.code)}
           <button type="button" data-remove-section="${escapeHtml(item.section.id)}" aria-label="Remover ${escapeHtml(item.section.subject.name)}">×</button>
         </span>
@@ -555,8 +567,24 @@ function getItemCredits(item) {
   return workload[0] + workload[1];
 }
 
+function formatSectionDisplayName(section) {
+  const shift = section.shift === "Matutino" ? "Diurno" : section.shift;
+  const campus = section.campus === "SA"
+    ? "Santo André"
+    : section.campus === "SB" ? "São Bernardo" : section.campus;
+  const descriptor = [section.class_group, shift].filter(Boolean).join("-");
+  const fallback = [section.subject.name, descriptor, campus ? `(${campus})` : null]
+    .filter(Boolean)
+    .join(" ");
+  return String(section.display_name || fallback)
+    .replace(/-Matutino\b/gi, "-Diurno")
+    .replace(/\(SA\)\s*$/i, "(Santo André)")
+    .replace(/\(SB\)\s*$/i, "(São Bernardo)");
+}
+
 function renderRankingCard(item, weights) {
   const section = item.section;
+  const sectionDisplayName = formatSectionDisplayName(section);
   const seat = item.seat_probability;
   const priority = seat.priority;
   const probability = seat.estimated_probability;
@@ -600,7 +628,7 @@ function renderRankingCard(item, weights) {
         <div class="card-topline">
           <div>
             <p class="subject-code"><span>Disciplina</span>${escapeHtml(section.subject.code)}</p>
-            <h3>${escapeHtml(section.subject.name)}</h3>
+            <h3>${escapeHtml(sectionDisplayName)}</h3>
           </div>
           <div class="total-score"><strong>${Math.round(item.total_score)}</strong><span>compatibilidade</span></div>
         </div>

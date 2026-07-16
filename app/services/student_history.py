@@ -139,6 +139,7 @@ class HistoryImportResult:
     history_import: StudentHistoryImport
     replaced_existing: bool
     completed_count: int
+    completed_attempt_count: int
     in_progress_count: int
     ignored_attempt_count: int
     warnings: list[str]
@@ -445,7 +446,9 @@ class StudentHistoryService:
 
         warnings = list(parsed.warnings)
         self._apply_course(profile, parsed, warnings)
-        completed_count, in_progress_count, ignored_count = self._replace_subjects(profile, parsed)
+        completed_count, completed_attempt_count, in_progress_count, ignored_count = (
+            self._replace_subjects(profile, parsed)
+        )
 
         imported_at = datetime.now(UTC)
         history_import = profile.history_import
@@ -478,6 +481,7 @@ class StudentHistoryService:
             history_import=history_import,
             replaced_existing=replaced_existing,
             completed_count=completed_count,
+            completed_attempt_count=completed_attempt_count,
             in_progress_count=in_progress_count,
             ignored_attempt_count=ignored_count,
             warnings=warnings,
@@ -555,12 +559,14 @@ class StudentHistoryService:
 
     def _replace_subjects(
         self, profile: StudentProfile, parsed: ParsedStudentHistory
-    ) -> tuple[int, int, int]:
+    ) -> tuple[int, int, int, int]:
         completed: dict[str, HistoryEntry] = {}
         in_progress: dict[str, HistoryEntry] = {}
         ignored_count = 0
+        completed_attempt_count = 0
         for entry in parsed.entries:
             if entry.status in COMPLETED_STATUSES:
+                completed_attempt_count += 1
                 completed[entry.code] = entry
             elif entry.status == "MATR":
                 in_progress[entry.code] = entry
@@ -602,4 +608,4 @@ class StudentHistoryService:
                 )
             )
         profile.accumulated_credits = total_credits
-        return len(completed), len(in_progress), ignored_count
+        return len(completed), completed_attempt_count, len(in_progress), ignored_count

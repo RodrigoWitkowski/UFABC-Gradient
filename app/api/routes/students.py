@@ -62,6 +62,7 @@ async def import_student_history_pdf(
             imported_at=result.history_import.imported_at,
             replaced_existing=result.replaced_existing,
             completed_count=result.completed_count,
+            completed_attempt_count=result.completed_attempt_count,
             in_progress_count=result.in_progress_count,
             ignored_attempt_count=result.ignored_attempt_count,
             warnings=result.warnings,

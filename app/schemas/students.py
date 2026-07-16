@@ -145,6 +145,7 @@ class StudentHistoryImportRead(BaseModel):
     imported_at: datetime
     replaced_existing: bool
     completed_count: int
+    completed_attempt_count: int
     in_progress_count: int
     ignored_attempt_count: int
     warnings: list[str]
