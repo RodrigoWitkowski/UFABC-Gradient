@@ -461,7 +461,7 @@ class RankingService:
             self._curriculum_summary(classifications, config, student),
             *schedule_explanations,
             campus_explanation,
-            workload_explanation,
+            *([workload_explanation] if weights["workload"] > 0 else []),
         ]
         warnings = [*teacher_warnings, *seat_probability.warnings]
         return _RankedCandidate(

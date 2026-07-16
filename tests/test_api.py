@@ -35,11 +35,16 @@ def test_web_interface_and_assets_are_served(client: TestClient) -> None:
 
     assert page.status_code == 200
     assert "Gradient" in page.text
+    assert 'styles.css?v=' in page.text
+    assert 'app.js?v=' in page.text
     assert 'id="ranking-form"' in page.text
     assert 'id="current-term"' in page.text
     assert 'id="period-window"' in page.text
     assert 'id="history-pdf"' in page.text
     assert 'id="selected-shelf"' in page.text
+    assert 'id="category-filter"' in page.text
+    assert "Ranking Gradient" in page.text
+    assert "Estimativa, não promessa" not in page.text
     assert 'id="max-subject-credits"' not in page.text
     assert 'id="accumulated-credits"' not in page.text
     assert 'id="cr"' not in page.text
@@ -48,6 +53,9 @@ def test_web_interface_and_assets_are_served(client: TestClient) -> None:
     assert "--green:" in stylesheet.text
     assert script.status_code == 200
     assert 'fetchJson("/rankings/sections"' in script.text
+    assert "gradient_ranking_view_v2" in script.text
+    assert "result_limit: maxRankingResults" in script.text
+    assert 'data-results-action="more"' in script.text
     assert "compatibilidade" in script.text
     assert "disciplinas sendo cursadas atualmente" in script.text
     assert client.get("/docs").status_code == 404

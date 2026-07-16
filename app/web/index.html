@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Gradient: planejamento acadêmico personalizado na UFABC.">
     <title>Gradient</title>
-    <link rel="stylesheet" href="/assets/styles.css">
-    <script src="/assets/app.js" defer></script>
+    <link rel="stylesheet" href="/assets/styles.css?v=20260716.3">
+    <script src="/assets/app.js?v=20260716.3" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -30,13 +30,11 @@
             Compare disciplinas, docentes, horários e demanda seguindo as regras da UFABC.
           </p>
         </div>
-        <aside class="hero-note" aria-label="Como interpretar a estimativa">
-          <span class="note-index">01</span>
+        <aside class="hero-note" aria-label="Como o ranking funciona">
           <div>
-            <strong>Estimativa, não promessa.</strong>
+            <strong>Como o ranking funciona</strong>
             <p>
-              Se há mais solicitações que vagas, existe concorrência. Sua posição real ainda
-              depende de curso, turno, CP e CA.
+              O Gradient combina currículo, docentes, horários e demanda para ordenar as turmas.
             </p>
           </div>
         </aside>
@@ -155,6 +153,16 @@
                 </div>
               </fieldset>
 
+              <fieldset class="filter-group category-filter" id="category-filter">
+                <legend>Tipos de disciplina</legend>
+                <div class="segmented segmented-categories">
+                  <label><input type="checkbox" name="curriculum_category" value="mandatory" checked><span>Obrigatórias</span></label>
+                  <label><input type="checkbox" name="curriculum_category" value="limited" checked><span>Limitadas</span></label>
+                  <label><input type="checkbox" name="curriculum_category" value="free" checked><span>Livres</span></label>
+                </div>
+                <small class="field-help">Este filtro usa o tipo definido na matriz dos seus cursos.</small>
+              </fieldset>
+
               <label class="field schedule-window-field">
                 <span>Quando você pode ter aula?</span>
                 <select id="period-window" name="period_window">
@@ -189,7 +197,7 @@
         <section class="results-column" id="results-panel" aria-labelledby="results-title">
           <div class="results-heading">
             <div>
-              <p class="eyebrow">Recomendação explicável</p>
+              <p class="eyebrow">Ranking Gradient</p>
               <h2 id="results-title">Turmas para você</h2>
             </div>
             <div class="result-meta" id="result-meta" hidden></div>

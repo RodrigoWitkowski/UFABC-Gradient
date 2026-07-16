@@ -1,11 +1,24 @@
 const studentIdStorageKey = "gradient_student_id";
 const legacyStudentIdStorageKey = "trajeto_student_id";
+const rankingViewStorageKey = "gradient_ranking_view_v2";
+const selectedSectionsStorageKey = "gradient_selected_sections_v1";
+const resultPageSize = 50;
+const maxRankingResults = 2000;
+const curriculumCategories = ["mandatory", "limited", "free"];
+window.localStorage.removeItem("gradient_ranking_view_v1");
 const storedStudentId = window.localStorage.getItem(studentIdStorageKey)
   || window.localStorage.getItem(legacyStudentIdStorageKey);
 if (storedStudentId && !window.localStorage.getItem(studentIdStorageKey)) {
   window.localStorage.setItem(studentIdStorageKey, storedStudentId);
   window.localStorage.removeItem(legacyStudentIdStorageKey);
 }
+const storedRankingView = readStorageJson(rankingViewStorageKey);
+const matchingStoredView = storedRankingView?.studentId === storedStudentId
+  ? storedRankingView
+  : null;
+const storedCategories = Array.isArray(matchingStoredView?.categories)
+  ? matchingStoredView.categories.filter((category) => curriculumCategories.includes(category))
+  : curriculumCategories;
 
 const state = {
   courses: [],
@@ -14,6 +27,9 @@ const state = {
   ranking: null,
   selectedSections: new Map(),
   studentId: storedStudentId,
+  visibleResultCount: Number(matchingStoredView?.visibleResultCount) || resultPageSize,
+  selectedCategories: new Set(storedCategories),
+  selectedShelfExpanded: Boolean(matchingStoredView?.selectedShelfExpanded),
 };
 
 const elements = {
@@ -24,6 +40,7 @@ const elements = {
   results: document.querySelector("#results"),
   resultMeta: document.querySelector("#result-meta"),
   selectedShelf: document.querySelector("#selected-shelf"),
+  categoryFilter: document.querySelector("#category-filter"),
   controlColumn: document.querySelector(".control-column"),
   button: document.querySelector("#rank-button"),
   historyInput: document.querySelector("#history-pdf"),
@@ -67,6 +84,8 @@ document.addEventListener("DOMContentLoaded", initialize);
 
 async function initialize() {
   bindEvents();
+  syncCategoryFilterInputs();
+  updateControlFade();
   try {
     const [courses, terms] = await Promise.all([fetchJson("/courses"), fetchJson("/terms")]);
     state.courses = courses.filter((course) => supportedCourses.has(course.code));
@@ -75,6 +94,11 @@ async function initialize() {
     renderTerms();
     if (state.studentId) {
       await loadStoredProfile();
+      if (state.studentId) {
+        restoreSelectedSections();
+        renderSelectedShelf();
+        await restoreLatestRanking();
+      }
     } else {
       selectDefaultCourse();
     }
@@ -89,7 +113,9 @@ function bindEvents() {
   elements.historyInput.addEventListener("change", handleHistoryUpload);
   elements.results.addEventListener("click", handleResultAction);
   elements.selectedShelf.addEventListener("click", handleSelectedAction);
+  elements.categoryFilter.addEventListener("change", handleCategoryFilterChange);
   elements.controlColumn.addEventListener("scroll", updateControlFade, { passive: true });
+  window.addEventListener("resize", updateControlFade, { passive: true });
   document.querySelectorAll("[data-step-target]").forEach((button) => {
     button.addEventListener("click", () => {
       document.querySelector(`#${button.dataset.stepTarget}`).scrollIntoView({ block: "start" });
@@ -141,6 +167,10 @@ async function handleHistoryUpload(event) {
 
 function updateControlFade() {
   elements.controlColumn.classList.toggle("is-scrolled", elements.controlColumn.scrollTop > 6);
+  const remainingScroll = elements.controlColumn.scrollHeight
+    - elements.controlColumn.scrollTop
+    - elements.controlColumn.clientHeight;
+  elements.controlColumn.classList.toggle("is-at-bottom", remainingScroll < 6);
 }
 
 async function loadStoredProfile() {
@@ -150,6 +180,8 @@ async function loadStoredProfile() {
     showToast("Perfil local recuperado.");
   } catch (error) {
     window.localStorage.removeItem(studentIdStorageKey);
+    window.localStorage.removeItem(rankingViewStorageKey);
+    window.localStorage.removeItem(selectedSectionsStorageKey);
     state.studentId = null;
     state.profile = null;
     selectDefaultCourse();
@@ -412,7 +444,7 @@ function buildRankingRequest() {
   return {
     term: elements.term.value,
     student_id: state.studentId,
-    result_limit: 50,
+    result_limit: maxRankingResults,
     config: {
       hard_constraints: buildHardConstraints(),
       soft_preferences: buildSoftPreferences(),
@@ -440,7 +472,7 @@ function buildSoftPreferences() {
 function renderLoading() {
   elements.results.setAttribute("aria-busy", "true");
   elements.resultMeta.hidden = true;
-  elements.selectedShelf.hidden = true;
+  renderSelectedShelf();
   elements.results.innerHTML = `
     <div class="loading-state" aria-label="Calculando ranking">
       <div class="skeleton result-skeleton"></div>
@@ -449,9 +481,11 @@ function renderLoading() {
     </div>`;
 }
 
-function renderRanking(ranking) {
+function renderRanking(ranking, { resetVisible = true, persist = true } = {}) {
   state.ranking = ranking;
-  state.selectedSections.clear();
+  if (resetVisible) state.visibleResultCount = resultPageSize;
+  refreshSelectedSections(ranking);
+  if (persist) persistRankingView();
   renderRankingView();
 }
 
@@ -460,8 +494,10 @@ function renderRankingView() {
   if (!ranking) return;
   elements.results.setAttribute("aria-busy", "false");
   elements.resultMeta.hidden = false;
-  const visibleItems = ranking.items.filter((item) => isCompatibleWithSelection(item));
-  elements.resultMeta.innerHTML = `<strong>${visibleItems.length}</strong> turmas sem conflito`;
+  const compatibleItems = ranking.items.filter((item) => isCompatibleWithSelection(item));
+  const filteredItems = compatibleItems.filter((item) => itemMatchesCategoryFilters(item));
+  const visibleItems = filteredItems.slice(0, state.visibleResultCount);
+  elements.resultMeta.innerHTML = `<strong>${visibleItems.length}/${filteredItems.length}</strong> turmas exibidas`;
   renderSelectedShelf();
   if (!ranking.items.length) {
     elements.results.innerHTML = `
@@ -471,7 +507,7 @@ function renderRankingView() {
       </div>`;
     return;
   }
-  if (!visibleItems.length) {
+  if (!compatibleItems.length) {
     elements.results.innerHTML = `
       <div class="empty-state">
         <h3>Nenhuma outra turma cabe nos horários escolhidos.</h3>
@@ -479,20 +515,40 @@ function renderRankingView() {
       </div>`;
     return;
   }
+  if (!filteredItems.length) {
+    elements.results.innerHTML = `
+      <div class="empty-state">
+        <h3>Nenhuma turma corresponde aos tipos selecionados.</h3>
+        <p>Marque obrigatórias, limitadas ou livres nas preferências.</p>
+      </div>`;
+    return;
+  }
 
-  const knownDemand = visibleItems.filter((item) => item.seat_probability.estimated_probability !== null);
+  const knownDemand = filteredItems.filter((item) => item.seat_probability.estimated_probability !== null);
   elements.results.innerHTML = `
     <div class="ranking-summary">
-      <div class="summary-cell"><span>Após filtros</span><strong>${ranking.candidate_count}</strong></div>
-      <div class="summary-cell"><span>Sem conflito</span><strong>${visibleItems.length}</strong></div>
-      <div class="summary-cell"><span>Demanda disponível</span><strong>${knownDemand.length}/${visibleItems.length}</strong></div>
+      <div class="summary-cell"><span>No ranking</span><strong>${ranking.item_count}</strong></div>
+      <div class="summary-cell"><span>Tipos selecionados</span><strong>${filteredItems.length}</strong></div>
+      <div class="summary-cell"><span>Demanda disponível</span><strong>${knownDemand.length}/${filteredItems.length}</strong></div>
     </div>
     <div class="ranking-list">
-      ${visibleItems.map((item) => renderRankingCard(item, ranking.config.weights)).join("")}
-    </div>`;
+      ${visibleItems.map((item) => renderRankingCard(item, ranking.config.weights, ranking.item_count)).join("")}
+    </div>
+    ${renderResultControls(visibleItems.length, filteredItems.length)}`;
 }
 
 function handleResultAction(event) {
+  const resultAction = event.target.closest("[data-results-action]");
+  if (resultAction && state.ranking) {
+    const compatibleItems = state.ranking.items.filter((item) => isCompatibleWithSelection(item));
+    const filteredCount = compatibleItems.filter((item) => itemMatchesCategoryFilters(item)).length;
+    state.visibleResultCount = resultAction.dataset.resultsAction === "all"
+      ? filteredCount
+      : Math.min(state.visibleResultCount + resultPageSize, filteredCount);
+    persistRankingView();
+    renderRankingView();
+    return;
+  }
   const button = event.target.closest(".select-section");
   if (!button || !state.ranking) return;
   const item = state.ranking.items.find((candidate) => candidate.section.id === button.dataset.sectionId);
@@ -506,19 +562,30 @@ function handleResultAction(event) {
     return;
   }
   state.selectedSections.set(item.section.id, item);
+  persistSelectedSections();
   renderRankingView();
 }
 
 function handleSelectedAction(event) {
+  const toggle = event.target.closest("[data-toggle-selected]");
+  if (toggle) {
+    state.selectedShelfExpanded = !state.selectedShelfExpanded;
+    persistRankingView();
+    renderSelectedShelf();
+    return;
+  }
   const button = event.target.closest("[data-remove-section]");
   if (!button) return;
   state.selectedSections.delete(button.dataset.removeSection);
-  renderRankingView();
+  persistSelectedSections();
+  if (state.ranking) renderRankingView();
+  else renderSelectedShelf();
 }
 
 function renderSelectedShelf() {
   const selected = [...state.selectedSections.values()];
   elements.selectedShelf.hidden = selected.length === 0;
+  elements.selectedShelf.classList.toggle("is-expanded", state.selectedShelfExpanded);
   if (!selected.length) {
     elements.selectedShelf.innerHTML = "";
     return;
@@ -531,17 +598,136 @@ function renderSelectedShelf() {
     : `${formatNumber(totalCredits)} de ${formatNumber(limit)} créditos`;
   elements.selectedShelf.innerHTML = `
     <div class="selected-shelf-header">
-      <strong>Turmas fixadas</strong>
-      <span>${creditSummary}</span>
+      <div>
+        <strong>Turmas fixadas</strong>
+        <span>${creditSummary}</span>
+      </div>
+      <button class="selected-expand" type="button" data-toggle-selected
+        aria-expanded="${state.selectedShelfExpanded}">
+        ${state.selectedShelfExpanded ? "Recolher" : "Expandir"}
+      </button>
     </div>
     <div class="selected-list">
-      ${selected.map((item) => `
-        <span class="selected-chip" title="${escapeHtml(formatSectionDisplayName(item.section))}">
-          ${escapeHtml(item.section.subject.code)} · ${escapeHtml(item.section.code)}
-          <button type="button" data-remove-section="${escapeHtml(item.section.id)}" aria-label="Remover ${escapeHtml(item.section.subject.name)}">×</button>
-        </span>
-      `).join("")}
+      ${selected.map((item) => renderSelectedSection(item)).join("")}
     </div>`;
+}
+
+function renderSelectedSection(item) {
+  const section = item.section;
+  const teachers = section.teachers.length
+    ? section.teachers.map((teacher) => teacher.name).join(", ")
+    : "Docente não informado";
+  const meetings = section.meetings.length
+    ? [...section.meetings].sort(compareMeetings).map((meeting) => (
+      `${weekdays[meeting.weekday] || "Dia"} ${shortTime(meeting.start_time)}–${shortTime(meeting.end_time)}`
+    )).join(" · ")
+    : "Horário não informado";
+  return `
+    <article class="selected-chip" title="${escapeHtml(formatSectionDisplayName(section))}">
+      <div class="selected-chip-topline">
+        <span>${escapeHtml(section.subject.code)} · ${escapeHtml(section.code)}</span>
+        <button type="button" data-remove-section="${escapeHtml(section.id)}"
+          aria-label="Remover ${escapeHtml(section.subject.name)}">×</button>
+      </div>
+      ${state.selectedShelfExpanded ? `
+        <strong class="selected-chip-name">${escapeHtml(formatSectionDisplayName(section))}</strong>
+        <p>${escapeHtml(meetings)}</p>
+        <p>${escapeHtml(teachers)}</p>
+      ` : ""}
+    </article>`;
+}
+
+function renderResultControls(visibleCount, totalCount) {
+  const remaining = totalCount - visibleCount;
+  if (remaining <= 0) return "";
+  const nextCount = Math.min(resultPageSize, remaining);
+  return `
+    <div class="result-controls" aria-label="Carregar mais resultados">
+      <p>${visibleCount} de ${totalCount} turmas carregadas na tela.</p>
+      <div>
+        <button type="button" data-results-action="more">Ver mais ${nextCount}</button>
+        <button type="button" data-results-action="all">Ver todas</button>
+      </div>
+    </div>`;
+}
+
+function handleCategoryFilterChange() {
+  state.selectedCategories = new Set(selectedValues("curriculum_category"));
+  state.visibleResultCount = resultPageSize;
+  persistRankingView();
+  if (state.ranking) renderRankingView();
+}
+
+function itemMatchesCategoryFilters(item) {
+  return item.curriculum_classifications.some((classification) => (
+    state.selectedCategories.has(classification.category)
+  ));
+}
+
+function syncCategoryFilterInputs() {
+  document.querySelectorAll('input[name="curriculum_category"]').forEach((input) => {
+    input.checked = state.selectedCategories.has(input.value);
+  });
+}
+
+async function restoreLatestRanking() {
+  const saved = readStorageJson(rankingViewStorageKey);
+  if (!saved?.rankingId || saved.studentId !== state.studentId) return;
+  try {
+    const ranking = await fetchJson(`/rankings/${saved.rankingId}`);
+    if (ranking.student_id !== state.studentId || ranking.term !== elements.term.value) {
+      window.localStorage.removeItem(rankingViewStorageKey);
+      return;
+    }
+    renderRanking(ranking, { resetVisible: false, persist: false });
+  } catch (error) {
+    window.localStorage.removeItem(rankingViewStorageKey);
+    showToast("O ranking anterior não está mais disponível.");
+  }
+}
+
+function restoreSelectedSections() {
+  const saved = readStorageJson(selectedSectionsStorageKey);
+  if (saved?.studentId !== state.studentId || !Array.isArray(saved.items)) return;
+  state.selectedSections.clear();
+  saved.items.forEach((item) => {
+    if (item?.section?.id && item.section.subject && Array.isArray(item.section.meetings)) {
+      state.selectedSections.set(item.section.id, item);
+    }
+  });
+}
+
+function refreshSelectedSections(ranking) {
+  if (!state.selectedSections.size) return;
+  ranking.items.forEach((item) => {
+    if (state.selectedSections.has(item.section.id)) {
+      state.selectedSections.set(item.section.id, item);
+    }
+  });
+  persistSelectedSections();
+}
+
+function persistRankingView() {
+  if (!state.studentId) return;
+  const previous = readStorageJson(rankingViewStorageKey);
+  writeStorageJson(rankingViewStorageKey, {
+    studentId: state.studentId,
+    rankingId: state.ranking?.id || previous?.rankingId || null,
+    visibleResultCount: state.visibleResultCount,
+    categories: [...state.selectedCategories],
+    selectedShelfExpanded: state.selectedShelfExpanded,
+  });
+}
+
+function persistSelectedSections() {
+  if (!state.studentId) return;
+  const items = [...state.selectedSections.values()].map((item) => ({
+    position: item.position,
+    total_score: item.total_score,
+    section: item.section,
+    curriculum_classifications: item.curriculum_classifications,
+  }));
+  writeStorageJson(selectedSectionsStorageKey, { studentId: state.studentId, items });
 }
 
 function isCompatibleWithSelection(item) {
@@ -594,7 +780,7 @@ function formatSectionDisplayName(section) {
     .replace(/\(SB\)\s*$/i, "(São Bernardo)");
 }
 
-function renderRankingCard(item, weights) {
+function renderRankingCard(item, weights, rankingSize) {
   const section = item.section;
   const sectionDisplayName = formatSectionDisplayName(section);
   const seat = item.seat_probability;
@@ -632,10 +818,12 @@ function renderRankingCard(item, weights) {
   const requests = seat.requests === null ? "?" : seat.requests;
   const seats = seat.seats === null ? "?" : seat.seats;
   const meterWidth = probability === null ? 0 : Math.round(probability * 100);
+  const gradientColor = rankGradientColor(item.position, rankingSize);
 
   return `
-    <article class="ranking-card" style="--position:${Math.min(item.position, 12)}">
+    <article class="ranking-card" style="--position:${Math.min(item.position, 12)};--rank-color:${gradientColor}">
       <div class="rank-number" aria-label="Posição ${item.position}">${item.position}</div>
+      <span class="rank-gradient" aria-hidden="true"></span>
       <div class="card-main">
         <div class="card-topline">
           <div>
@@ -666,15 +854,15 @@ function renderRankingCard(item, weights) {
             <p class="availability-caption">Não é sua chance pessoal.</p>
           </div>
         </div>
-        <div class="priority-strip" aria-label="Critérios de prioridade">
-          ${criteria}
-          <span class="tag">Grupo: ${escapeHtml(formatPool(priority.competition_pool))}</span>
-        </div>
         <button class="select-section" type="button" data-section-id="${escapeHtml(section.id)}">
           Fixar esta turma e remover conflitos
         </button>
         <details class="card-disclosure">
           <summary>Por que esta turma ficou aqui?</summary>
+          <div class="priority-strip" aria-label="Critérios de prioridade">
+            ${criteria}
+            <span class="tag">Grupo: ${escapeHtml(formatPool(priority.competition_pool))}</span>
+          </div>
           <ul class="explanation-list">
             <li><strong>Fórmula de compatibilidade</strong></li>
             ${scoreBreakdown}
@@ -683,6 +871,12 @@ function renderRankingCard(item, weights) {
         </details>
       </div>
     </article>`;
+}
+
+function rankGradientColor(position, total) {
+  const ratio = total <= 1 ? 0 : Math.min(Math.max((position - 1) / (total - 1), 0), 1);
+  const hue = 154 - (142 * ratio);
+  return `hsl(${hue.toFixed(1)} 66% 43%)`;
 }
 
 function formatCriterion(criterion) {
@@ -746,6 +940,23 @@ function formatApiError(detail) {
   if (typeof detail === "string") return detail;
   if (Array.isArray(detail)) return detail.map((item) => item.msg || JSON.stringify(item)).join("; ");
   return JSON.stringify(detail);
+}
+
+function readStorageJson(key) {
+  try {
+    const value = window.localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function writeStorageJson(key, value) {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    // The app remains usable when storage is disabled or full.
+  }
 }
 
 function selectedValues(name) {

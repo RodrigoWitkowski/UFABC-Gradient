@@ -96,11 +96,11 @@ class RankingSoftPreferences(BaseModel):
 
 
 class RankingScoreWeights(BaseModel):
-    curriculum_relevance: float = Field(default=0.35, ge=0, le=1)
+    curriculum_relevance: float = Field(default=0.375, ge=0, le=1)
     teacher: float = Field(default=0.25, ge=0, le=1)
     seat_probability: float = Field(default=0.25, ge=0, le=1)
-    schedule_preference: float = Field(default=0.10, ge=0, le=1)
-    workload: float = Field(default=0.05, ge=0, le=1)
+    schedule_preference: float = Field(default=0.125, ge=0, le=1)
+    workload: float = Field(default=0.0, ge=0, le=1)
     campus: float = Field(default=0.0, ge=0, le=1)
 
     @model_validator(mode="after")

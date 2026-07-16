@@ -62,6 +62,15 @@ def api_client(session: Session) -> Generator[TestClient, None, None]:
     app.dependency_overrides.clear()
 
 
+def test_default_ranking_weights_ignore_subject_credits() -> None:
+    weights = RankingScoreWeights()
+
+    assert weights.curriculum_relevance == pytest.approx(0.375)
+    assert weights.schedule_preference == pytest.approx(0.125)
+    assert weights.workload == 0
+    assert sum(weights.model_dump().values()) == pytest.approx(1)
+
+
 def test_ranking_is_explainable_and_reranking_preserves_original(session: Session) -> None:
     student, mandatory_section, free_section = _create_ranking_scenario(session)
     service = RankingService(session)

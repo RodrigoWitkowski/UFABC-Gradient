@@ -248,14 +248,14 @@ Cada resultado representa uma turma específica e retorna seis notas separadas:
 - estatística dos docentes;
 - disponibilidade estimada por vagas e demanda;
 - compatibilidade básica de turno;
-- carga da disciplina;
+- carga da disciplina, apenas como diagnóstico e com peso padrão zero;
 - compatibilidade de campus.
 
 A nota de compatibilidade `N` e todos os seus componentes ficam entre 0 e 100. A configuração
 padrão usa a seguinte soma ponderada:
 
 ```text
-N = 0,35 R + 0,25 D + 0,25 V + 0,10 H + 0,05 C + 0,00 K
+N = 0,375 R + 0,25 D + 0,25 V + 0,125 H + 0,00 C + 0,00 K
 ```
 
 Os símbolos representam:
@@ -272,7 +272,8 @@ Os símbolos representam:
   é usada a nota neutra 50. Esse valor não é uma promessa pessoal de matrícula.
 - `H`, horário: 100 quando o turno coincide com o do aluno, 25 quando difere e 50 quando falta
   informação. Preferências opcionais de dias e horários entram como média ponderada adicional.
-- `C`, carga: `C = max(100 - 15 max(créditos - 6, 0), 0)`. Até seis créditos recebe 100.
+- `C`, carga: mantida apenas no detalhamento para compatibilidade com rankings antigos. Seu peso
+  padrão é zero, portanto o número de créditos da disciplina não altera a nota.
 - `K`, campus: 100 para campus preferido, 25 para outro e 50 sem informação. Quando o aluno
   fornece uma lista explícita de campi preferidos, um campus fora dela recebe 0. O peso padrão
   de `K` é zero, então campus não altera `N` enquanto o aluno não configurar pesos diferentes.
