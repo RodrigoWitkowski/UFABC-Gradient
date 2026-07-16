@@ -85,6 +85,7 @@ class StudentService:
         profile.admission_shift = clean_text(payload.admission_shift)
         profile.campus = clean_text(payload.campus)
         profile.cr = payload.cr
+        profile.ca = payload.ca
         profile.course_strategy = payload.course_strategy
 
         profile.courses.clear()

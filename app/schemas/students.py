@@ -49,6 +49,7 @@ class AcademicProfileUpdate(BaseModel):
     admission_shift: str | None = Field(default=None, max_length=32)
     campus: str | None = Field(default=None, max_length=32)
     cr: Decimal | None = Field(default=None, ge=0, le=4)
+    ca: Decimal | None = Field(default=None, ge=0, le=4)
     accumulated_credits: Decimal | None = Field(default=None, ge=0)
     course_strategy: CourseStrategy = CourseStrategy.PRIMARY_COURSE
     courses: list[StudentCourseInput] = Field(min_length=1)
@@ -122,6 +123,7 @@ class StudentRead(BaseModel):
     admission_shift: str | None
     campus: str | None
     cr: Decimal | None
+    ca: Decimal | None
     accumulated_credits: Decimal
     course_strategy: CourseStrategy
     courses: list[StudentCourseRead]

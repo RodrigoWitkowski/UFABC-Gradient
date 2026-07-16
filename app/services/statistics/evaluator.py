@@ -33,6 +33,14 @@ class TeacherStatisticsEvaluator:
     ) -> TeacherStatisticsEvaluationRead:
         general_row = self._find_general(payload)
         specific_row = self._find_specific(payload)
+        return self.evaluate_from_rows(payload, general_row, specific_row)
+
+    def evaluate_from_rows(
+        self,
+        payload: TeacherStatisticsEvaluationRequest,
+        general_row: TeacherStatistics | None,
+        specific_row: TeacherSubjectStatistics | None,
+    ) -> TeacherStatisticsEvaluationRead:
         general = self._recalculate(general_row, payload) if general_row else None
         specific = self._recalculate(specific_row, payload) if specific_row else None
         warnings: list[str] = []

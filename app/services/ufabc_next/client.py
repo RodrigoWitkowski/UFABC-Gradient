@@ -32,6 +32,10 @@ class UfabcNextDisabledError(UfabcNextError):
     pass
 
 
+class UfabcNextRequestLimitError(UfabcNextError):
+    pass
+
+
 class UfabcNextResponseError(UfabcNextError):
     def __init__(self, message: str, *, status_code: int | None = None) -> None:
         super().__init__(message)
@@ -62,7 +66,7 @@ class UfabcNextClient:
         self.http = http_client or httpx.Client(
             base_url=settings.ufabc_next_base_url.rstrip("/"),
             timeout=settings.ufabc_next_timeout_seconds,
-            headers={"User-Agent": "ufabc-class-ranking/0.3"},
+            headers={"User-Agent": "ufabc-class-ranking/0.6-experiment"},
             follow_redirects=True,
         )
 
@@ -143,6 +147,11 @@ class UfabcNextClient:
 
         last_error: Exception | None = None
         for attempt in range(self.settings.ufabc_next_max_retries + 1):
+            if self.remote_requests >= self.settings.ufabc_next_max_requests_per_sync:
+                raise UfabcNextRequestLimitError(
+                    "limite local de chamadas ao UFABC Next atingido; "
+                    "a sincronizacao foi interrompida por seguranca"
+                )
             self._wait_for_rate_limit()
             try:
                 response = self.http.get(path, params=params)

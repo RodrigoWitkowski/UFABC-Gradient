@@ -134,6 +134,7 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
             "admission_year": 2025,
             "admission_shift": "Noturno",
             "cr": 3.1,
+            "ca": 3.3,
             "courses": [
                 {
                     "course_code": "BCC",
@@ -147,6 +148,7 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
         },
     )
     assert update_response.status_code == 200
+    assert update_response.json()["ca"] == "3.3"
     assert update_response.json()["courses"][0]["curriculum_version"] == "2025"
 
     classification_response = client.get(

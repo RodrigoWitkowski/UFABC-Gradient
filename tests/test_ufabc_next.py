@@ -25,7 +25,7 @@ from app.models.ufabc_next import (
 from app.schemas.ufabc_next import UfabcNextSyncRequest
 from app.services.normalization.text import normalize_text
 from app.services.ufabc_next.cache import UfabcNextDatabaseCache
-from app.services.ufabc_next.client import UfabcNextClient
+from app.services.ufabc_next.client import UfabcNextClient, UfabcNextRequestLimitError
 from app.services.ufabc_next.sync import UfabcNextSyncError, UfabcNextSyncService
 
 
@@ -193,6 +193,28 @@ def test_client_retries_and_uses_sanitized_cache(session: Session) -> None:
     cached = session.scalar(select(UfabcNextCacheEntry))
     assert cached is not None
     assert "private" not in json.dumps(cached.response_body)
+
+
+def test_client_stops_at_local_remote_request_limit(session: Session) -> None:
+    calls = 0
+
+    def handler(_: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        return httpx.Response(200, json=components_payload())
+
+    client = build_mock_client(
+        session,
+        httpx.MockTransport(handler),
+        ufabc_next_max_requests_per_sync=1,
+    )
+    client.get_components("2026:3")
+
+    with pytest.raises(UfabcNextRequestLimitError, match="limite local"):
+        client.get_teacher_reviews("teacher-next-1")
+
+    assert calls == 1
+    assert client.remote_requests == 1
 
 
 def test_sync_persists_components_reviews_and_external_links(session: Session) -> None:

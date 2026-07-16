@@ -14,7 +14,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--season", required=True, help="Quadrimestre no formato 2026:3")
     parser.add_argument("--include-teacher-reviews", action="store_true")
     parser.add_argument("--include-subject-reviews", action="store_true")
-    parser.add_argument("--review-limit", type=int, default=100)
+    parser.add_argument("--review-limit", type=int, default=10)
     parser.add_argument("--force-refresh", action="store_true")
     return parser.parse_args()
 

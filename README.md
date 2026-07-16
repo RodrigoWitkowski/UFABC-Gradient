@@ -5,7 +5,8 @@ livres estao registradas em [REGRAS_UFABC.md](REGRAS_UFABC.md).
 
 Backend incremental para importar e normalizar ofertas de turmas da UFABC, manter matrizes
 curriculares versionadas, sincronizar dados públicos do UFABC Next e calcular indicadores
-estatísticos explicáveis. Esta entrega ainda não inclui o ranking final nem o gerador de grades.
+estatísticos e rankings explicáveis. Esta entrega ainda não inclui a interface para alunos
+nem o gerador de grades completas.
 
 ## O que já funciona
 
@@ -17,11 +18,13 @@ estatísticos explicáveis. Esta entrega ainda não inclui o ranking final nem o
 - revisão por turma e comparação de docentes, encontros, salas, campus e vagas;
 - erros e avisos por linha sem interromper as demais ofertas;
 - cursos, matrizes versionadas, requisitos e classificação curricular por curso;
-- perfis acadêmicos com múltiplos cursos, matriz por curso, CR, CP, IK e curso principal;
+- perfis acadêmicos com múltiplos cursos, matriz por curso, CR, CA, CP, IK e curso principal;
 - disciplinas concluídas e em andamento, preferências e restrições do aluno;
 - sugestão de matriz pelo ano de ingresso, com possibilidade de escolha manual;
 - sincronização manual de componentes e reviews do UFABC Next, com cache e auditoria;
 - estatísticas gerais e por disciplina dos docentes, com ajuste bayesiano e amostra explícita;
+- ranking persistido de turmas com decomposição, explicações e reranking configurável;
+- restrições rígidas e preferências flexíveis de horário, turno, campus e docentes;
 - API FastAPI, PostgreSQL, Alembic e testes automatizados.
 
 Na planilha `matriculas_2026_3_turmas_ofertadas.xlsx`, o importador seleciona automaticamente a
@@ -151,6 +154,11 @@ Cada status informa chamadas remotas, cache hits, HTTP retornado, itens recebido
 correspondências e avisos. O cache impede novas chamadas dentro do TTL. Use
 `"force_refresh":true` somente quando for necessário ignorar o cache.
 
+Por segurança, a sincronização é sequencial, espera no mínimo 1 segundo entre chamadas,
+usa no máximo 10 reviews por padrão e interrompe a execução ao atingir 50 chamadas remotas.
+Esses valores podem ser alterados por configuração, mas devem ser aumentados conscientemente.
+Ranking, reranking e testes estatísticos nunca consultam o Next: usam somente snapshots locais.
+
 A integração pode ser desligada com `UFABC_NEXT_ENABLED=false`. Timeout, retries, backoff,
 intervalo mínimo e TTLs são configurados pelas variáveis `UFABC_NEXT_*` do `.env.example`.
 O sistema não persiste a lista de alunos matriculados, RA, login, e-mail, SIAPE ou chaves
@@ -215,6 +223,123 @@ As métricas de pontuação são `a_rate`, `ab_rate`, `failure_rate`, `fo_rate` 
 Para `failure_rate` e `fo_rate`, uma taxa menor gera pontuação maior. Os pesos padrão da média
 são `A=4`, `B=3`, `C=2`, `D=1`, `F=0` e `O=0`.
 
+## Ranking de turmas
+
+O ranking usa um perfil acadêmico já cadastrado e as turmas ativas de um quadrimestre:
+
+```bash
+curl -X POST http://localhost:8000/rankings/sections \
+  -H "Content-Type: application/json" \
+  -d '{
+    "term":"2026:3",
+    "student_id":"UUID_DO_ALUNO",
+    "result_limit":100
+  }'
+```
+
+Cada resultado representa uma turma específica e retorna seis notas separadas:
+
+- relevância curricular para cada curso e matriz do aluno;
+- estatística dos docentes;
+- disponibilidade estimada por vagas e demanda;
+- compatibilidade básica de turno;
+- carga da disciplina;
+- compatibilidade de campus.
+
+A configuração padrão calcula:
+
+```text
+total = 0,35 * relevancia curricular
+      + 0,25 * docente
+      + 0,25 * vagas/demanda
+      + 0,10 * turno
+      + 0,05 * carga
+```
+
+Disciplinas concluídas ou em andamento são excluídas por padrão. Uma disciplina ausente das
+listas de obrigatórias e limitadas usa a regra `free` da matriz. Quando a demanda é zero, ela
+é tratada como ainda indisponível, e não como ausência de concorrência.
+
+A porcentagem atual é apenas a disponibilidade agregada `vagas / solicitações`, com confiança
+baixa. Cada turma também informa a análise individual da Resolução ConsEPE 260/2023: curso,
+turno, CP e CA, nessa ordem. Campus continua sendo filtro ou preferência logística; CR e IK não
+participam dessa classificação. `personalized_probability` permanece vazio porque transformar
+a prioridade em porcentagem exige conhecer ou estimar a distribuição dos demais solicitantes.
+O resultado nunca deve ser interpretado como garantia de matrícula.
+
+Consultar um ranking salvo ou criar outro com pesos diferentes:
+
+```bash
+curl http://localhost:8000/rankings/UUID_DO_RANKING
+
+curl -X POST http://localhost:8000/rankings/UUID_DO_RANKING/rerank \
+  -H "Content-Type: application/json" \
+  -d '{
+    "config": {
+      "weights": {
+        "curriculum_relevance":1,
+        "teacher":0,
+        "seat_probability":0,
+        "schedule_preference":0,
+        "workload":0,
+        "campus":0
+      }
+    }
+  }'
+```
+
+O reranking cria um novo registro e preserva o anterior para comparação. Nenhuma dessas
+operações importa planilhas ou faz chamadas externas.
+
+### Filtros e preferências
+
+As preferências salvas no perfil são usadas quando `hard_constraints` e `soft_preferences`
+não aparecem na configuração do ranking. Quando aparecem, substituem integralmente as
+preferências salvas. Isso permite experimentar sem alterar o perfil.
+
+Restrições rígidas eliminam a turma:
+
+```json
+{
+  "config": {
+    "hard_constraints": {
+      "allowed_shifts": ["Noturno"],
+      "excluded_weekdays": ["friday"],
+      "allowed_campuses": ["SA"],
+      "earliest_start_time": "19:00",
+      "latest_end_time": "23:00",
+      "excluded_teacher_ids": [],
+      "excluded_subject_ids": [],
+      "max_subject_credits": 6
+    }
+  }
+}
+```
+
+Os dias também podem ser números: segunda é `0`, sexta é `4` e domingo é `6`.
+`max_subject_credits` limita uma disciplina individual; o limite de créditos da grade inteira
+será responsabilidade do gerador de grades.
+
+Preferências flexíveis não eliminam turmas, apenas modificam as notas de turno e campus:
+
+```json
+{
+  "config": {
+    "soft_preferences": {
+      "prefer_night": 1.0,
+      "avoid_friday": 0.8,
+      "avoid_early_classes": 1.0,
+      "preferred_earliest_start": "19:00",
+      "prefer_fewer_campus_days": 0.6,
+      "preferred_campuses": ["SA"]
+    }
+  }
+}
+```
+
+As intensidades variam de `0` a `1`. Preferências que dependem da combinação de várias
+turmas, como evitar janelas entre aulas, serão calculadas na etapa de geração de grades.
+
 ## Perfil acadêmico
 
 Primeiro crie o perfil básico:
@@ -241,6 +366,7 @@ curl -X PUT http://localhost:8000/students/UUID_DO_ALUNO/academic-profile \
     "admission_shift": "Noturno",
     "campus": "SA",
     "cr": 3.1,
+    "ca": 3.3,
     "course_strategy": "weighted_courses",
     "courses": [
       {"course_code": "BCT", "is_primary": false, "weight": 0.4, "cp": 0.72, "ik": 0.68},

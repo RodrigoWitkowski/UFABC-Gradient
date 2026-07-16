@@ -22,7 +22,8 @@ class Settings(BaseSettings):
     ufabc_next_timeout_seconds: float = Field(default=15.0, gt=0, le=120)
     ufabc_next_max_retries: int = Field(default=2, ge=0, le=5)
     ufabc_next_backoff_seconds: float = Field(default=0.5, ge=0, le=30)
-    ufabc_next_min_interval_seconds: float = Field(default=0.1, ge=0, le=10)
+    ufabc_next_min_interval_seconds: float = Field(default=1.0, ge=0, le=60)
+    ufabc_next_max_requests_per_sync: int = Field(default=50, ge=1, le=10_000)
     ufabc_next_component_cache_seconds: int = Field(default=900, ge=0)
     ufabc_next_review_cache_seconds: int = Field(default=86400, ge=0)
 

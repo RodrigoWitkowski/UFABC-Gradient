@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ufabc-class-ranking"
-version = "0.4.0"
+version = "0.7.0"
 description = "Backend para importacao, classificacao curricular e ranking de turmas da UFABC"
 readme = "README.md"
 requires-python = ">=3.12"

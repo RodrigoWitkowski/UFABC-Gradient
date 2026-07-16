@@ -128,6 +128,7 @@ def serialize_student(profile: StudentProfile) -> StudentRead:
             "admission_shift": profile.admission_shift,
             "campus": profile.campus,
             "cr": profile.cr,
+            "ca": profile.ca,
             "accumulated_credits": profile.accumulated_credits,
             "course_strategy": profile.course_strategy,
             "courses": [

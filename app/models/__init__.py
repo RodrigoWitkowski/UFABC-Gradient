@@ -16,6 +16,7 @@ from app.models.offerings import (
     Teacher,
     TeacherAlias,
 )
+from app.models.rankings import Ranking, RankingItem
 from app.models.statistics import (
     StatisticsBuild,
     SubjectStatistics,
@@ -49,6 +50,8 @@ __all__ = [
     "ImportBatch",
     "ImportFile",
     "ImportIssue",
+    "Ranking",
+    "RankingItem",
     "Section",
     "SectionCourseOffering",
     "SectionMeeting",

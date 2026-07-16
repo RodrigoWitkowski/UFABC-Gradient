@@ -17,6 +17,7 @@ class StudentProfile(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     admission_shift: Mapped[str | None] = mapped_column(String(32))
     campus: Mapped[str | None] = mapped_column(String(32))
     cr: Mapped[Decimal | None] = mapped_column(Numeric(6, 4))
+    ca: Mapped[Decimal | None] = mapped_column(Numeric(6, 4))
     accumulated_credits: Mapped[Decimal] = mapped_column(Numeric(8, 2), default=0)
     course_strategy: Mapped[CourseStrategy] = mapped_column(
         Enum(CourseStrategy, native_enum=False, length=48),

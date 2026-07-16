@@ -1,7 +1,7 @@
 # Regras curriculares da UFABC usadas no projeto
 
 Este documento registra o entendimento de dominio usado pelo sistema de ranking de
-turmas. As fontes foram conferidas em 15 de julho de 2026 nas paginas oficiais da
+turmas. As fontes foram conferidas em 16 de julho de 2026 nas paginas oficiais da
 UFABC. Alteracoes futuras nos projetos pedagogicos e documentos complementares devem
 gerar novas versoes dos dados, sem sobrescrever as versoes anteriores.
 
@@ -177,6 +177,59 @@ O sistema nao deve apagar uma classificacao para produzir outra categoria unica.
 o ranking precisar de um valor consolidado, deve aplicar a estrategia escolhida pelo
 aluno, como curso principal, maior progresso em qualquer curso ou pesos por curso.
 
+## Prioridade para conseguir vaga em uma turma
+
+A classificacao curricular e a prioridade de matricula sao conceitos diferentes. A
+categoria responde como a disciplina conta no curso; a prioridade responde em que ordem
+as solicitacoes disputam as vagas.
+
+Para a primeira fase de matriculas, a versao de regra `consepe-260-2023` e aplicada a
+partir de `2024:1`. A ordem e lexicografica: um criterio anterior e avaliado antes do
+seguinte, em vez de todos serem somados em uma unica nota.
+
+Turmas ofertadas pelos cursos interdisciplinares de ingresso, incluindo BC&T e BC&H:
+
+1. disciplina obrigatoria para o curso interdisciplinar de ingresso;
+2. mesmo turno de ingresso do aluno e da turma;
+3. CP em ordem decrescente;
+4. CA em ordem decrescente.
+
+Turmas ofertadas por cursos de formacao especifica, como o BCC:
+
+1. vinculo ou reserva no curso para o qual a disciplina seja obrigatoria ou limitada;
+2. mesmo turno de ingresso do aluno e da turma;
+3. CP em ordem decrescente;
+4. CA em ordem decrescente.
+
+Nas turmas de formacao especifica, 20% das vagas sao reservadas para alunos sem o
+vinculo prioritario. Nesse grupo, sao considerados turno do curso de ingresso, CP do
+curso de ingresso e CA, nessa ordem.
+
+Consequencias para o projeto:
+
+- turno tem dois usos independentes: preferencia de horario no ranking e criterio oficial
+  de prioridade para a vaga;
+- campus pode filtrar ou favorecer uma turma por conveniencia, mas nao participa da ordem
+  inicial de alocacao; o Art. 17 apenas limita eventual remanejamento a outra turma do
+  mesmo horario e campus;
+- CP e por curso; para o grupo de nao vinculados de um curso especifico, usa-se o CP do
+  curso interdisciplinar de ingresso;
+- CA e global no perfil e aparece depois do CP;
+- CR e IK nao aparecem na ordem de alocacao de turmas regulares da Resolucao 260;
+- CP proximo de 1 e favoravel dentro do mesmo grupo, mas nao garante vaga porque curso e
+  turno vem antes, e os coeficientes dos outros solicitantes nao sao conhecidos.
+
+O sistema separa duas saidas. `estimated_probability` e apenas a disponibilidade agregada
+`vagas / solicitacoes`, com confianca baixa. `personalized_probability` permanece vazia
+enquanto nao houver uma distribuicao anonimizada dos solicitantes ou historico suficiente
+para calibrar o modelo. A analise individual ainda exibe o grupo de disputa e os criterios
+curso, turno, CP e CA, sem inventar uma porcentagem.
+
+Na segunda e terceira fases, ajuste e reajuste, as vagas sao ocupadas por ordem de
+solicitacao. Existem tambem regras especiais para ingressantes e grupos com vaga garantida;
+essas condicoes precisam ser informadas explicitamente antes de entrarem em uma estimativa
+individual.
+
 ## O que nao determina a categoria
 
 Os seguintes dados nao sao fontes suficientes para classificar uma disciplina:
@@ -224,6 +277,8 @@ Cada entrada importada deve guardar, sempre que possivel:
 - [Opcoes limitadas do BCC 2023](https://www.ufabc.edu.br/images/stories/comunicacao/Boletim/cg_ato-decisorio_044_anexo-01.pdf)
 - [Transicao do BCC 2023](https://www.ufabc.edu.br/images/stories/comunicacao/Boletim/cg_ato-decisorio_044_anexo-02.pdf)
 - [Catalogos de Disciplinas](https://prograd.ufabc.edu.br/catalogos-de-disciplinas)
+- [Resolucao ConsEPE 260/2023](https://www.ufabc.edu.br/images/consepe/resolucoes/resoluo_260_-_estabelece_normas_e_critrios_para_a_solicitao_e_cancelamento_de_matrculas_em_disciplinas_da_grad_revoga_e_subst_131_n_202_e_n_219_assinada.pdf)
+- [Perguntas frequentes sobre matriculas](https://prograd.ufabc.edu.br/sisu/217-aluno/7615-duvidas-frequentes-matricula-em-disciplinas)
 
 ## Dados oficiais materializados
 

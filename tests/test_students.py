@@ -66,6 +66,7 @@ def test_student_supports_multiple_courses_and_matrix_suggestion(session: Sessio
             "admission_shift": "Noturno",
             "campus": "SA",
             "cr": 3.2,
+            "ca": 3.4,
             "course_strategy": "weighted_courses",
             "courses": [
                 {
@@ -110,6 +111,7 @@ def test_student_supports_multiple_courses_and_matrix_suggestion(session: Sessio
     loaded = service.get_student(student.id)
 
     assert loaded.course_strategy == CourseStrategy.WEIGHTED_COURSES
+    assert loaded.ca == Decimal("3.4000")
     assert len(loaded.courses) == 2
     assert all(item.curriculum_version.version == "2025" for item in loaded.courses)
     assert sum(item.is_primary for item in loaded.courses) == 1
