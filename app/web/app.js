@@ -446,6 +446,7 @@ function buildRankingRequest() {
     student_id: state.studentId,
     result_limit: maxRankingResults,
     config: {
+      sort_mode: "probability_first",
       hard_constraints: buildHardConstraints(),
       soft_preferences: buildSoftPreferences(),
     },
@@ -524,12 +525,18 @@ function renderRankingView() {
     return;
   }
 
-  const knownDemand = filteredItems.filter((item) => item.seat_probability.estimated_probability !== null);
+  const knownProbability = filteredItems.filter(
+    (item) => rankingProbabilityValue(item.seat_probability) !== null,
+  );
+  const personalizedProbability = filteredItems.filter(
+    (item) => item.seat_probability.personalized_probability !== null,
+  );
   elements.results.innerHTML = `
     <div class="ranking-summary">
       <div class="summary-cell"><span>No ranking</span><strong>${ranking.item_count}</strong></div>
       <div class="summary-cell"><span>Tipos selecionados</span><strong>${filteredItems.length}</strong></div>
-      <div class="summary-cell"><span>Demanda disponível</span><strong>${knownDemand.length}/${filteredItems.length}</strong></div>
+      <div class="summary-cell"><span>Probabilidade calculada</span><strong>${knownProbability.length}/${filteredItems.length}</strong></div>
+      <div class="summary-cell"><span>Estimativa pessoal</span><strong>${personalizedProbability.length}</strong></div>
     </div>
     <div class="ranking-list">
       ${visibleItems.map((item) => renderRankingCard(item, ranking.config.weights, ranking.item_count)).join("")}
@@ -785,7 +792,9 @@ function renderRankingCard(item, weights, rankingSize) {
   const sectionDisplayName = formatSectionDisplayName(section);
   const seat = item.seat_probability;
   const priority = seat.priority;
-  const probability = seat.estimated_probability;
+  const aggregateProbability = seat.estimated_probability;
+  const probabilityMetric = describeProbabilityMetric(seat);
+  const teacherMetric = summarizeTeacherMetric(item);
   const classifications = item.curriculum_classifications
     .filter((classification) => classification.category)
     .map((classification) => `
@@ -807,7 +816,12 @@ function renderRankingCard(item, weights, rankingSize) {
       ${escapeHtml(formatCriterion(criterion))}
     </span>
   `).join("");
-  const explanations = [...item.explanations, ...seat.warnings]
+  const explanations = [...new Set([
+    ...item.explanations,
+    ...seat.favorable_factors,
+    ...seat.risk_factors,
+    ...seat.warnings,
+  ])]
     .filter(Boolean)
     .map((text) => `<li>${escapeHtml(text)}</li>`)
     .join("");
@@ -817,8 +831,12 @@ function renderRankingCard(item, weights, rankingSize) {
     .join("");
   const requests = seat.requests === null ? "?" : seat.requests;
   const seats = seat.seats === null ? "?" : seat.seats;
-  const meterWidth = probability === null ? 0 : Math.round(probability * 100);
+  const meterWidth = aggregateProbability === null ? 0 : Math.round(aggregateProbability * 100);
   const gradientColor = rankGradientColor(item.position, rankingSize);
+  const observedDemandLabel = aggregateProbability === null ? "Sem dados" : formatPercent(aggregateProbability);
+  const observedDemandCaption = aggregateProbability === null
+    ? "Sem demanda atual observada; a chance pessoal pode vir apenas da base local."
+    : "Disponibilidade agregada da turma; nao representa sua chance pessoal.";
 
   return `
     <article class="ranking-card" style="--position:${Math.min(item.position, 12)};--rank-color:${gradientColor}">
@@ -830,13 +848,29 @@ function renderRankingCard(item, weights, rankingSize) {
             <p class="subject-code"><span>Disciplina</span>${escapeHtml(section.subject.code)}</p>
             <h3>${escapeHtml(sectionDisplayName)}</h3>
           </div>
-          <div class="total-score"><strong>${Math.round(item.total_score)}</strong><span>compatibilidade</span></div>
+          <div class="total-score"><strong>${Math.round(item.total_score)}</strong><span>compatibilidade geral</span></div>
         </div>
         <div class="tag-row">
           <span class="tag">Turma ${escapeHtml(section.code)}</span>
           <span class="tag">${escapeHtml(section.campus || "Campus ?")}</span>
           <span class="tag">${escapeHtml(section.shift || "Turno ?")}</span>
           ${classifications}
+        </div>
+        <div class="decision-grid">
+          <div class="decision-box">
+            <span class="detail-label">Probabilidade de matrícula</span>
+            <strong class="decision-value">${escapeHtml(probabilityMetric.value)}</strong>
+            <p class="decision-meta">${escapeHtml(probabilityMetric.meta)}</p>
+          </div>
+          <div class="decision-box">
+            <span class="detail-label">Score do professor</span>
+            <strong class="decision-value">${escapeHtml(teacherMetric.value)}</strong>
+            <p class="decision-meta">${escapeHtml(teacherMetric.meta)}</p>
+          </div>
+          <div class="decision-box decision-box-reason">
+            <span class="detail-label">Motivo da estimativa</span>
+            <p class="decision-reason">${escapeHtml(seat.summary)}</p>
+          </div>
         </div>
         <div class="card-details">
           <div class="detail-box">
@@ -845,13 +879,13 @@ function renderRankingCard(item, weights, rankingSize) {
             <div class="teacher-list">${teachers}</div>
           </div>
           <div class="detail-box">
-            <span class="detail-label">Demanda da turma</span>
+            <span class="detail-label">Base observada</span>
             <div class="availability-head">
               <span>${seats} vagas / ${requests} solicitações</span>
-              <strong>${formatPercent(probability)}</strong>
+              <strong>${observedDemandLabel}</strong>
             </div>
             <div class="meter" aria-hidden="true"><span style="--meter-width:${meterWidth}%"></span></div>
-            <p class="availability-caption">Não é sua chance pessoal.</p>
+            <p class="availability-caption">${escapeHtml(observedDemandCaption)}</p>
           </div>
         </div>
         <button class="select-section" type="button" data-section-id="${escapeHtml(section.id)}">
@@ -877,6 +911,41 @@ function rankGradientColor(position, total) {
   const ratio = total <= 1 ? 0 : Math.min(Math.max((position - 1) / (total - 1), 0), 1);
   const hue = 154 - (142 * ratio);
   return `hsl(${hue.toFixed(1)} 66% 43%)`;
+}
+
+function rankingProbabilityValue(seat) {
+  return seat.personalized_probability ?? seat.estimated_probability;
+}
+
+function describeProbabilityMetric(seat) {
+  if (seat.personalized_probability !== null) {
+    return {
+      value: formatPercent(seat.personalized_probability),
+      meta: "estimativa personalizada",
+    };
+  }
+  if (seat.estimated_probability !== null) {
+    return {
+      value: formatPercent(seat.estimated_probability),
+      meta: "referência agregada da turma",
+    };
+  }
+  return {
+    value: "Sem dados",
+    meta: "probabilidade indisponível",
+  };
+}
+
+function summarizeTeacherMetric(item) {
+  const available = item.teacher_statistics.filter((teacher) => teacher.statistics_available).length;
+  const total = item.teacher_statistics.length;
+  if (!total) {
+    return { value: "Sem docente", meta: "Turma sem docente informado" };
+  }
+  return {
+    value: String(Math.round(item.score_breakdown.teacher)),
+    meta: available ? `${available}/${total} docente(s) com histórico` : "Sem histórico docente",
+  };
 }
 
 function formatCriterion(criterion) {

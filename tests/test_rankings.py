@@ -39,6 +39,7 @@ from app.models.students import (
 )
 from app.models.ufabc_next import UfabcNextComponentSnapshot, UfabcNextSyncRun
 from app.schemas.rankings import (
+    LocalPopulationProbabilityConfig,
     RankingConfig,
     RankingHardConstraints,
     RankingRerankRequest,
@@ -120,6 +121,7 @@ def test_ranking_is_explainable_and_reranking_preserves_original(session: Sessio
     assert any("Demanda igual a zero" in warning for warning in free_item.warnings)
 
     teacher_only = RankingConfig(
+        sort_mode="weighted_score",
         weights=RankingScoreWeights(
             curriculum_relevance=0,
             teacher=1,
@@ -173,7 +175,12 @@ def test_ranking_api_create_get_and_rerank(api_client: TestClient, session: Sess
 
     reranked = api_client.post(
         f"/rankings/{payload['id']}/rerank",
-        json={"config": {"weights": _single_component_weights("teacher")}},
+        json={
+            "config": {
+                "sort_mode": "weighted_score",
+                "weights": _single_component_weights("teacher"),
+            }
+        },
     )
     assert reranked.status_code == 201
     reranked_payload = reranked.json()
@@ -195,6 +202,37 @@ def test_ranking_api_create_get_and_rerank(api_client: TestClient, session: Sess
     assert filtered.status_code == 201
     assert filtered.json()["candidate_count"] == 1
     assert filtered.json()["items"][0]["section"]["id"] == str(free_section.id)
+
+
+def test_probability_first_is_default_when_probability_and_teacher_conflict(
+    session: Session,
+) -> None:
+    student, mandatory_section, free_section = _create_ranking_scenario(session)
+    service = RankingService(session)
+
+    ranking = service.create_ranking(
+        SectionRankingRequest(
+            term="2026:3",
+            student_id=student.id,
+            config=RankingConfig(
+                weights=RankingScoreWeights(
+                    curriculum_relevance=0,
+                    teacher=1,
+                    seat_probability=0,
+                    schedule_preference=0,
+                    workload=0,
+                    campus=0,
+                )
+            ),
+        )
+    )
+    session.commit()
+    result = service.serialize(service.get_ranking(ranking.id))
+
+    assert result.items[0].section.id == mandatory_section.id
+    assert result.items[0].seat_probability.summary
+    assert result.items[0].seat_probability.estimated_probability == pytest.approx(0.2)
+    assert result.items[1].teacher_statistics[0].score > result.items[0].teacher_statistics[0].score
 
 
 def test_saved_hard_constraints_filter_and_explicit_config_replaces_them(
@@ -271,6 +309,66 @@ def test_soft_preferences_change_score_without_removing_sections(session: Sessio
         mandatory_section.id,
         free_section.id,
     }
+
+
+def test_local_population_probability_can_drive_ranking(session: Session) -> None:
+    student, mandatory_section, free_section = _create_ranking_scenario(session)
+    mandatory_section.total_seats = 1
+    free_section.total_seats = 1
+    session.add(
+        StudentProfile(
+            display_name="Concorrente Forte",
+            admission_year=2026,
+            admission_shift="Noturno",
+            campus="SA",
+            ca=Decimal("3.8"),
+            accumulated_credits=Decimal(0),
+            course_strategy=CourseStrategy.PRIMARY_COURSE,
+            courses=[
+                StudentCourse(
+                    course=student.courses[0].course,
+                    curriculum_version=student.courses[0].curriculum_version,
+                    is_primary=True,
+                    cp=Decimal("0.99"),
+                )
+            ],
+        )
+    )
+    session.commit()
+
+    service = RankingService(session)
+    ranking = service.create_ranking(
+        SectionRankingRequest(
+            term="2026:3",
+            student_id=student.id,
+            config=RankingConfig(
+                weights=RankingScoreWeights(
+                    curriculum_relevance=0,
+                    teacher=0,
+                    seat_probability=1,
+                    schedule_preference=0,
+                    workload=0,
+                    campus=0,
+                ),
+                local_population_probability=LocalPopulationProbabilityConfig(
+                    min_population_size=1,
+                    simulations=400,
+                ),
+            ),
+        )
+    )
+    session.commit()
+    result = service.serialize(service.get_ranking(ranking.id))
+
+    assert result.items[0].section.id == free_section.id
+    assert result.items[0].seat_probability.personalized_probability is not None
+    assert result.items[1].seat_probability.personalized_probability is not None
+    assert (
+        result.items[0].seat_probability.personalized_probability
+        > result.items[1].seat_probability.personalized_probability
+    )
+    assert result.items[0].seat_probability.probability_basis == "local_population_monte_carlo"
+    assert result.items[1].seat_probability.estimated_probability == pytest.approx(0.2)
 
 
 def test_specific_course_uses_non_linked_twenty_percent_pool(session: Session) -> None:

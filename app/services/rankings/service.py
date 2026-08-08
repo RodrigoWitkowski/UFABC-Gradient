@@ -36,6 +36,7 @@ from app.schemas.rankings import (
     SectionRankingRequest,
 )
 from app.schemas.statistics import TeacherStatisticsEvaluationRequest
+from app.services.admission_probability import LocalPopulationAdmissionProbabilityService
 from app.services.enrollment import EnrollmentPriorityEvaluator
 from app.services.normalization.text import normalize_text
 from app.services.statistics import TeacherStatisticsEvaluator
@@ -51,6 +52,10 @@ class RankingNotFoundError(ValueError):
 class _RankedCandidate:
     section: Section
     total_score: float
+    curriculum_score: float
+    teacher_score: float
+    sort_probability: float | None
+    probability_basis_rank: int
     score_breakdown: dict[str, float]
     classifications: list[RankingCurriculumClassificationRead]
     teacher_statistics: list[RankingTeacherStatisticsRead]
@@ -100,6 +105,7 @@ class RankingService:
             sections, student, config, entry_map
         )
         component_map = self._component_snapshots(term, sections)
+        population_students = self._local_population_students(student.id, config)
         general_statistics, specific_statistics = self._teacher_statistics(sections)
 
         candidates = [
@@ -110,12 +116,13 @@ class RankingService:
                 config,
                 entry_map,
                 component_map.get(section.id),
+                population_students,
                 general_statistics,
                 specific_statistics,
             )
             for section in sections
         ]
-        candidates.sort(key=lambda item: (-item.total_score, item.section.code))
+        candidates.sort(key=lambda item: self._candidate_sort_key(item, config.sort_mode))
         selected = candidates[: payload.result_limit]
         warnings = [
             "A porcentagem de vagas representa vagas/solicitacoes da turma, nao a chance "
@@ -420,6 +427,7 @@ class RankingService:
         config: RankingConfig,
         entry_map: dict[tuple[uuid.UUID, uuid.UUID], CourseCurriculumSubject],
         component: UfabcNextComponentSnapshot | None,
+        population_students: list[StudentProfile],
         general_statistics: dict[uuid.UUID, TeacherStatistics],
         specific_statistics: dict[tuple[uuid.UUID, uuid.UUID], TeacherSubjectStatistics],
     ) -> _RankedCandidate:
@@ -435,7 +443,16 @@ class RankingService:
             student=student,
             curriculum_entries=entry_map,
         )
-        seat_probability = self._seat_probability(section, component, config, priority)
+        seat_probability = self._seat_probability(
+            section,
+            term,
+            student,
+            component,
+            config,
+            entry_map,
+            priority,
+            population_students,
+        )
         soft_preferences = config.soft_preferences or RankingSoftPreferences()
         schedule_score, schedule_explanations = self._schedule_score(
             section, student, soft_preferences
@@ -467,6 +484,20 @@ class RankingService:
         return _RankedCandidate(
             section=section,
             total_score=total_score,
+            curriculum_score=curriculum_score,
+            teacher_score=teacher_score,
+            sort_probability=(
+                seat_probability.personalized_probability
+                if seat_probability.personalized_probability is not None
+                else seat_probability.estimated_probability
+            ),
+            probability_basis_rank=(
+                0
+                if seat_probability.personalized_probability is not None
+                else 1
+                if seat_probability.estimated_probability is not None
+                else 2
+            ),
             score_breakdown=score_breakdown,
             classifications=classifications,
             teacher_statistics=teacher_statistics,
@@ -628,10 +659,23 @@ class RankingService:
     def _seat_probability(
         self,
         section: Section,
+        term: Term,
+        student: StudentProfile,
         component: UfabcNextComponentSnapshot | None,
         config: RankingConfig,
+        entry_map: dict[tuple[uuid.UUID, uuid.UUID], CourseCurriculumSubject],
         priority: EnrollmentPriorityRead,
+        population_students: list[StudentProfile],
     ) -> SeatProbabilityRead:
+        local_estimate = LocalPopulationAdmissionProbabilityService().estimate(
+            section=section,
+            term=term,
+            target_student=student,
+            target_priority=priority,
+            population_students=population_students,
+            config=config.local_population_probability,
+            curriculum_entries=entry_map,
+        )
         seats = (
             component.seats
             if component is not None and component.seats is not None
@@ -639,7 +683,44 @@ class RankingService:
         )
         requests = component.requests if component is not None else None
         enrolled = component.enrolled_count if component is not None else None
-        source = "ufabc_next_snapshot" if component is not None else "official_offer"
+        aggregate_source = "ufabc_next_snapshot" if component is not None else "official_offer"
+        if local_estimate is not None:
+            source = (
+                "ufabc_next_snapshot+local_database"
+                if component is not None
+                else "local_database"
+            )
+            favorable = list(local_estimate.favorable_factors)
+            risks = list(local_estimate.risk_factors)
+            warnings = list(local_estimate.warnings)
+            estimated_probability: float | None = None
+            if seats is not None and requests is not None and requests > 0:
+                aggregate_probability = min(max(seats / requests, 0.0), 1.0)
+                estimated_probability = aggregate_probability
+                warnings.append(
+                    "A disponibilidade agregada por vagas/solicitacoes continua exposta "
+                    "como referencia, mas a nota usa a estimativa personalizada local."
+                )
+                if requests <= seats:
+                    favorable.append("A demanda agregada observada nao supera as vagas.")
+                else:
+                    risks.append(f"Ha {requests / seats:.2f} solicitacoes por vaga.")
+            return SeatProbabilityRead(
+                estimated_probability=estimated_probability,
+                personalized_probability=local_estimate.probability,
+                probability_basis="local_population_monte_carlo",
+                summary=local_estimate.summary,
+                score=round(local_estimate.probability * 100, 6),
+                confidence="low",
+                seats=seats,
+                requests=requests,
+                enrolled_count=enrolled,
+                source=source,
+                favorable_factors=favorable,
+                risk_factors=risks,
+                warnings=warnings,
+                priority=priority,
+            )
         if seats is None or requests is None or requests <= 0:
             reason = (
                 "Demanda igual a zero foi tratada como indisponivel, pois as solicitacoes "
@@ -651,12 +732,13 @@ class RankingService:
                 estimated_probability=None,
                 personalized_probability=None,
                 probability_basis="unavailable",
+                summary=reason,
                 score=config.missing_seat_probability_score,
                 confidence="none",
                 seats=seats,
                 requests=requests,
                 enrolled_count=enrolled,
-                source=source,
+                source=aggregate_source,
                 favorable_factors=[],
                 risk_factors=[],
                 warnings=[
@@ -678,12 +760,13 @@ class RankingService:
             estimated_probability=probability,
             personalized_probability=None,
             probability_basis="aggregate_seats_over_requests",
+            summary="Estimativa agregada por vagas/solicitacoes da turma.",
             score=round(probability * 100, 6),
             confidence="low",
             seats=seats,
             requests=requests,
             enrolled_count=enrolled,
-            source=source,
+            source=aggregate_source,
             favorable_factors=favorable,
             risk_factors=risks,
             warnings=[
@@ -693,6 +776,51 @@ class RankingService:
             ],
             priority=priority,
         )
+
+    def _local_population_students(
+        self,
+        student_id: uuid.UUID,
+        config: RankingConfig,
+    ) -> list[StudentProfile]:
+        if not config.local_population_probability.enabled:
+            return []
+        profiles = (
+            self.session.scalars(
+                select(StudentProfile)
+                .where(StudentProfile.id != student_id, StudentProfile.ca.is_not(None))
+                .options(
+                    selectinload(StudentProfile.courses).selectinload(
+                        StudentCourse.curriculum_version
+                    ),
+                    selectinload(StudentProfile.completed_subjects),
+                    selectinload(StudentProfile.in_progress_subjects),
+                )
+            )
+            .unique()
+            .all()
+        )
+        return [profile for profile in profiles if profile.courses]
+
+    @staticmethod
+    def _candidate_sort_key(
+        candidate: _RankedCandidate,
+        sort_mode: str,
+    ) -> tuple[float | int | str, ...]:
+        if sort_mode == "probability_first":
+            probability = (
+                candidate.sort_probability
+                if candidate.sort_probability is not None
+                else -1.0
+            )
+            return (
+                candidate.probability_basis_rank,
+                -probability,
+                -candidate.teacher_score,
+                -candidate.curriculum_score,
+                -candidate.total_score,
+                candidate.section.code,
+            )
+        return (-candidate.total_score, candidate.section.code)
 
     def _schedule_score(
         self,

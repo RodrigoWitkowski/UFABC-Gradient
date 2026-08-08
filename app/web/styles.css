@@ -1073,7 +1073,7 @@ main {
 
 .ranking-summary {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 1px;
   margin: 18px 0;
   overflow: hidden;
@@ -1262,6 +1262,48 @@ main {
   margin-top: 9px;
 }
 
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 13px;
+}
+
+.decision-box {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(16, 47, 44, 0.08);
+  border-radius: 12px;
+}
+
+.decision-value {
+  display: block;
+  color: var(--green);
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.decision-meta {
+  margin: 6px 0 0 !important;
+  color: var(--ink-soft);
+  font-size: 10px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.decision-box-reason {
+  background: rgba(244, 240, 229, 0.7);
+}
+
+.decision-reason {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 .tag {
   display: inline-flex;
   align-items: center;
@@ -1396,6 +1438,13 @@ main {
   font-weight: 800;
   font-variant-numeric: lining-nums tabular-nums;
   text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .decision-grid,
+  .card-details {
+    grid-template-columns: 1fr;
+  }
 }
 
 .criterion::before {

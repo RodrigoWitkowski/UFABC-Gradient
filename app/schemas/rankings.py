@@ -130,10 +130,27 @@ class RankingTeacherStatisticsConfig(BaseModel):
     missing_score: float = Field(default=50.0, ge=0, le=100)
 
 
+class LocalPopulationProbabilityConfig(BaseModel):
+    enabled: bool = True
+    simulations: int = Field(default=600, ge=100, le=20_000)
+    min_population_size: int = Field(default=10, ge=1, le=100_000)
+    mandatory_request_probability: float = Field(default=0.7, ge=0, le=1)
+    limited_request_probability: float = Field(default=0.45, ge=0, le=1)
+    free_request_probability: float = Field(default=0.15, ge=0, le=1)
+    unclassified_request_probability: float = Field(default=0.1, ge=0, le=1)
+    priority_affiliation_multiplier: float = Field(default=1.35, ge=0, le=10)
+    same_shift_multiplier: float = Field(default=1.15, ge=0, le=10)
+    max_request_probability: float = Field(default=0.95, ge=0, le=1)
+
+
 class RankingConfig(BaseModel):
     course_strategy: CourseStrategy | None = None
+    sort_mode: Literal["probability_first", "weighted_score"] = "probability_first"
     teacher_statistics: RankingTeacherStatisticsConfig = Field(
         default_factory=RankingTeacherStatisticsConfig
+    )
+    local_population_probability: LocalPopulationProbabilityConfig = Field(
+        default_factory=LocalPopulationProbabilityConfig
     )
     curriculum_weights: CurriculumRelevanceWeights = Field(
         default_factory=CurriculumRelevanceWeights
@@ -218,7 +235,12 @@ class EnrollmentPriorityRead(BaseModel):
 class SeatProbabilityRead(BaseModel):
     estimated_probability: float | None
     personalized_probability: float | None
-    probability_basis: Literal["aggregate_seats_over_requests", "unavailable"]
+    probability_basis: Literal[
+        "aggregate_seats_over_requests",
+        "local_population_monte_carlo",
+        "unavailable",
+    ]
+    summary: str
     score: float
     confidence: Literal["none", "low"]
     seats: int | None
