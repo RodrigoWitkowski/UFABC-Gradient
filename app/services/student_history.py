@@ -25,7 +25,7 @@ from app.services.credit_limits import calculate_max_quarter_credits
 from app.services.normalization.text import clean_text, normalize_code, strip_accents
 from app.services.students import StudentService
 
-PARSER_VERSION = "sigaa-history-v1"
+PARSER_VERSION = "sigaa-history-v2"
 MAX_HISTORY_PDF_BYTES = 10 * 1024 * 1024
 ROW_RE = re.compile(r"^\s*(20\d{2}\.[1-3])\s")
 ROW_CONTENT_RE = re.compile(
@@ -94,7 +94,6 @@ class ParsedStudentHistory:
     cr: Decimal | None
     ca: Decimal
     cp: Decimal | None
-    ik: Decimal | None
     issued_at: datetime | None
     page_count: int
     entries: tuple[HistoryEntry, ...]
@@ -111,7 +110,6 @@ class ParsedStudentHistory:
             "cr": str(self.cr) if self.cr is not None else None,
             "ca": str(self.ca),
             "cp": str(self.cp) if self.cp is not None else None,
-            "ik": str(self.ik) if self.ik is not None else None,
             "issued_at": self.issued_at.isoformat() if self.issued_at else None,
             "entries": [entry.as_json() for entry in self.entries],
             "warnings": list(self.warnings),
@@ -129,7 +127,6 @@ class ParsedHistoryMetadata:
     cr: Decimal | None
     ca: Decimal
     cp: Decimal | None
-    ik: Decimal | None
     issued_at: datetime | None
 
 
@@ -177,7 +174,6 @@ class HistoryPdfParser:
             cr=metadata.cr,
             ca=metadata.ca,
             cp=metadata.cp,
-            ik=metadata.ik,
             issued_at=metadata.issued_at,
             page_count=len(reader.pages),
             entries=tuple(entries),
@@ -238,7 +234,6 @@ class HistoryPdfParser:
             cr=self._coefficient(normalized, "CR"),
             ca=ca,
             cp=self._coefficient(normalized, "CP"),
-            ik=self._coefficient(normalized, "IK"),
             issued_at=issued_at,
         )
 
@@ -555,7 +550,6 @@ class StudentHistoryService:
             )
             profile.courses.append(student_course)
         student_course.cp = parsed.cp
-        student_course.ik = parsed.ik
 
     def _replace_subjects(
         self, profile: StudentProfile, parsed: ParsedStudentHistory

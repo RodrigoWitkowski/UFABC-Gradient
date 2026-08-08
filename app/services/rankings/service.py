@@ -128,7 +128,7 @@ class RankingService:
             "A porcentagem de vagas representa vagas/solicitacoes da turma, nao a chance "
             "pessoal de matricula.",
             "A prioridade individual segue curso, turno, CP e CA conforme a regra "
-            "versionada; CR, IK e campus nao alteram essa ordem.",
+            "versionada; CR e campus nao alteram essa ordem.",
             *preference_warnings,
             *filter_warnings,
         ]

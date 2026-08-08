@@ -122,7 +122,6 @@ class StudentService:
                     is_primary=course_input.is_primary,
                     weight=course_input.weight,
                     cp=course_input.cp,
-                    ik=course_input.ik,
                 )
             )
 
@@ -199,7 +198,7 @@ class StudentService:
             )
         if self._course_payload_snapshot(payload) != self._course_profile_snapshot(profile):
             raise StudentAcademicDataLockedError(
-                "cursos, matriz, CP e IK vieram do historico importado "
+                "cursos, matriz e CP vieram do historico importado "
                 "e nao podem ser editados manualmente"
             )
         if (
@@ -222,7 +221,7 @@ class StudentService:
     @staticmethod
     def _course_payload_snapshot(
         payload: AcademicProfileUpdate,
-    ) -> list[tuple[str, str | None, bool, Decimal | None, Decimal | None, Decimal | None]]:
+    ) -> list[tuple[str, str | None, bool, Decimal | None, Decimal | None]]:
         return sorted(
             (
                 normalize_code(item.course_code),
@@ -230,7 +229,6 @@ class StudentService:
                 item.is_primary,
                 item.weight,
                 item.cp,
-                item.ik,
             )
             for item in payload.courses
         )
@@ -238,7 +236,7 @@ class StudentService:
     @staticmethod
     def _course_profile_snapshot(
         profile: StudentProfile,
-    ) -> list[tuple[str, str | None, bool, Decimal | None, Decimal | None, Decimal | None]]:
+    ) -> list[tuple[str, str | None, bool, Decimal | None, Decimal | None]]:
         return sorted(
             (
                 item.course.code,
@@ -246,7 +244,6 @@ class StudentService:
                 item.is_primary,
                 item.weight,
                 item.cp,
-                item.ik,
             )
             for item in profile.courses
         )

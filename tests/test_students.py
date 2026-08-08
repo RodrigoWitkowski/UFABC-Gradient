@@ -74,14 +74,12 @@ def test_student_supports_multiple_courses_and_matrix_suggestion(session: Sessio
                     "is_primary": False,
                     "weight": 0.4,
                     "cp": 0.72,
-                    "ik": 0.68,
                 },
                 {
                     "course_code": "BCC",
                     "is_primary": True,
                     "weight": 0.6,
                     "cp": 0.38,
-                    "ik": 0.41,
                 },
             ],
             "completed_subjects": [

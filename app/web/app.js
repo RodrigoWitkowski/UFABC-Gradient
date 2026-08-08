@@ -26,6 +26,7 @@ const state = {
   ranking: null,
   selectedSections: new Map(),
   studentId: storedStudentId,
+  selectedTerm: typeof matchingStoredView?.term === "string" ? matchingStoredView.term : null,
   visibleResultCount: Number(matchingStoredView?.visibleResultCount) || resultPageSize,
   selectedCategories: new Set(storedCategories),
   selectedShelfExpanded: Boolean(matchingStoredView?.selectedShelfExpanded),
@@ -34,6 +35,7 @@ const state = {
 const elements = {
   form: document.querySelector("#ranking-form"),
   term: document.querySelector("#term"),
+  termPicker: document.querySelector("#term-picker"),
   currentTerm: document.querySelector("#current-term"),
   results: document.querySelector("#results"),
   resultMeta: document.querySelector("#result-meta"),
@@ -105,6 +107,7 @@ async function initialize() {
 function bindEvents() {
   elements.form.addEventListener("submit", handleRankingSubmit);
   elements.historyInput.addEventListener("change", handleHistoryUpload);
+  elements.termPicker.addEventListener("change", handleTermChange);
   elements.results.addEventListener("click", handleResultAction);
   elements.selectedShelf.addEventListener("click", handleSelectedAction);
   elements.categoryFilter.addEventListener("change", handleCategoryFilterChange);
@@ -193,12 +196,38 @@ async function loadStoredProfile() {
 function renderTerms() {
   if (!state.terms.length) {
     elements.term.value = "";
+    elements.termPicker.innerHTML = '<option value="">Nenhuma oferta</option>';
+    elements.termPicker.disabled = true;
     elements.currentTerm.textContent = "Nenhuma oferta ativa importada";
     return;
   }
-  const term = state.terms[0];
+  const term = state.terms.find((item) => item.code === state.selectedTerm) || state.terms[0];
+  state.selectedTerm = term.code;
+  elements.termPicker.disabled = false;
+  elements.termPicker.innerHTML = state.terms.map((item) => `
+    <option value="${escapeHtml(item.code)}"${item.code === term.code ? " selected" : ""}>
+      ${escapeHtml(`${item.year} - ${item.term_number} quad`)}
+    </option>
+  `).join("");
   elements.term.value = term.code;
   elements.currentTerm.textContent = `${term.year} · ${term.term_number}º quadrimestre`;
+}
+
+function handleTermChange(event) {
+  const termCode = event.target.value || "";
+  state.selectedTerm = termCode || null;
+  elements.term.value = termCode;
+  const selected = state.terms.find((term) => term.code === termCode) || null;
+  elements.currentTerm.textContent = selected
+    ? `${selected.year} Â· ${selected.term_number}Âº quadrimestre`
+    : "Nenhuma oferta ativa importada";
+  state.ranking = null;
+  state.selectedSections.clear();
+  persistSelectedSections();
+  persistRankingView();
+  renderSelectedShelf();
+  renderInitialResultsState();
+  if (state.studentId) restoreLatestRanking();
 }
 
 function fillProfile(profile) {
@@ -233,7 +262,6 @@ function renderProfileSummaryLegacy(profile) {
         <dl class="linked-course-meta">
           <div><dt>Matriz</dt><dd>${escapeHtml(course.curriculum_version || "Automática")}</dd></div>
           <div><dt>CP</dt><dd>${course.cp === null ? "Sem dado" : formatNumber(course.cp)}</dd></div>
-          <div><dt>IK</dt><dd>${course.ik === null ? "Sem dado" : formatNumber(course.ik)}</dd></div>
         </dl>
       </article>
     `).join("")
@@ -340,11 +368,6 @@ function renderProfileSummary(profile) {
             course.cp === null ? "Sem dado" : formatNumber(course.cp),
             { data: true },
           )}
-          ${renderProfileMetric(
-            "IK",
-            course.ik === null ? "Sem dado" : formatNumber(course.ik),
-            { data: true },
-          )}
         </div>
       </section>
     `).join("")
@@ -370,7 +393,7 @@ function renderProfileSummary(profile) {
         <div class="profile-summary-heading">
           <div>
             <h3>${courses.length === 1 ? "Curso vinculado" : "Cursos vinculados"}</h3>
-            <p>O ranking usa matriz, CP e IK do seu vinculo para estimar sua prioridade de matricula.</p>
+            <p>O ranking usa matriz e CP do seu vinculo para estimar sua prioridade de matricula.</p>
           </div>
         </div>
         <div class="linked-course-list">
@@ -426,7 +449,7 @@ function validateForm() {
   }
   if (!selectedValues("allowed_campus").length) throw new Error("Selecione ao menos um campus.");
   if (!elements.term.value) {
-    throw new Error("Nenhuma oferta ativa do proximo quadrimestre foi importada ainda.");
+    throw new Error("Nenhuma oferta de turmas foi importada ainda.");
   }
 }
 
@@ -473,7 +496,6 @@ function buildAcademicProfile() {
       is_primary: course.is_primary,
       weight: course.weight,
       cp: course.cp,
-      ik: course.ik,
     })),
     completed_subjects: completed,
     in_progress_subjects: inProgress,
@@ -545,6 +567,19 @@ function renderEmptyResultsState(title, message, hints = []) {
       <h3>${escapeHtml(title)}</h3>
       <p>${escapeHtml(message)}</p>
       ${hintList}
+    </div>`;
+}
+
+function renderInitialResultsState() {
+  elements.resultMeta.hidden = true;
+  elements.results.setAttribute("aria-busy", "false");
+  elements.results.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-illustration" aria-hidden="true">
+        <span>1</span><span>2</span><span>3</span>
+      </div>
+      <h3>Seu ranking começa ao lado.</h3>
+      <p>Preencha o perfil e as preferências. As melhores turmas aparecerão aqui.</p>
     </div>`;
 }
 
@@ -751,6 +786,7 @@ function syncCategoryFilterInputs() {
 async function restoreLatestRanking() {
   const saved = readStorageJson(rankingViewStorageKey);
   if (!saved?.rankingId || saved.studentId !== state.studentId) return;
+  if (saved.term !== elements.term.value) return;
   try {
     const ranking = await fetchJson(`/rankings/${saved.rankingId}`);
     if (ranking.student_id !== state.studentId || ranking.term !== elements.term.value) {
@@ -766,7 +802,13 @@ async function restoreLatestRanking() {
 
 function restoreSelectedSections() {
   const saved = readStorageJson(selectedSectionsStorageKey);
-  if (saved?.studentId !== state.studentId || !Array.isArray(saved.items)) return;
+  if (
+    saved?.studentId !== state.studentId
+    || saved?.term !== elements.term.value
+    || !Array.isArray(saved.items)
+  ) {
+    return;
+  }
   state.selectedSections.clear();
   saved.items.forEach((item) => {
     if (item?.section?.id && item.section.subject && Array.isArray(item.section.meetings)) {
@@ -790,6 +832,7 @@ function persistRankingView() {
   const previous = readStorageJson(rankingViewStorageKey);
   writeStorageJson(rankingViewStorageKey, {
     studentId: state.studentId,
+    term: elements.term.value,
     rankingId: state.ranking?.id || previous?.rankingId || null,
     visibleResultCount: state.visibleResultCount,
     categories: [...state.selectedCategories],
@@ -805,7 +848,11 @@ function persistSelectedSections() {
     section: item.section,
     curriculum_classifications: item.curriculum_classifications,
   }));
-  writeStorageJson(selectedSectionsStorageKey, { studentId: state.studentId, items });
+  writeStorageJson(selectedSectionsStorageKey, {
+    studentId: state.studentId,
+    term: elements.term.value,
+    items,
+  });
 }
 
 function isCompatibleWithSelection(item) {
@@ -1126,7 +1173,7 @@ function renderProfileMetric(label, value, options = {}) {
   return `
     <article class="profile-metric">
       <span>${escapeHtml(label)}</span>
-      <strong class="${classes.join(" ")}">${escapeHtml(value)}</strong>
+      <strong class="${classes.join(" ")}" title="${escapeHtml(value)}">${escapeHtml(value)}</strong>
     </article>`;
 }
 

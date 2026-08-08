@@ -26,7 +26,6 @@ class StudentCourseInput(BaseModel):
     is_primary: bool = False
     weight: Decimal | None = Field(default=None, ge=0, le=1)
     cp: Decimal | None = Field(default=None, ge=0, le=1)
-    ik: Decimal | None = Field(default=None, ge=0, le=1)
 
 
 class StudentSubjectInput(BaseModel):
@@ -97,7 +96,6 @@ class StudentCourseRead(BaseModel):
     is_primary: bool
     weight: Decimal | None
     cp: Decimal | None
-    ik: Decimal | None
 
 
 class StudentSubjectRead(BaseModel):

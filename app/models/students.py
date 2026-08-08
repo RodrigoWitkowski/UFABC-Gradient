@@ -77,7 +77,6 @@ class StudentCourse(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     is_primary: Mapped[bool] = mapped_column(default=False)
     weight: Mapped[Decimal | None] = mapped_column(Numeric(7, 6))
     cp: Mapped[Decimal | None] = mapped_column(Numeric(7, 6))
-    ik: Mapped[Decimal | None] = mapped_column(Numeric(7, 6))
 
     student_profile: Mapped[StudentProfile] = relationship(back_populates="courses")
     course: Mapped["Course"] = relationship()  # noqa: F821

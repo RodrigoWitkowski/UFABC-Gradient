@@ -558,8 +558,8 @@ main {
 
 .profile-metrics-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .profile-metric {
@@ -713,7 +713,7 @@ main {
 }
 
 .profile-course-metrics-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .profile-metric {
@@ -723,13 +723,15 @@ main {
 }
 
 .profile-metric .profile-metric-value {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  font-size: clamp(20px, 2.2vw, 30px);
+  overflow: hidden;
+  font-size: clamp(18px, 1.45vw, 24px);
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .profile-metric .profile-metric-value.is-compact {
-  font-size: clamp(18px, 1.8vw, 24px);
+  font-size: clamp(15px, 1.05vw, 18px);
 }
 
 .profile-metric .profile-metric-value.is-data {
@@ -763,9 +765,9 @@ main {
 }
 
 .linked-course-topline strong {
-  font-size: clamp(28px, 2.8vw, 38px);
-  line-height: 0.95;
-  overflow-wrap: anywhere;
+  font-size: clamp(22px, 1.8vw, 34px);
+  line-height: 0.98;
+  white-space: nowrap;
 }
 
 .linked-course-name {
@@ -971,11 +973,39 @@ main {
   font-weight: 700;
 }
 
+.current-offer > div {
+  min-width: 0;
+}
+
 .current-offer strong {
   color: var(--green);
   font-family: var(--font-display);
   font-size: 17px;
   font-weight: 400;
+}
+
+.current-offer-picker {
+  display: grid;
+  flex: 0 0 176px;
+  gap: 5px;
+}
+
+.current-offer-picker span {
+  color: var(--ink-soft);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.current-offer-picker select {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
 }
 
 .schedule-window-field {
@@ -1844,6 +1874,8 @@ main {
   .result-controls { align-items: stretch; flex-direction: column; }
   .result-controls > div { display: grid; grid-template-columns: 1fr 1fr; }
   .selected-shelf.is-expanded .selected-list { grid-template-columns: 1fr; }
+  .current-offer { align-items: stretch; flex-direction: column; }
+  .current-offer-picker { flex-basis: auto; }
 }
 
 @media (max-width: 1040px) {

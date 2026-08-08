@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Gradient: planejamento acadêmico personalizado na UFABC.">
     <title>Gradient</title>
-    <link rel="stylesheet" href="/assets/styles.css?v=20260808.1">
-    <script src="/assets/app.js?v=20260808.1" defer></script>
+    <link rel="stylesheet" href="/assets/styles.css?v=20260808.2">
+    <script src="/assets/app.js?v=20260808.2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -97,8 +97,16 @@
               </div>
 
               <div class="current-offer" aria-live="polite">
-                <span>Oferta usada no ranking</span>
-                <strong id="current-term">Carregando...</strong>
+                <div>
+                  <span>Oferta usada no ranking</span>
+                  <strong id="current-term">Carregando...</strong>
+                </div>
+                <label class="current-offer-picker">
+                  <span>Quadrimestre</span>
+                  <select id="term-picker" aria-label="Quadrimestre da oferta">
+                    <option value="">Nenhuma oferta</option>
+                  </select>
+                </label>
               </div>
               <input id="term" name="term" type="hidden">
 

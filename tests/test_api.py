@@ -179,7 +179,6 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
                     "course_code": "BCC",
                     "is_primary": True,
                     "cp": 0.38,
-                    "ik": 0.41,
                 }
             ],
             "completed_subjects": [],
@@ -191,6 +190,7 @@ def test_student_academic_profile_api(client: TestClient, session: Session) -> N
     assert update_response.json()["ca"] == "3.3"
     assert update_response.json()["max_quarter_credits"] == "27"
     assert update_response.json()["courses"][0]["curriculum_version"] == "2025"
+    assert "ik" not in update_response.json()["courses"][0]
 
     classification_response = client.get(
         f"/students/{student_id}/subjects/MCCC001-23/classifications"
@@ -228,7 +228,6 @@ def test_history_pdf_api_replaces_existing_ra(
         cr=Decimal("2.1"),
         ca=Decimal("2.85"),
         cp=Decimal("0.82"),
-        ik=Decimal("0.73"),
         issued_at=datetime(2026, 7, 15, 19, 12, tzinfo=UTC),
         page_count=5,
         entries=(
@@ -306,7 +305,6 @@ def test_history_backed_profile_rejects_manual_academic_edits(
         cr=Decimal("2.1"),
         ca=Decimal("2.85"),
         cp=Decimal("0.82"),
-        ik=Decimal("0.73"),
         issued_at=datetime(2026, 7, 15, 19, 12, tzinfo=UTC),
         page_count=5,
         entries=(),
@@ -339,7 +337,6 @@ def test_history_backed_profile_rejects_manual_academic_edits(
                     "is_primary": student["courses"][0]["is_primary"],
                     "weight": student["courses"][0]["weight"],
                     "cp": student["courses"][0]["cp"],
-                    "ik": student["courses"][0]["ik"],
                 }
             ],
             "completed_subjects": [],
@@ -379,7 +376,6 @@ def test_terms_endpoint_ignores_history_only_terms(
         cr=Decimal("2.1"),
         ca=Decimal("2.85"),
         cp=Decimal("0.82"),
-        ik=Decimal("0.73"),
         issued_at=datetime(2026, 7, 15, 19, 12, tzinfo=UTC),
         page_count=5,
         entries=(

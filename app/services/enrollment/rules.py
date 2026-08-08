@@ -201,7 +201,7 @@ class EnrollmentPriorityEvaluator:
         warnings.extend(
             [
                 "Campus nao faz parte da ordem de classificacao da primeira fase.",
-                "CR e IK nao fazem parte da ordem curso, turno, CP e CA.",
+                "CR nao faz parte da ordem curso, turno, CP e CA.",
                 "A posicao relativa depende dos dados dos outros solicitantes.",
             ]
         )

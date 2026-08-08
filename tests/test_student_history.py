@@ -97,7 +97,6 @@ def test_reimport_replaces_the_single_history_for_ra(session: Session) -> None:
         cr=Decimal("2.1"),
         ca=Decimal("2.85"),
         cp=Decimal("0.82"),
-        ik=Decimal("0.73"),
         issued_at=datetime(2026, 7, 15, 19, 12, tzinfo=UTC),
         page_count=5,
         entries=(

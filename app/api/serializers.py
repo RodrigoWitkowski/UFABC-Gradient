@@ -154,7 +154,6 @@ def serialize_student(profile: StudentProfile) -> StudentRead:
                     "is_primary": item.is_primary,
                     "weight": item.weight,
                     "cp": item.cp,
-                    "ik": item.ik,
                 }
                 for item in profile.courses
             ],
