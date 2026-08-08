@@ -35,7 +35,6 @@ const state = {
 const elements = {
   form: document.querySelector("#ranking-form"),
   term: document.querySelector("#term"),
-  termPicker: document.querySelector("#term-picker"),
   currentTerm: document.querySelector("#current-term"),
   results: document.querySelector("#results"),
   resultMeta: document.querySelector("#result-meta"),
@@ -107,7 +106,6 @@ async function initialize() {
 function bindEvents() {
   elements.form.addEventListener("submit", handleRankingSubmit);
   elements.historyInput.addEventListener("change", handleHistoryUpload);
-  elements.termPicker.addEventListener("change", handleTermChange);
   elements.results.addEventListener("click", handleResultAction);
   elements.selectedShelf.addEventListener("click", handleSelectedAction);
   elements.categoryFilter.addEventListener("change", handleCategoryFilterChange);
@@ -196,19 +194,11 @@ async function loadStoredProfile() {
 function renderTerms() {
   if (!state.terms.length) {
     elements.term.value = "";
-    elements.termPicker.innerHTML = '<option value="">Nenhuma oferta</option>';
-    elements.termPicker.disabled = true;
     elements.currentTerm.textContent = "Nenhuma oferta ativa importada";
     return;
   }
-  const term = state.terms.find((item) => item.code === state.selectedTerm) || state.terms[0];
+  const term = state.terms[0];
   state.selectedTerm = term.code;
-  elements.termPicker.disabled = false;
-  elements.termPicker.innerHTML = state.terms.map((item) => `
-    <option value="${escapeHtml(item.code)}"${item.code === term.code ? " selected" : ""}>
-      ${escapeHtml(`${item.year} - ${item.term_number} quad`)}
-    </option>
-  `).join("");
   elements.term.value = term.code;
   elements.currentTerm.textContent = `${term.year} · ${term.term_number}º quadrimestre`;
 }
@@ -310,66 +300,43 @@ function renderProfileSummary(profile) {
   const inProgressCount = Array.isArray(profile.in_progress_subjects)
     ? profile.in_progress_subjects.length
     : 0;
-  const summaryMetrics = [
-    renderProfileMetric("RA", profile.ra || "Sem dado", { compact: true, data: true }),
-    renderProfileMetric(
-      "Turno de ingresso",
-      profile.admission_shift || "Sem dado",
-      { compact: true },
-    ),
-    renderProfileMetric(
-      "Campus",
-      formatCampusName(profile.campus) || "Sem dado",
-      { compact: true },
-    ),
-    renderProfileMetric(
-      "Ano de ingresso",
-      profile.admission_year || "Sem dado",
-      { data: true },
-    ),
-    renderProfileMetric(
-      "CA",
-      profile.ca === null ? "Sem dado" : formatNumber(profile.ca),
-      { data: true },
-    ),
-    renderProfileMetric(
-      "Limite de creditos",
+  const identityFacts = [
+    renderProfileFact("RA", profile.ra || "Sem dado", { data: true }),
+    renderProfileFact("Turno", profile.admission_shift || "Sem dado"),
+    renderProfileFact("Campus", formatCampusName(profile.campus) || "Sem dado"),
+    renderProfileFact("Ingresso", profile.admission_year || "Sem dado", { data: true }),
+  ].join("");
+  const progressMetrics = [
+    renderProfileStat("CA", profile.ca === null ? "Sem dado" : formatNumber(profile.ca)),
+    renderProfileStat(
+      "Limite",
       profile.max_quarter_credits === null
         ? "Sem dado"
         : formatNumber(profile.max_quarter_credits),
-      { data: true },
     ),
-    renderProfileMetric("Concluidas", String(completedCount), { data: true }),
-    renderProfileMetric("Em andamento", String(inProgressCount), { data: true }),
+    renderProfileStat("Concluidas", String(completedCount)),
+    renderProfileStat("Em andamento", String(inProgressCount)),
   ].join("");
   const courseCards = courses.length
     ? courses.map((course, index) => `
-      <section class="linked-course-block">
-        <article class="linked-course-card">
-          <div class="linked-course-topline">
-            <div class="linked-course-copy">
-              <p class="linked-course-kicker">${course.is_primary ? "Curso principal" : `Vinculo adicional ${index + 1}`}</p>
-              <strong>${escapeHtml(course.course_code)}</strong>
+      <article class="course-summary-card">
+        <div class="course-summary-head">
+          <div class="course-summary-copy">
+            <p class="course-summary-kicker">${course.is_primary ? "Curso principal" : `Vinculo adicional ${index + 1}`}</p>
+            <div class="course-summary-title-row">
+              <h4 class="course-summary-title">${escapeHtml(course.course_code)}</h4>
+              <span class="linked-course-badge${course.is_primary ? "" : " is-secondary"}">
+                ${course.is_primary ? "Principal" : "Vinculo"}
+              </span>
             </div>
-            <span class="linked-course-badge${course.is_primary ? "" : " is-secondary"}">
-              ${course.is_primary ? "Principal" : "Vinculo"}
-            </span>
+            <p class="course-summary-name">${escapeHtml(course.course_name)}</p>
           </div>
-          <p class="linked-course-name">${escapeHtml(course.course_name)}</p>
-        </article>
-        <div class="profile-metrics-grid profile-course-metrics-grid">
-          ${renderProfileMetric(
-            "Matriz",
-            course.curriculum_version || "Automatica",
-            { compact: true, data: true },
-          )}
-          ${renderProfileMetric(
-            "CP",
-            course.cp === null ? "Sem dado" : formatNumber(course.cp),
-            { data: true },
-          )}
         </div>
-      </section>
+        <dl class="course-summary-meta">
+          ${renderCourseMeta("Matriz", course.curriculum_version || "Automatica")}
+          ${renderCourseMeta("CP", course.cp === null ? "Sem dado" : formatNumber(course.cp), { data: true })}
+        </dl>
+      </article>
     `).join("")
     : `
       <div class="profile-summary-warning">
@@ -378,22 +345,25 @@ function renderProfileSummary(profile) {
       </div>`;
   elements.profileSummary.innerHTML = `
     <div class="profile-summary-stack">
-      <section class="profile-summary-block">
+      <section class="profile-history-card">
         <div class="profile-summary-heading">
           <div>
             <h3>Dados do historico</h3>
-            <p>Esses dados vem do PDF do SIGAA e passam a ser a fonte oficial do seu perfil.</p>
+            <p>O PDF do SIGAA vira a fonte oficial do seu perfil. Aqui nao existe edicao manual.</p>
           </div>
         </div>
-        <div class="profile-metrics-grid">
-          ${summaryMetrics}
+        <div class="profile-fact-list">
+          ${identityFacts}
+        </div>
+        <div class="profile-stat-grid">
+          ${progressMetrics}
         </div>
       </section>
       <section class="profile-summary-block">
         <div class="profile-summary-heading">
           <div>
             <h3>${courses.length === 1 ? "Curso vinculado" : "Cursos vinculados"}</h3>
-            <p>O ranking usa matriz e CP do seu vinculo para estimar sua prioridade de matricula.</p>
+            <p>O ranking usa a matriz e o CP do seu vinculo para estimar sua prioridade de matricula.</p>
           </div>
         </div>
         <div class="linked-course-list">
@@ -1164,6 +1134,32 @@ function formatPercent(value) {
 
 function formatNumber(value) {
   return Number(value).toLocaleString("pt-BR", { maximumFractionDigits: 4 });
+}
+
+function renderProfileFact(label, value, options = {}) {
+  return `
+    <article class="profile-fact-row">
+      <span class="profile-fact-label">${escapeHtml(label)}</span>
+      <strong class="profile-fact-value${options.data ? " is-data" : ""}" title="${escapeHtml(value)}">
+        ${escapeHtml(value)}
+      </strong>
+    </article>`;
+}
+
+function renderProfileStat(label, value) {
+  return `
+    <article class="profile-stat-card">
+      <span class="profile-stat-label">${escapeHtml(label)}</span>
+      <strong class="profile-stat-value" title="${escapeHtml(value)}">${escapeHtml(value)}</strong>
+    </article>`;
+}
+
+function renderCourseMeta(label, value, options = {}) {
+  return `
+    <div class="course-summary-meta-item">
+      <dt>${escapeHtml(label)}</dt>
+      <dd class="${options.data ? "is-data" : ""}" title="${escapeHtml(value)}">${escapeHtml(value)}</dd>
+    </div>`;
 }
 
 function renderProfileMetric(label, value, options = {}) {
