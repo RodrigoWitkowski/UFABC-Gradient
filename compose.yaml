@@ -16,11 +16,13 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     environment:
       APP_ENV: ${APP_ENV:-development}
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-ufabc}:${POSTGRES_PASSWORD:-ufabc}@db:5432/${POSTGRES_DB:-ufabc_ranking}
-      IMPORT_STORAGE_PATH: /app/var/imports
+      IMPORT_STORAGE_PATH: /workspace/var/imports
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       API_DOCS_ENABLED: ${API_DOCS_ENABLED:-false}
       UFABC_NEXT_ENABLED: ${UFABC_NEXT_ENABLED:-true}
@@ -39,7 +41,7 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
-      - import-data:/app/var/imports
+      - import-data:/workspace/var/imports
 
 volumes:
   postgres-data:
