@@ -33,6 +33,10 @@ class StudentNotFoundError(ValueError):
     pass
 
 
+class StudentAcademicDataLockedError(ValueError):
+    pass
+
+
 class StudentService:
     def __init__(self, session: Session) -> None:
         self.session = session
@@ -84,6 +88,8 @@ class StudentService:
         payload: AcademicProfileUpdate,
     ) -> StudentProfile:
         profile = self.get_student(student_id)
+        if profile.history_import is not None:
+            self._ensure_locked_fields_match(profile, payload)
         profile.ra = clean_text(payload.ra)
         profile.admission_year = payload.admission_year
         profile.admission_shift = clean_text(payload.admission_shift)
@@ -156,6 +162,143 @@ class StudentService:
         profile.preferences.soft_preferences = payload.preferences.soft_preferences
         self.session.flush()
         return profile
+
+    def _ensure_locked_fields_match(
+        self,
+        profile: StudentProfile,
+        payload: AcademicProfileUpdate,
+    ) -> None:
+        if clean_text(payload.ra) != profile.ra:
+            raise StudentAcademicDataLockedError(
+                "RA veio do historico importado e nao pode ser editado manualmente"
+            )
+        if payload.admission_year != profile.admission_year:
+            raise StudentAcademicDataLockedError(
+                "ano de ingresso veio do historico importado e nao pode ser editado manualmente"
+            )
+        if clean_text(payload.admission_shift) != profile.admission_shift:
+            raise StudentAcademicDataLockedError(
+                "turno veio do historico importado e nao pode ser editado manualmente"
+            )
+        if clean_text(payload.campus) != profile.campus:
+            raise StudentAcademicDataLockedError(
+                "campus veio do historico importado e nao pode ser editado manualmente"
+            )
+        if payload.cr != profile.cr:
+            raise StudentAcademicDataLockedError(
+                "CR veio do historico importado e nao pode ser editado manualmente"
+            )
+        if payload.ca != profile.ca:
+            raise StudentAcademicDataLockedError(
+                "CA veio do historico importado e nao pode ser editado manualmente"
+            )
+        if payload.accumulated_credits != profile.accumulated_credits:
+            raise StudentAcademicDataLockedError(
+                "creditos acumulados vieram do historico importado "
+                "e nao podem ser editados manualmente"
+            )
+        if self._course_payload_snapshot(payload) != self._course_profile_snapshot(profile):
+            raise StudentAcademicDataLockedError(
+                "cursos, matriz, CP e IK vieram do historico importado "
+                "e nao podem ser editados manualmente"
+            )
+        if (
+            self._completed_payload_snapshot(payload)
+            != self._completed_profile_snapshot(profile)
+        ):
+            raise StudentAcademicDataLockedError(
+                "disciplinas concluidas vieram do historico importado "
+                "e nao podem ser editadas manualmente"
+            )
+        if (
+            self._in_progress_payload_snapshot(payload)
+            != self._in_progress_profile_snapshot(profile)
+        ):
+            raise StudentAcademicDataLockedError(
+                "disciplinas em andamento vieram do historico importado "
+                "e nao podem ser editadas manualmente"
+            )
+
+    @staticmethod
+    def _course_payload_snapshot(
+        payload: AcademicProfileUpdate,
+    ) -> list[tuple[str, str | None, bool, Decimal | None, Decimal | None, Decimal | None]]:
+        return sorted(
+            (
+                normalize_code(item.course_code),
+                clean_text(item.curriculum_version),
+                item.is_primary,
+                item.weight,
+                item.cp,
+                item.ik,
+            )
+            for item in payload.courses
+        )
+
+    @staticmethod
+    def _course_profile_snapshot(
+        profile: StudentProfile,
+    ) -> list[tuple[str, str | None, bool, Decimal | None, Decimal | None, Decimal | None]]:
+        return sorted(
+            (
+                item.course.code,
+                item.curriculum_version.version,
+                item.is_primary,
+                item.weight,
+                item.cp,
+                item.ik,
+            )
+            for item in profile.courses
+        )
+
+    @staticmethod
+    def _completed_payload_snapshot(
+        payload: AcademicProfileUpdate,
+    ) -> list[tuple[str, str | None, str | None, Decimal | None]]:
+        return sorted(
+            (
+                normalize_code(item.code),
+                clean_text(item.term),
+                clean_text(item.grade).upper() if clean_text(item.grade) else None,
+                item.credits,
+            )
+            for item in payload.completed_subjects
+        )
+
+    @staticmethod
+    def _completed_profile_snapshot(
+        profile: StudentProfile,
+    ) -> list[tuple[str, str | None, str | None, Decimal | None]]:
+        return sorted(
+            (
+                item.subject.code,
+                item.term.code if item.term else None,
+                item.grade,
+                item.credits,
+            )
+            for item in profile.completed_subjects
+        )
+
+    @staticmethod
+    def _in_progress_payload_snapshot(
+        payload: AcademicProfileUpdate,
+    ) -> list[tuple[str, str | None]]:
+        return sorted(
+            (normalize_code(item.code), clean_text(item.term))
+            for item in payload.in_progress_subjects
+        )
+
+    @staticmethod
+    def _in_progress_profile_snapshot(
+        profile: StudentProfile,
+    ) -> list[tuple[str, str | None]]:
+        return sorted(
+            (
+                item.subject.code,
+                item.term.code if item.term else None,
+            )
+            for item in profile.in_progress_subjects
+        )
 
     def classify_subject(
         self,

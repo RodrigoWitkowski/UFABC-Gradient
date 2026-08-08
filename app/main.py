@@ -9,6 +9,8 @@ from fastapi.staticfiles import StaticFiles
 from app.api.routes import courses, imports, rankings, statistics, students, terms, ufabc_next
 from app.core.config import get_settings
 from app.core.logging import configure_logging
+from app.db.session import SessionLocal
+from app.services.official_curricula import import_official_curricula
 
 WEB_DIRECTORY = Path(__file__).parent / "web"
 SETTINGS = get_settings()
@@ -18,6 +20,9 @@ SETTINGS = get_settings()
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     settings = get_settings()
     configure_logging(settings.log_level)
+    with SessionLocal() as session:
+        import_official_curricula(session)
+        session.commit()
     yield
 
 

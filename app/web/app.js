@@ -21,7 +21,6 @@ const storedCategories = Array.isArray(matchingStoredView?.categories)
   : curriculumCategories;
 
 const state = {
-  courses: [],
   terms: [],
   profile: null,
   ranking: null,
@@ -34,13 +33,13 @@ const state = {
 
 const elements = {
   form: document.querySelector("#ranking-form"),
-  courseOptions: document.querySelector("#course-options"),
   term: document.querySelector("#term"),
   currentTerm: document.querySelector("#current-term"),
   results: document.querySelector("#results"),
   resultMeta: document.querySelector("#result-meta"),
   selectedShelf: document.querySelector("#selected-shelf"),
   categoryFilter: document.querySelector("#category-filter"),
+  profileSummary: document.querySelector("#profile-summary"),
   controlColumn: document.querySelector(".control-column"),
   button: document.querySelector("#rank-button"),
   historyInput: document.querySelector("#history-pdf"),
@@ -48,8 +47,6 @@ const elements = {
   historyStatus: document.querySelector("#history-status"),
   toast: document.querySelector("#toast"),
 };
-
-const supportedCourses = new Set(["BCT", "BCH", "BCC"]);
 const weekdays = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
 const categoryLabels = {
   mandatory: "Obrigatória",
@@ -87,10 +84,8 @@ async function initialize() {
   syncCategoryFilterInputs();
   updateControlFade();
   try {
-    const [courses, terms] = await Promise.all([fetchJson("/courses"), fetchJson("/terms")]);
-    state.courses = courses.filter((course) => supportedCourses.has(course.code));
+    const terms = await fetchJson("/terms");
     state.terms = terms;
-    renderCourses();
     renderTerms();
     if (state.studentId) {
       await loadStoredProfile();
@@ -100,7 +95,7 @@ async function initialize() {
         await restoreLatestRanking();
       }
     } else {
-      selectDefaultCourse();
+      renderEmptyProfileSummary();
     }
   } catch (error) {
     showError("Não foi possível iniciar a interface", error.message);
@@ -109,7 +104,6 @@ async function initialize() {
 
 function bindEvents() {
   elements.form.addEventListener("submit", handleRankingSubmit);
-  elements.courseOptions.addEventListener("change", handleCourseChange);
   elements.historyInput.addEventListener("change", handleHistoryUpload);
   elements.results.addEventListener("click", handleResultAction);
   elements.selectedShelf.addEventListener("click", handleSelectedAction);
@@ -151,10 +145,17 @@ async function handleHistoryUpload(event) {
     const currentSummary = result.in_progress_count === 1
       ? "1 disciplina sendo cursada atualmente"
       : `${result.in_progress_count} disciplinas sendo cursadas atualmente`;
-    elements.historyStatus.textContent = `${completionSummary}; ${currentSummary}.${replacement}`;
+    const warnings = Array.isArray(result.warnings) && result.warnings.length
+      ? ` Avisos: ${result.warnings.join(" ")}`
+      : "";
+    elements.historyStatus.textContent = `${completionSummary}; ${currentSummary}.${replacement}${warnings}`;
     elements.historyStatus.hidden = false;
     historyStatusTimer = window.setTimeout(() => { elements.historyStatus.hidden = true; }, 9000);
-    showToast("Histórico importado e perfil atualizado.");
+    showToast(
+      result.student.courses?.length
+        ? "Histórico importado e perfil atualizado."
+        : "Histórico importado, mas o vínculo de curso ainda não foi identificado.",
+    );
   } catch (error) {
     elements.historyStatus.textContent = error.message;
     elements.historyStatus.hidden = false;
@@ -184,53 +185,9 @@ async function loadStoredProfile() {
     window.localStorage.removeItem(selectedSectionsStorageKey);
     state.studentId = null;
     state.profile = null;
-    selectDefaultCourse();
+    renderEmptyProfileSummary();
     showToast("O perfil anterior não existe mais. Crie um novo perfil.");
   }
-}
-
-function renderCourses() {
-  if (!state.courses.length) {
-    elements.courseOptions.innerHTML = `
-      <div class="error-state">
-        <strong>Cursos não encontrados.</strong>
-        <p>Importe as matrizes de BCT, BCH ou BCC antes de continuar.</p>
-      </div>`;
-    return;
-  }
-
-  const descriptions = {
-    BCT: "Interdisciplinar de ingresso",
-    BCH: "Interdisciplinar de ingresso",
-    BCC: "Formação específica pós-BCT",
-  };
-  elements.courseOptions.innerHTML = state.courses.map((course) => {
-    const versions = `<option value="">Automática pelo ano</option>` + course.curriculum_versions.map((curriculum) => `
-      <option value="${escapeHtml(curriculum.version)}">Matriz ${escapeHtml(curriculum.version)}</option>
-    `).join("");
-    return `
-      <article class="course-card" data-course-code="${escapeHtml(course.code)}">
-        <div class="course-select-row">
-          <input class="course-enabled" id="course-${escapeHtml(course.code)}" type="checkbox"
-            value="${escapeHtml(course.code)}" aria-label="Selecionar ${escapeHtml(course.code)}">
-          <label for="course-${escapeHtml(course.code)}">
-            <strong>${escapeHtml(course.code)}</strong>
-            <small>${escapeHtml(descriptions[course.code] || course.name)}</small>
-          </label>
-          <label class="primary-course">
-            <input type="radio" name="primary_course" value="${escapeHtml(course.code)}" disabled>
-            <span>Principal</span>
-          </label>
-        </div>
-        <div class="course-detail">
-          <label>Matriz<select class="course-version">${versions}</select></label>
-          <label>CP<input class="course-cp" type="number" min="0" max="1" step="0.000001"
-            placeholder="0 a 1" inputmode="decimal"></label>
-          <label>IK<input class="course-ik" type="number" min="0" max="1" step="0.000001"
-            placeholder="Opcional" inputmode="decimal"></label>
-        </div>
-      </article>`;
-  }).join("");
 }
 
 function renderTerms() {
@@ -244,36 +201,8 @@ function renderTerms() {
   elements.currentTerm.textContent = `${term.year} · ${term.term_number}º quadrimestre`;
 }
 
-function selectDefaultCourse() {
-  const bct = document.querySelector('[data-course-code="BCT"] .course-enabled');
-  if (bct) {
-    bct.checked = true;
-    updateCourseCard(bct.closest(".course-card"));
-    selectPrimary("BCT");
-  }
-}
-
 function fillProfile(profile) {
-  setValue("#ra", profile.ra);
-  setValue("#display-name", profile.display_name);
-  setValue("#admission-year", profile.admission_year);
-  setValue("#admission-shift", profile.admission_shift);
-  setValue("#student-campus", profile.campus);
-  setDecimalDisplay("#ca", profile.ca, 4);
-  setDecimalDisplay("#max-quarter-credits", profile.max_quarter_credits, 0);
-
-  document.querySelectorAll(".course-card").forEach((card) => {
-    const saved = profile.courses.find((course) => course.course_code === card.dataset.courseCode);
-    const enabled = card.querySelector(".course-enabled");
-    enabled.checked = Boolean(saved);
-    updateCourseCard(card);
-    if (!saved) return;
-    setElementValue(card.querySelector(".course-version"), saved.curriculum_version);
-    setElementValue(card.querySelector(".course-cp"), saved.cp);
-    setElementValue(card.querySelector(".course-ik"), saved.ik);
-    if (saved.is_primary) selectPrimary(saved.course_code);
-  });
-
+  renderProfileSummary(profile);
   const hard = profile.preferences?.hard_constraints || {};
   const soft = profile.preferences?.soft_preferences || {};
   restoreChecks("allowed_campus", hard.allowed_campuses);
@@ -281,53 +210,75 @@ function fillProfile(profile) {
   document.querySelector("#avoid-friday").checked = Number(soft.avoid_friday || 0) > 0;
 }
 
+function renderEmptyProfileSummary() {
+  elements.profileSummary.innerHTML = `
+    <div class="empty-state compact-empty-state">
+      <h3>O ranking começa pelo histórico.</h3>
+      <p>Importe o PDF do SIGAA para liberar seu vínculo, seu CP e a análise das turmas.</p>
+    </div>`;
+}
+
+function renderProfileSummary(profile) {
+  const courses = Array.isArray(profile.courses) ? profile.courses : [];
+  const completedCount = Array.isArray(profile.completed_subjects) ? profile.completed_subjects.length : 0;
+  const inProgressCount = Array.isArray(profile.in_progress_subjects) ? profile.in_progress_subjects.length : 0;
+  const courseCards = courses.length
+    ? courses.map((course) => `
+      <article class="linked-course-card">
+        <div class="linked-course-topline">
+          <strong>${escapeHtml(course.course_code)}</strong>
+          ${course.is_primary ? '<span class="linked-course-badge">Principal</span>' : ""}
+        </div>
+        <p class="linked-course-name">${escapeHtml(course.course_name)}</p>
+        <dl class="linked-course-meta">
+          <div><dt>Matriz</dt><dd>${escapeHtml(course.curriculum_version || "Automática")}</dd></div>
+          <div><dt>CP</dt><dd>${course.cp === null ? "Sem dado" : formatNumber(course.cp)}</dd></div>
+          <div><dt>IK</dt><dd>${course.ik === null ? "Sem dado" : formatNumber(course.ik)}</dd></div>
+        </dl>
+      </article>
+    `).join("")
+    : `
+      <div class="profile-summary-warning">
+        <strong>Nenhum curso foi vinculado automaticamente.</strong>
+        <p>Sem curso vinculado, o ranking não consegue aplicar corretamente a prioridade de matrícula.</p>
+      </div>`;
+  elements.profileSummary.innerHTML = `
+    <div class="profile-metrics-grid">
+      <article class="profile-metric">
+        <span>RA</span>
+        <strong>${escapeHtml(profile.ra || "Sem dado")}</strong>
+      </article>
+      <article class="profile-metric">
+        <span>Turno de ingresso</span>
+        <strong>${escapeHtml(profile.admission_shift || "Sem dado")}</strong>
+      </article>
+      <article class="profile-metric">
+        <span>CA</span>
+        <strong>${profile.ca === null ? "Sem dado" : formatNumber(profile.ca)}</strong>
+      </article>
+      <article class="profile-metric">
+        <span>Limite de créditos</span>
+        <strong>${profile.max_quarter_credits === null ? "Sem dado" : formatNumber(profile.max_quarter_credits)}</strong>
+      </article>
+      <article class="profile-metric">
+        <span>Concluídas</span>
+        <strong>${completedCount}</strong>
+      </article>
+      <article class="profile-metric">
+        <span>Em andamento</span>
+        <strong>${inProgressCount}</strong>
+      </article>
+    </div>
+    <div class="linked-course-list">
+      ${courseCards}
+    </div>`;
+}
+
 function restoreChecks(name, values) {
   if (!Array.isArray(values) || !values.length) return;
   document.querySelectorAll(`input[name="${name}"]`).forEach((input) => {
     input.checked = values.includes(input.value);
   });
-}
-
-function handleCourseChange(event) {
-  const card = event.target.closest(".course-card");
-  if (!card) return;
-  if (event.target.classList.contains("course-enabled")) {
-    updateCourseCard(card);
-    if (event.target.checked && card.dataset.courseCode === "BCC") {
-      ensureCourseSelected("BCT");
-      selectPrimary("BCC");
-      showToast("BCT também foi selecionado como curso de ingresso do BCC.");
-    }
-    ensurePrimaryCourse();
-  }
-}
-
-function ensureCourseSelected(code) {
-  const card = document.querySelector(`[data-course-code="${code}"]`);
-  if (!card) return;
-  card.querySelector(".course-enabled").checked = true;
-  updateCourseCard(card);
-}
-
-function updateCourseCard(card) {
-  const enabled = card.querySelector(".course-enabled").checked;
-  const primary = card.querySelector('input[name="primary_course"]');
-  card.classList.toggle("is-selected", enabled);
-  primary.disabled = !enabled;
-  if (!enabled) primary.checked = false;
-}
-
-function selectPrimary(code) {
-  const primary = document.querySelector(`input[name="primary_course"][value="${code}"]`);
-  if (primary && !primary.disabled) primary.checked = true;
-}
-
-function ensurePrimaryCourse() {
-  const selected = [...document.querySelectorAll(".course-card.is-selected")];
-  const checkedPrimary = document.querySelector('input[name="primary_course"]:checked');
-  if (!checkedPrimary && selected.length) {
-    selected[0].querySelector('input[name="primary_course"]').checked = true;
-  }
 }
 
 async function handleRankingSubmit(event) {
@@ -354,42 +305,32 @@ async function handleRankingSubmit(event) {
 }
 
 function validateForm() {
-  if (!elements.form.reportValidity()) throw new Error("Revise os campos obrigatórios.");
-  const selectedCourses = document.querySelectorAll(".course-card.is-selected");
-  if (!selectedCourses.length) throw new Error("Selecione pelo menos um curso.");
-  if (!document.querySelector('input[name="primary_course"]:checked')) {
-    throw new Error("Marque um curso como principal.");
+  if (!state.studentId || !state.profile) {
+    throw new Error("Importe seu histórico do SIGAA antes de montar o ranking.");
+  }
+  if (!Array.isArray(state.profile.courses) || !state.profile.courses.length) {
+    throw new Error(
+      "O histórico importado ainda não gerou um curso vinculado. Verifique as matrizes e o PDF importado.",
+    );
   }
   if (!selectedValues("allowed_campus").length) throw new Error("Selecione ao menos um campus.");
   if (!elements.term.value) throw new Error("Nenhuma oferta de próximo quadrimestre foi importada.");
 }
 
 async function saveProfile() {
-  const basicProfile = {
-    ra: valueOrNull("#ra"),
-    display_name: valueOrNull("#display-name"),
-    admission_year: numberValue("#admission-year"),
-    admission_shift: valueOrNull("#admission-shift"),
-    campus: valueOrNull("#student-campus"),
-  };
-  if (!state.studentId) {
-    const created = await fetchJson("/students", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(basicProfile),
-    });
-    state.studentId = created.id;
-    window.localStorage.setItem(studentIdStorageKey, created.id);
+  if (!state.studentId || !state.profile) {
+    throw new Error("Importe seu histórico do SIGAA antes de montar o ranking.");
   }
-
   state.profile = await fetchJson(`/students/${state.studentId}/academic-profile`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(buildAcademicProfile()),
   });
+  fillProfile(state.profile);
 }
 
 function buildAcademicProfile() {
+  if (!state.profile) throw new Error("Perfil acadêmico indisponível.");
   const completed = state.profile?.completed_subjects?.map((subject) => ({
     code: subject.code,
     name: subject.name,
@@ -405,30 +346,26 @@ function buildAcademicProfile() {
   })) || [];
 
   return {
-    ra: valueOrNull("#ra"),
-    admission_year: numberValue("#admission-year"),
-    admission_shift: valueOrNull("#admission-shift"),
-    campus: valueOrNull("#student-campus"),
+    ra: state.profile.ra,
+    admission_year: state.profile.admission_year,
+    admission_shift: state.profile.admission_shift,
+    campus: state.profile.campus,
     cr: state.profile?.cr ?? null,
-    ca: decimalValue("#ca"),
+    ca: state.profile?.ca ?? null,
     accumulated_credits: state.profile?.accumulated_credits ?? null,
-    course_strategy: "primary_course",
-    courses: selectedCoursePayloads(),
+    course_strategy: state.profile.course_strategy,
+    courses: state.profile.courses.map((course) => ({
+      course_code: course.course_code,
+      curriculum_version: course.curriculum_version,
+      is_primary: course.is_primary,
+      weight: course.weight,
+      cp: course.cp,
+      ik: course.ik,
+    })),
     completed_subjects: completed,
     in_progress_subjects: inProgress,
     preferences: buildPreferences(),
   };
-}
-
-function selectedCoursePayloads() {
-  const primary = document.querySelector('input[name="primary_course"]:checked')?.value;
-  return [...document.querySelectorAll(".course-card.is-selected")].map((card) => ({
-    course_code: card.dataset.courseCode,
-    curriculum_version: card.querySelector(".course-version").value || null,
-    is_primary: card.dataset.courseCode === primary,
-    cp: decimalElementValue(card.querySelector(".course-cp")),
-    ik: decimalElementValue(card.querySelector(".course-ik")),
-  }));
 }
 
 function buildPreferences() {
@@ -561,7 +498,9 @@ function handleResultAction(event) {
   const item = state.ranking.items.find((candidate) => candidate.section.id === button.dataset.sectionId);
   if (!item) return;
   const credits = getItemCredits(item);
-  const limit = decimalValue("#max-quarter-credits");
+  const limit = state.profile?.max_quarter_credits === null || state.profile?.max_quarter_credits === undefined
+    ? null
+    : Number(state.profile.max_quarter_credits);
   const selectedCredits = [...state.selectedSections.values()]
     .reduce((total, selected) => total + (getItemCredits(selected) || 0), 0);
   if (limit !== null && credits !== null && selectedCredits + credits > limit) {
@@ -599,7 +538,9 @@ function renderSelectedShelf() {
   }
   const knownCredits = selected.map(getItemCredits).filter((value) => value !== null);
   const totalCredits = knownCredits.reduce((total, value) => total + value, 0);
-  const limit = decimalValue("#max-quarter-credits");
+  const limit = state.profile?.max_quarter_credits === null || state.profile?.max_quarter_credits === undefined
+    ? null
+    : Number(state.profile.max_quarter_credits);
   const creditSummary = limit === null
     ? `${formatNumber(totalCredits)} créditos selecionados`
     : `${formatNumber(totalCredits)} de ${formatNumber(limit)} créditos`;

@@ -277,3 +277,76 @@ def test_history_pdf_api_replaces_existing_ra(
     assert second.status_code == 200
     assert second.json()["student"]["id"] == first.json()["student"]["id"]
     assert second.json()["replaced_existing"] is True
+
+
+def test_history_backed_profile_rejects_manual_academic_edits(
+    client: TestClient,
+    session: Session,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    CurriculumService(session).import_curriculum(
+        CurriculumImportRequest.model_validate(
+            {
+                "course": {"code": "BCT", "name": "Bacharelado em Ciencia e Tecnologia"},
+                "version": "2015",
+                "admission_year_start": 2015,
+                "admission_year_end": 2022,
+                "unlisted_subject_category": "free",
+                "subjects": [],
+            }
+        )
+    )
+    parsed = ParsedStudentHistory(
+        ra="11234567890",
+        admission_year=2021,
+        admission_shift="Noturno",
+        campus="SA",
+        course_code="BCT",
+        curriculum_version="2015",
+        cr=Decimal("2.1"),
+        ca=Decimal("2.85"),
+        cp=Decimal("0.82"),
+        ik=Decimal("0.73"),
+        issued_at=datetime(2026, 7, 15, 19, 12, tzinfo=UTC),
+        page_count=5,
+        entries=(),
+        warnings=(),
+    )
+    monkeypatch.setattr(HistoryPdfParser, "parse", lambda _self, _content: parsed)
+
+    imported = client.post(
+        "/students/history/pdf",
+        files={"file": ("historico.pdf", b"%PDF-test", "application/pdf")},
+    )
+    assert imported.status_code == 200
+    student = imported.json()["student"]
+
+    response = client.put(
+        f"/students/{student['id']}/academic-profile",
+        json={
+            "ra": student["ra"],
+            "admission_year": student["admission_year"],
+            "admission_shift": "Matutino",
+            "campus": student["campus"],
+            "cr": student["cr"],
+            "ca": student["ca"],
+            "accumulated_credits": student["accumulated_credits"],
+            "course_strategy": student["course_strategy"],
+            "courses": [
+                {
+                    "course_code": student["courses"][0]["course_code"],
+                    "curriculum_version": student["courses"][0]["curriculum_version"],
+                    "is_primary": student["courses"][0]["is_primary"],
+                    "weight": student["courses"][0]["weight"],
+                    "cp": student["courses"][0]["cp"],
+                    "ik": student["courses"][0]["ik"],
+                }
+            ],
+            "completed_subjects": [],
+            "in_progress_subjects": [],
+            "preferences": {"hard_constraints": {}, "soft_preferences": {}},
+        },
+    )
+
+    assert response.status_code == 422
+    assert "turno veio do historico importado" in response.json()["detail"]

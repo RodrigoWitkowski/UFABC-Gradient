@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Gradient: planejamento acadêmico personalizado na UFABC.">
     <title>Gradient</title>
-    <link rel="stylesheet" href="/assets/styles.css?v=20260716.3">
-    <script src="/assets/app.js?v=20260716.3" defer></script>
+    <link rel="stylesheet" href="/assets/styles.css?v=20260808.1">
+    <script src="/assets/app.js?v=20260808.1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -60,7 +60,7 @@
                 <span class="panel-number">01</span>
                 <div>
                   <p class="kicker">Quem está planejando?</p>
-                  <h2>Perfil acadêmico</h2>
+                  <h2>Importe seu histórico</h2>
                 </div>
               </div>
 
@@ -68,65 +68,22 @@
                 <input id="history-pdf" type="file" accept="application/pdf,.pdf">
                 <span>
                   <strong>Importar histórico do SIGAA</strong>
-                  <small>Preenche RA, CA, coeficientes e disciplinas já cursadas.</small>
+                  <small>O arquivo identifica seu vínculo, turno, CA, CP e as disciplinas já cursadas.</small>
                 </span>
                 <b aria-hidden="true">PDF</b>
               </label>
               <p class="history-status" id="history-status" hidden></p>
+              <p class="profile-import-note">
+                Você importa uma vez e o Gradient usa esse histórico para montar seu perfil acadêmico.
+                As preferências abaixo continuam configuráveis só para filtragem e ordenação.
+              </p>
 
-              <div class="field-grid two-columns">
-                <label class="field field-wide">
-                  <span>Como podemos te chamar?</span>
-                  <input id="display-name" name="display_name" type="text" maxlength="255"
-                    placeholder="Seu nome ou apelido" autocomplete="name">
-                </label>
-                <label class="field">
-                  <span>RA</span>
-                  <input id="ra" name="ra" type="text" minlength="8" maxlength="16"
-                    pattern="[0-9]{8,16}" placeholder="Somente números" inputmode="numeric">
-                </label>
-                <label class="field">
-                  <span>Ano de ingresso</span>
-                  <input id="admission-year" name="admission_year" type="number"
-                    min="2006" max="2100" value="2023" required>
-                </label>
-                <label class="field">
-                  <span>Turno de ingresso</span>
-                  <select id="admission-shift" name="admission_shift" required>
-                    <option value="Noturno">Noturno</option>
-                    <option value="Matutino">Matutino</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Campus de preferência</span>
-                  <select id="student-campus" name="campus">
-                    <option value="SA">Santo André</option>
-                    <option value="SB">São Bernardo</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>CA <small>0 a 4</small></span>
-                  <input id="ca" name="ca" type="text" placeholder="Importe o histórico"
-                    inputmode="decimal" readonly>
-                  <small class="field-help">Valor extraído do histórico do SIGAA.</small>
-                </label>
-                <label class="field">
-                  <span>Limite total de créditos</span>
-                  <input id="max-quarter-credits" name="max_quarter_credits" type="text"
-                    placeholder="Calculado pelo CA" inputmode="numeric" readonly>
-                  <small class="field-help">Calculado pela regra oficial: teto de 20 + 2 × CA.</small>
-                </label>
-              </div>
-
-              <fieldset class="course-fieldset">
-                <legend>Seus cursos</legend>
-                <p class="field-help">Selecione os vínculos atuais e marque um curso principal.</p>
-                <div id="course-options" class="course-options" aria-live="polite">
-                  <div class="skeleton course-skeleton"></div>
-                  <div class="skeleton course-skeleton"></div>
-                  <div class="skeleton course-skeleton"></div>
+              <section class="profile-summary-panel" id="profile-summary" aria-live="polite">
+                <div class="empty-state compact-empty-state">
+                  <h3>O ranking começa pelo histórico.</h3>
+                  <p>Importe o PDF do SIGAA para liberar seu vínculo, seu CP e a análise das turmas.</p>
                 </div>
-              </fieldset>
+              </section>
 
             </section>
 
