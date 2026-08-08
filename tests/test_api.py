@@ -350,3 +350,61 @@ def test_history_backed_profile_rejects_manual_academic_edits(
 
     assert response.status_code == 422
     assert "turno veio do historico importado" in response.json()["detail"]
+
+
+def test_terms_endpoint_ignores_history_only_terms(
+    client: TestClient,
+    session: Session,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    CurriculumService(session).import_curriculum(
+        CurriculumImportRequest.model_validate(
+            {
+                "course": {"code": "BCT", "name": "Bacharelado em Ciencia e Tecnologia"},
+                "version": "2015",
+                "admission_year_start": 2015,
+                "admission_year_end": 2022,
+                "unlisted_subject_category": "free",
+                "subjects": [],
+            }
+        )
+    )
+    parsed = ParsedStudentHistory(
+        ra="11234567890",
+        admission_year=2021,
+        admission_shift="Noturno",
+        campus="SA",
+        course_code="BCT",
+        curriculum_version="2015",
+        cr=Decimal("2.1"),
+        ca=Decimal("2.85"),
+        cp=Decimal("0.82"),
+        ik=Decimal("0.73"),
+        issued_at=datetime(2026, 7, 15, 19, 12, tzinfo=UTC),
+        page_count=5,
+        entries=(
+            HistoryEntry(
+                code="BIJ0207-15",
+                name="Bases Conceituais da Energia",
+                term="2026:2",
+                status="APR",
+                category="OBR",
+                grade="A",
+                credits=Decimal(2),
+                hours=24,
+                extension_hours=0,
+            ),
+        ),
+        warnings=(),
+    )
+    monkeypatch.setattr(HistoryPdfParser, "parse", lambda _self, _content: parsed)
+
+    imported = client.post(
+        "/students/history/pdf",
+        files={"file": ("historico.pdf", b"%PDF-test", "application/pdf")},
+    )
+    assert imported.status_code == 200
+
+    terms = client.get("/terms")
+    assert terms.status_code == 200
+    assert terms.json() == []

@@ -193,7 +193,7 @@ async function loadStoredProfile() {
 function renderTerms() {
   if (!state.terms.length) {
     elements.term.value = "";
-    elements.currentTerm.textContent = "Nenhuma oferta importada";
+    elements.currentTerm.textContent = "Nenhuma oferta ativa importada";
     return;
   }
   const term = state.terms[0];
@@ -218,7 +218,7 @@ function renderEmptyProfileSummary() {
     </div>`;
 }
 
-function renderProfileSummary(profile) {
+function renderProfileSummaryLegacy(profile) {
   const courses = Array.isArray(profile.courses) ? profile.courses : [];
   const completedCount = Array.isArray(profile.completed_subjects) ? profile.completed_subjects.length : 0;
   const inProgressCount = Array.isArray(profile.in_progress_subjects) ? profile.in_progress_subjects.length : 0;
@@ -274,9 +274,120 @@ function renderProfileSummary(profile) {
     </div>`;
 }
 
+function renderProfileSummary(profile) {
+  const courses = Array.isArray(profile.courses) ? profile.courses : [];
+  const completedCount = Array.isArray(profile.completed_subjects)
+    ? profile.completed_subjects.length
+    : 0;
+  const inProgressCount = Array.isArray(profile.in_progress_subjects)
+    ? profile.in_progress_subjects.length
+    : 0;
+  const summaryMetrics = [
+    renderProfileMetric("RA", profile.ra || "Sem dado", { compact: true, data: true }),
+    renderProfileMetric(
+      "Turno de ingresso",
+      profile.admission_shift || "Sem dado",
+      { compact: true },
+    ),
+    renderProfileMetric(
+      "Campus",
+      formatCampusName(profile.campus) || "Sem dado",
+      { compact: true },
+    ),
+    renderProfileMetric(
+      "Ano de ingresso",
+      profile.admission_year || "Sem dado",
+      { data: true },
+    ),
+    renderProfileMetric(
+      "CA",
+      profile.ca === null ? "Sem dado" : formatNumber(profile.ca),
+      { data: true },
+    ),
+    renderProfileMetric(
+      "Limite de creditos",
+      profile.max_quarter_credits === null
+        ? "Sem dado"
+        : formatNumber(profile.max_quarter_credits),
+      { data: true },
+    ),
+    renderProfileMetric("Concluidas", String(completedCount), { data: true }),
+    renderProfileMetric("Em andamento", String(inProgressCount), { data: true }),
+  ].join("");
+  const courseCards = courses.length
+    ? courses.map((course, index) => `
+      <section class="linked-course-block">
+        <article class="linked-course-card">
+          <div class="linked-course-topline">
+            <div class="linked-course-copy">
+              <p class="linked-course-kicker">${course.is_primary ? "Curso principal" : `Vinculo adicional ${index + 1}`}</p>
+              <strong>${escapeHtml(course.course_code)}</strong>
+            </div>
+            <span class="linked-course-badge${course.is_primary ? "" : " is-secondary"}">
+              ${course.is_primary ? "Principal" : "Vinculo"}
+            </span>
+          </div>
+          <p class="linked-course-name">${escapeHtml(course.course_name)}</p>
+        </article>
+        <div class="profile-metrics-grid profile-course-metrics-grid">
+          ${renderProfileMetric(
+            "Matriz",
+            course.curriculum_version || "Automatica",
+            { compact: true, data: true },
+          )}
+          ${renderProfileMetric(
+            "CP",
+            course.cp === null ? "Sem dado" : formatNumber(course.cp),
+            { data: true },
+          )}
+          ${renderProfileMetric(
+            "IK",
+            course.ik === null ? "Sem dado" : formatNumber(course.ik),
+            { data: true },
+          )}
+        </div>
+      </section>
+    `).join("")
+    : `
+      <div class="profile-summary-warning">
+        <strong>Nenhum curso foi vinculado automaticamente.</strong>
+        <p>Sem curso vinculado, o ranking nao consegue aplicar corretamente a prioridade de matricula.</p>
+      </div>`;
+  elements.profileSummary.innerHTML = `
+    <div class="profile-summary-stack">
+      <section class="profile-summary-block">
+        <div class="profile-summary-heading">
+          <div>
+            <h3>Dados do historico</h3>
+            <p>Esses dados vem do PDF do SIGAA e passam a ser a fonte oficial do seu perfil.</p>
+          </div>
+        </div>
+        <div class="profile-metrics-grid">
+          ${summaryMetrics}
+        </div>
+      </section>
+      <section class="profile-summary-block">
+        <div class="profile-summary-heading">
+          <div>
+            <h3>${courses.length === 1 ? "Curso vinculado" : "Cursos vinculados"}</h3>
+            <p>O ranking usa matriz, CP e IK do seu vinculo para estimar sua prioridade de matricula.</p>
+          </div>
+        </div>
+        <div class="linked-course-list">
+          ${courseCards}
+        </div>
+      </section>
+    </div>`;
+}
+
 function restoreChecks(name, values) {
-  if (!Array.isArray(values) || !values.length) return;
-  document.querySelectorAll(`input[name="${name}"]`).forEach((input) => {
+  const inputs = [...document.querySelectorAll(`input[name="${name}"]`)];
+  if (!inputs.length) return;
+  if (!Array.isArray(values) || !values.length) {
+    inputs.forEach((input) => { input.checked = true; });
+    return;
+  }
+  inputs.forEach((input) => {
     input.checked = values.includes(input.value);
   });
 }
@@ -314,7 +425,9 @@ function validateForm() {
     );
   }
   if (!selectedValues("allowed_campus").length) throw new Error("Selecione ao menos um campus.");
-  if (!elements.term.value) throw new Error("Nenhuma oferta de próximo quadrimestre foi importada.");
+  if (!elements.term.value) {
+    throw new Error("Nenhuma oferta ativa do proximo quadrimestre foi importada ainda.");
+  }
 }
 
 async function saveProfile() {
@@ -419,6 +532,22 @@ function renderLoading() {
     </div>`;
 }
 
+function renderEmptyResultsState(title, message, hints = []) {
+  const visibleHints = Array.isArray(hints) ? hints.filter(Boolean).slice(0, 3) : [];
+  const hintList = visibleHints.length
+    ? `
+      <ul class="empty-hint-list">
+        ${visibleHints.map((hint) => `<li>${escapeHtml(hint)}</li>`).join("")}
+      </ul>`
+    : "";
+  elements.results.innerHTML = `
+    <div class="empty-state compact-empty-state empty-results-state">
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(message)}</p>
+      ${hintList}
+    </div>`;
+}
+
 function renderRanking(ranking, { resetVisible = true, persist = true } = {}) {
   state.ranking = ranking;
   if (resetVisible) state.visibleResultCount = resultPageSize;
@@ -438,27 +567,28 @@ function renderRankingView() {
   elements.resultMeta.innerHTML = `<strong>${visibleItems.length}/${filteredItems.length}</strong> turmas exibidas`;
   renderSelectedShelf();
   if (!ranking.items.length) {
-    elements.results.innerHTML = `
-      <div class="empty-state">
-        <h3>Nenhuma turma passou pelos filtros.</h3>
-        <p>Libere outro campus ou uma faixa de horário maior e tente novamente.</p>
-      </div>`;
+    elements.resultMeta.hidden = true;
+    renderEmptyResultsState(
+      "Nenhuma turma candidata foi encontrada.",
+      "O ranking nao encontrou turmas elegiveis na oferta ativa atual.",
+      ranking.warnings,
+    );
     return;
   }
   if (!compatibleItems.length) {
-    elements.results.innerHTML = `
-      <div class="empty-state">
-        <h3>Nenhuma outra turma cabe nos horários escolhidos.</h3>
-        <p>Remova uma turma fixada para liberar os horários conflitantes.</p>
-      </div>`;
+    elements.resultMeta.hidden = true;
+    renderEmptyResultsState(
+      "Nenhuma outra turma cabe nos horarios escolhidos.",
+      "Remova uma turma fixada para liberar os horarios conflitantes.",
+    );
     return;
   }
   if (!filteredItems.length) {
-    elements.results.innerHTML = `
-      <div class="empty-state">
-        <h3>Nenhuma turma corresponde aos tipos selecionados.</h3>
-        <p>Marque obrigatórias, limitadas ou livres nas preferências.</p>
-      </div>`;
+    elements.resultMeta.hidden = true;
+    renderEmptyResultsState(
+      "Nenhuma turma corresponde aos tipos selecionados.",
+      "Marque obrigatorias, limitadas ou livres nas preferencias.",
+    );
     return;
   }
 
@@ -973,24 +1103,6 @@ function selectedValues(name) {
   return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map((input) => input.value);
 }
 
-function valueOrNull(selector) {
-  const value = document.querySelector(selector).value.trim();
-  return value || null;
-}
-
-function numberValue(selector) {
-  return Number(document.querySelector(selector).value);
-}
-
-function decimalValue(selector) {
-  return decimalElementValue(document.querySelector(selector));
-}
-
-function decimalElementValue(element) {
-  const value = element.value.trim().replace(",", ".");
-  return value === "" ? null : Number(value);
-}
-
 function setValue(selector, value) {
   setElementValue(document.querySelector(selector), value);
 }
@@ -999,20 +1111,29 @@ function setElementValue(element, value) {
   if (element && value !== null && value !== undefined) element.value = value;
 }
 
-function setDecimalDisplay(selector, value, maximumFractionDigits) {
-  const element = document.querySelector(selector);
-  if (!element) return;
-  element.value = value === null || value === undefined
-    ? ""
-    : Number(value).toLocaleString("pt-BR", { maximumFractionDigits });
-}
-
 function formatPercent(value) {
   return value === null || value === undefined ? "Sem dados" : `${Math.round(value * 100)}%`;
 }
 
 function formatNumber(value) {
   return Number(value).toLocaleString("pt-BR", { maximumFractionDigits: 4 });
+}
+
+function renderProfileMetric(label, value, options = {}) {
+  const classes = ["profile-metric-value"];
+  if (options.compact) classes.push("is-compact");
+  if (options.data) classes.push("is-data");
+  return `
+    <article class="profile-metric">
+      <span>${escapeHtml(label)}</span>
+      <strong class="${classes.join(" ")}">${escapeHtml(value)}</strong>
+    </article>`;
+}
+
+function formatCampusName(value) {
+  if (value === "SA") return "Santo Andre";
+  if (value === "SB") return "Sao Bernardo";
+  return value;
 }
 
 function shortTime(value) {

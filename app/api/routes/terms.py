@@ -15,7 +15,13 @@ router = APIRouter(prefix="/terms", tags=["terms"])
 
 @router.get("", response_model=list[TermRead])
 def list_terms(db: DatabaseSession) -> list[TermRead]:
-    terms = db.scalars(select(Term).order_by(Term.year.desc(), Term.term_number.desc())).all()
+    terms = db.scalars(
+        select(Term)
+        .join(Section, Section.term_id == Term.id)
+        .where(Section.is_active.is_(True))
+        .distinct()
+        .order_by(Term.year.desc(), Term.term_number.desc())
+    ).all()
     return [TermRead.model_validate(term, from_attributes=True) for term in terms]
 
 

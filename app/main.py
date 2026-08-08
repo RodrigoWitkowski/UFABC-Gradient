@@ -17,12 +17,13 @@ SETTINGS = get_settings()
 
 
 @asynccontextmanager
-async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     settings = get_settings()
     configure_logging(settings.log_level)
-    with SessionLocal() as session:
-        import_official_curricula(session)
-        session.commit()
+    if not getattr(app.state, "skip_startup_curriculum_sync", False):
+        with SessionLocal() as session:
+            import_official_curricula(session)
+            session.commit()
     yield
 
 
