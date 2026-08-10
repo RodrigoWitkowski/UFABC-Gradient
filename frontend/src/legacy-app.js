@@ -5,12 +5,12 @@ const selectedSectionsStorageKey = "gradient_selected_sections_v1";
 const resultPageSize = 50;
 const maxRankingResults = 2000;
 const curriculumCategories = ["mandatory", "limited", "free"];
-window.localStorage.removeItem("gradient_ranking_view_v1");
-const storedStudentId = window.localStorage.getItem(studentIdStorageKey)
-  || window.localStorage.getItem(legacyStudentIdStorageKey);
-if (storedStudentId && !window.localStorage.getItem(studentIdStorageKey)) {
-  window.localStorage.setItem(studentIdStorageKey, storedStudentId);
-  window.localStorage.removeItem(legacyStudentIdStorageKey);
+removeStorageValue("gradient_ranking_view_v1");
+const storedStudentId = readStorageValue(studentIdStorageKey)
+  || readStorageValue(legacyStudentIdStorageKey);
+if (storedStudentId && !readStorageValue(studentIdStorageKey)) {
+  writeStorageValue(studentIdStorageKey, storedStudentId);
+  removeStorageValue(legacyStudentIdStorageKey);
 }
 const storedRankingView = readStorageJson(rankingViewStorageKey);
 const matchingStoredView = storedRankingView?.studentId === storedStudentId
@@ -77,8 +77,19 @@ const scheduleWindows = {
 };
 
 let historyStatusTimer;
+let initialized = false;
 
-document.addEventListener("DOMContentLoaded", initialize);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeOnce, { once: true });
+} else {
+  void initializeOnce();
+}
+
+async function initializeOnce() {
+  if (initialized) return;
+  initialized = true;
+  await initialize();
+}
 
 async function initialize() {
   bindEvents();
@@ -136,7 +147,7 @@ async function handleHistoryUpload(event) {
     });
     state.studentId = result.student.id;
     state.profile = result.student;
-    window.localStorage.setItem(studentIdStorageKey, state.studentId);
+    writeStorageValue(studentIdStorageKey, state.studentId);
     fillProfile(state.profile);
     const replacement = result.replaced_existing ? " O histórico anterior foi substituído." : "";
     const repeatedApprovals = result.completed_attempt_count - result.completed_count;
@@ -181,9 +192,9 @@ async function loadStoredProfile() {
     fillProfile(state.profile);
     showToast("Perfil local recuperado.");
   } catch (error) {
-    window.localStorage.removeItem(studentIdStorageKey);
-    window.localStorage.removeItem(rankingViewStorageKey);
-    window.localStorage.removeItem(selectedSectionsStorageKey);
+    removeStorageValue(studentIdStorageKey);
+    removeStorageValue(rankingViewStorageKey);
+    removeStorageValue(selectedSectionsStorageKey);
     state.studentId = null;
     state.profile = null;
     renderEmptyProfileSummary();
@@ -754,12 +765,12 @@ async function restoreLatestRanking() {
   try {
     const ranking = await fetchJson(`/rankings/${saved.rankingId}`);
     if (ranking.student_id !== state.studentId || ranking.term !== elements.term.value) {
-      window.localStorage.removeItem(rankingViewStorageKey);
+      removeStorageValue(rankingViewStorageKey);
       return;
     }
     renderRanking(ranking, { resetVisible: false, persist: false });
   } catch (error) {
-    window.localStorage.removeItem(rankingViewStorageKey);
+    removeStorageValue(rankingViewStorageKey);
     showToast("O ranking anterior não está mais disponível.");
   }
 }
@@ -1109,6 +1120,30 @@ function readStorageJson(key) {
 function writeStorageJson(key, value) {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    // The app remains usable when storage is disabled or full.
+  }
+}
+
+function readStorageValue(key) {
+  try {
+    return window.localStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+}
+
+function writeStorageValue(key, value) {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch (error) {
+    // The app remains usable when storage is disabled or full.
+  }
+}
+
+function removeStorageValue(key) {
+  try {
+    window.localStorage.removeItem(key);
   } catch (error) {
     // The app remains usable when storage is disabled or full.
   }
