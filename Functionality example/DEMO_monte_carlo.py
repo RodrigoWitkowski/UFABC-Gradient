@@ -46,7 +46,7 @@ def run_playground() -> None:
     cfg = apply_official_calibration(MockPopulationConfig(), calibration)
 
     total_requests = 250
-    simulations = 10_000
+    simulations = 2_000
     coverages = [0.00, 0.25, 0.50, 0.75, 0.90, 1.00]
 
     world = create_mock_world(subject, target, total_requests, cfg, seed=123)
