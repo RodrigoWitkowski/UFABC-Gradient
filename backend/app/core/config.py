@@ -14,7 +14,7 @@ class Settings(BaseSettings):
 
     app_name: str = "Gradient"
     app_env: str = "development"
-    database_url: str = "postgresql+psycopg://ufabc:ufabc@localhost:5432/ufabc_ranking"
+    database_url: str = "postgresql+psycopg://ufabc:ufabc@localhost:5433/ufabc_ranking"
     import_storage_path: Path = Path("var/imports")
     log_level: str = Field(default="INFO", pattern=r"^(DEBUG|INFO|WARNING|ERROR|CRITICAL)$")
     api_docs_enabled: bool = False

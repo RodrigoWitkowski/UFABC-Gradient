@@ -49,7 +49,7 @@ docker compose up --build
 Servicos padrao:
 
 - app: `http://localhost:8000`
-- postgres: `localhost:5432`
+- postgres: `localhost:5433`
 
 Para rodar testes locais do backend:
 
